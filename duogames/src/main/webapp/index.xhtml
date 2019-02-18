@@ -11,21 +11,21 @@
         <b:container id="center" class="centered-text">
                 <b:form class="centered-form">
                         <b:row>
-                            <b:inputText placeholder="Username" value="#{login.username}" required="true">
+                            <b:inputText placeholder="Username" value="#{auth.username}" required="true">
                             <f:facet name="prepend">
                               <b:icon name="user" />
                             </f:facet>
                           </b:inputText>
                             </b:row>
                             <b:row>
-                                <b:inputSecret placeholder="Password" value="#{login.password}" required="true">
+                                <b:inputSecret placeholder="Password" value="#{auth.password}" required="true">
                             <f:facet name="prepend">
                               <b:iconAwesome name="key" />
                             </f:facet>
                           </b:inputSecret>
                         </b:row>
                         <b:row>
-                            <b:commandButton value="Log in" actionListener="#{login.signin()}"></b:commandButton>
+                            <b:commandButton value="Log in" actionListener="#{auth.signin()}"></b:commandButton>
                         </b:row>
                     </b:form>
             <b:row>
