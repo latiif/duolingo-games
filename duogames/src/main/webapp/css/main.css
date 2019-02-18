@@ -9,7 +9,9 @@ and open the template in the editor.
 */
 #nav{
     background-color: #FFB405;
-    
+}
+#body {
+    padding-top: 100px;
 }
 .navbar-brand{
     color:#0037B2;

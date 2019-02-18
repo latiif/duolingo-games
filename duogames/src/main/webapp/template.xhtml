@@ -16,10 +16,11 @@
     <!-- This is common structure for all pages (defining the slots) -->
     <h:body>
 
+
         <c:set var="root" value="#{request.contextPath}" /> 
-        <b:image library="img" name="banner.jpg" height="250" />
     
-        <b:navBar brand="Play" brandHref="#" fixed="top" inverse="true" id="nav">
+        <b:navBar brand="Play" brandHref="#" fixed="top" id="nav">
+
             
             <b:navbarLinks pull="right">
              <b:dropMenu value="Menu" id="mainNav">
@@ -33,7 +34,7 @@
              </b:navbarLinks>
         </b:navBar>
        <!-- A slot to put some content in -->
-        <b:container>
+        <b:container id="body">
             <ui:insert name="content"/>
         </b:container>
        
