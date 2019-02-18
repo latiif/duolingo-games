@@ -9,25 +9,25 @@
     <ui:define name="content"> 
 
         <b:container id="center" class="centered-text">
-                <b:form class="centered-form">
-                        <b:row>
-                            <b:inputText placeholder="Username" value="#{auth.username}" required="true">
-                            <f:facet name="prepend">
-                              <b:icon name="user" />
-                            </f:facet>
-                          </b:inputText>
-                            </b:row>
-                            <b:row>
-                                <b:inputSecret placeholder="Password" value="#{auth.password}" required="true">
-                            <f:facet name="prepend">
-                              <b:iconAwesome name="key" />
-                            </f:facet>
-                          </b:inputSecret>
-                        </b:row>
-                        <b:row>
-                            <b:commandButton value="Log in" actionListener="#{auth.signin()}"></b:commandButton>
-                        </b:row>
-                    </b:form>
+            <b:form class="centered-form">
+                <b:row>
+                    <b:inputText placeholder="Username" value="#{auth.username}" required="true">
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
+                </b:row>
+                <b:row>
+                    <b:inputSecret placeholder="Password" value="#{auth.password}" required="true">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputSecret>
+                </b:row>
+                <b:row>
+                    <b:commandButton value="Log in" actionListener="#{auth.signin()}"></b:commandButton>
+                </b:row>
+            </b:form>
             <b:row>
                 <p>You need a Duolingo account to use this website, register for one <a href="https://www.duolingo.com/register" target="_blank">here</a>.</p>
             </b:row>

@@ -16,13 +16,13 @@ import lombok.Setter;
  *
  * @author latiif
  */
-
 @Named("user")
 //@RequestScoped
 @SessionScoped
-public class UserBean implements Serializable{
-    public String getName(){
+public class UserBean implements Serializable {
+
+    public String getName() {
         return "HIII";
     }
-    
+
 }

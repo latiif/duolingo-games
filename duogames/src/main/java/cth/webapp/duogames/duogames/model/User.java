@@ -13,32 +13,26 @@ import lombok.Setter;
  *
  * @author latiif
  */
-
-
 public class User {
-    
+
     @Getter
     private String name;
-    
+
     @Getter
     private String id;
-    
+
     @Getter
     private List<String> langs;
-    
+
     @Getter
     @Setter
     private String currLang;
-    
-    
-    
-    public User(String name, String id){
-        
-        this.name =  name;
+
+    public User(String name, String id) {
+
+        this.name = name;
         this.id = id;
-        
+
     }
-    
-    
-    
+
 }

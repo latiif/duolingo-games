@@ -5,12 +5,10 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import com.latiif.duoapi.DuoApi;
 
 import cth.webapp.duogames.duogames.model.User;
+import cth.webapp.duogames.duogames.services.DuoApi;
 import java.io.Serializable;
-import static java.lang.System.out;
-import javax.annotation.PostConstruct;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -27,12 +25,9 @@ import lombok.Setter;
 @SessionScoped
 public class LoginBean implements Serializable {
 
-    
-    public String getHi(){
+    public String getHi() {
         return "HIIII";
     }
-    
-
 
     @Getter
     @Setter
@@ -50,7 +45,7 @@ public class LoginBean implements Serializable {
      */
     public void signin() {
 
-         DuoApi user;
+        DuoApi user;
 
         if (username == null || password == null) {
             return;
@@ -61,8 +56,6 @@ public class LoginBean implements Serializable {
         }
 
         user = new DuoApi(username, password);
-
-     
 
         isLoggedIn = user.getIsLoggedIn();
     }

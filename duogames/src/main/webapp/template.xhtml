@@ -18,26 +18,26 @@
 
 
         <c:set var="root" value="#{request.contextPath}" /> 
-    
+
         <b:navBar brand="Play" brandHref="#" fixed="top" id="nav">
 
-            
+
             <b:navbarLinks pull="right">
-             <b:dropMenu value="Menu" id="mainNav">
-                <b:navLink value="Games" href="#"></b:navLink>
-                <b:navLink value="User Profile" href="#"></b:navLink>
-                <b:navLink value="High Score" href="#"></b:navLink>
-                <b:navLink></b:navLink>
-                <b:navLink value="Achivements" href="#"></b:navLink>
-                <b:navLink header="Logout" href="#"></b:navLink>
-              </b:dropMenu>
-             </b:navbarLinks>
+                <b:dropMenu value="Menu" id="mainNav">
+                    <b:navLink value="Games" href="#"></b:navLink>
+                    <b:navLink value="User Profile" href="#"></b:navLink>
+                    <b:navLink value="High Score" href="#"></b:navLink>
+                    <b:navLink></b:navLink>
+                    <b:navLink value="Achivements" href="#"></b:navLink>
+                    <b:navLink header="Logout" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
         </b:navBar>
-       <!-- A slot to put some content in -->
+        <!-- A slot to put some content in -->
         <b:container id="body">
             <ui:insert name="content"/>
         </b:container>
-       
+
     </h:body>
 
 </html>

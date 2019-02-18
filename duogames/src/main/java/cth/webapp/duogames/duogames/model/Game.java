@@ -13,6 +13,7 @@ import java.util.Map;
  * @author nicla
  */
 public abstract class Game {
+
     int id;
     boolean isFinished;
     Map<String, List<String>> dict;
