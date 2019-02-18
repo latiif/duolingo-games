@@ -7,8 +7,10 @@ package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.model.User;
 import cth.webapp.duogames.duogames.services.DuoApi;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,14 +23,9 @@ import lombok.Setter;
 //@RequestScoped
 @SessionScoped
 public class UserBean implements Serializable {
-    
-    
+
     @Getter
     private DuoApi api;
-   
-
-        
-    
 
     @Getter
     @Setter
@@ -46,8 +43,6 @@ public class UserBean implements Serializable {
      */
     public void signin() {
 
-       
-
         if (username == null || password == null) {
             return;
         }
@@ -56,12 +51,19 @@ public class UserBean implements Serializable {
             return;
         }
 
-       api = new DuoApi(username, password);
+        api = new DuoApi(username, password);
 
         isLoggedIn = api.getIsLoggedIn();
-        
-       
+        if (isLoggedIn)
+                redirect();
     }
 
+    public void redirect() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/userprofile.xhtml");
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
 }

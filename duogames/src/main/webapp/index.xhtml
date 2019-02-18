@@ -9,9 +9,8 @@
     <h:outputStylesheet library="css" name="css/main.css"  />
     <ui:define name="content"> 
 
-        
-        <c:if test="#{user.isLoggedIn==false}">
-            <p>YOU NEED TO LOG IN</p>
+        <c:if test="#{user.isLoggedIn}">
+            #{user.redirect()}
         </c:if>
         <b:container id="center" class="centered-text">
             <b:form class="centered-form">

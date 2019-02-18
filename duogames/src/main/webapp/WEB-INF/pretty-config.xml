@@ -9,4 +9,10 @@
         <view-id value="/index.xhtml" />
     </url-mapping>     
     
+    
+    <url-mapping id="user-profile">
+        <pattern value="/userprofile"/>
+        <view-id value ="/duogames/userprofile.xhtml"/>
+    </url-mapping>
+    
 </pretty-config>    
