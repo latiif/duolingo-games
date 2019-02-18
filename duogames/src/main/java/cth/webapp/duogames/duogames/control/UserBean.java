@@ -21,9 +21,8 @@ import lombok.Setter;
 //@RequestScoped
 @SessionScoped
 public class UserBean implements Serializable{
-    
-    @Getter
-    @Setter
-    private User user;
+    public String getName(){
+        return "HIII";
+    }
     
 }

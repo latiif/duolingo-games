@@ -6,9 +6,11 @@
 package cth.webapp.duogames.duogames.control;
 
 import com.latiif.duoapi.DuoApi;
+
 import cth.webapp.duogames.duogames.model.User;
 import java.io.Serializable;
 import static java.lang.System.out;
+import javax.annotation.PostConstruct;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -20,7 +22,7 @@ import lombok.Setter;
  *
  * @author latiif
  */
-@Named("login")
+@Named("auth")
 //@RequestScoped
 @SessionScoped
 public class LoginBean implements Serializable {
@@ -29,10 +31,8 @@ public class LoginBean implements Serializable {
     public String getHi(){
         return "HIIII";
     }
-    //@ManagedProperty(value = "#{user}")
-    private UserBean userbean;
+    
 
-    private DuoApi user;
 
     @Getter
     @Setter
@@ -40,7 +40,7 @@ public class LoginBean implements Serializable {
 
     @Getter
     @Setter
-    private String password = " ";
+    private String password = "";
 
     @Getter
     private Boolean isLoggedIn = false;
@@ -49,6 +49,8 @@ public class LoginBean implements Serializable {
     
      */
     public void signin() {
+
+         DuoApi user;
 
         if (username == null || password == null) {
             return;
@@ -60,15 +62,8 @@ public class LoginBean implements Serializable {
 
         user = new DuoApi(username, password);
 
-        userbean = new UserBean();
-        userbean.setUser(new User(user.getUserInfo().get("fullname"), user.getUserInfo().get("username")));
+     
 
         isLoggedIn = user.getIsLoggedIn();
-    }
-
-    @PostConstruct // CDI life cycle callbacks
-    void post() {
-        username = " ";
-        password = " ";
     }
 }
