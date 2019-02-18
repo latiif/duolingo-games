@@ -16,9 +16,11 @@
     <!-- This is common structure for all pages (defining the slots) -->
     <h:body>
 
-        <c:set var="root" value="#{request.contextPath}" />
+
+        <c:set var="root" value="#{request.contextPath}" /> 
     
-        <b:navBar brand="Play" brandHref="#" position="top" sticky="true" id="nav">
+        <b:navBar brand="Play" brandHref="#" fixed="top" id="nav">
+
             
             <b:navbarLinks pull="right">
              <b:dropMenu value="Menu" id="mainNav">
