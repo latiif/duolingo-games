@@ -34,10 +34,20 @@
             <scope>compile</scope>
         </dependency>
         
+        
+        <dependency>
+            <groupId>com.latiif.duoapi</groupId>
+            <artifactId>duoapi</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/duoapi.jar</systemPath>
+        </dependency>
+        
     </dependencies>
 
     <build>
         <plugins>
+              
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
