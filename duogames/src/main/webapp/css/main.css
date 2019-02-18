@@ -18,7 +18,6 @@ and open the template in the editor.
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    text-align: center;
 }
 .navbar-brand{
     color:#0037B2;
@@ -30,4 +29,7 @@ and open the template in the editor.
 .centered-form {
     width: 200px;
     margin: 0 auto;
+}
+.centered-text{
+    text-align: center;
 }
