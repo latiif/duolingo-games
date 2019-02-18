@@ -10,9 +10,10 @@
 
         <b:container id="center">
             <b:row>
+                <p>#{user.api.currentLanguage}</p>
                 <b:column col-xs="6">
                     <b:panel title="Skills" collapsible="false">
-                        <p>Number of known words: #{user.api.getKnownWords.size()}</p>
+                        <p>Number of known words: #{user.api.knownWords.size()}</p>
                         <p>Number of known languages:</p>
                     </b:panel>
                 </b:column>

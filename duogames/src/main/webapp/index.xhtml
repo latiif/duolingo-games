@@ -4,28 +4,33 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets">  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
     <h:outputStylesheet library="css" name="css/main.css"  />
     <ui:define name="content"> 
 
+        
+        <c:if test="#{user.isLoggedIn==false}">
+            <p>YOU NEED TO LOG IN</p>
+        </c:if>
         <b:container id="center" class="centered-text">
             <b:form class="centered-form">
                 <b:row>
-                    <b:inputText placeholder="Username" value="#{auth.username}" required="true">
+                    <b:inputText placeholder="Username" value="#{user.username}" required="true">
                         <f:facet name="prepend">
                             <b:icon name="user" />
                         </f:facet>
                     </b:inputText>
                 </b:row>
                 <b:row>
-                    <b:inputSecret placeholder="Password" value="#{auth.password}" required="true">
+                    <b:inputSecret placeholder="Password" value="#{user.password}" required="true">
                         <f:facet name="prepend">
                             <b:iconAwesome name="key" />
                         </f:facet>
                     </b:inputSecret>
                 </b:row>
                 <b:row>
-                    <b:commandButton value="Log in" actionListener="#{auth.signin()}"></b:commandButton>
+                    <b:commandButton value="Log in" actionListener="#{user.signin()}"></b:commandButton>
                 </b:row>
             </b:form>
             <b:row>
