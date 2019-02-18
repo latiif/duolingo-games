@@ -4,17 +4,22 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
-    <h:outputStylesheet library="css" name="css/main.css"  />
+
     <ui:define name="content"> 
 
         <b:container id="center">
             <b:row>
-                <p>#{user.api.currentLanguage}</p>
+
                 <b:column col-xs="6">
                     <b:panel title="Skills" collapsible="false">
                         <p>Number of known words: #{user.api.knownWords.size()}</p>
                         <p>Number of known languages:</p>
+                        <c:forEach var="langAbbr" items="#{user.api.getLanguages(true)}">
+                            <font size="12"><span class="flag-icon flag-icon-#{langAbbr}"></span></font>
+                        </c:forEach>
+
                     </b:panel>
                 </b:column>
                 <b:column col-xs="6">

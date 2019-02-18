@@ -50,7 +50,6 @@ public class UserBean implements Serializable {
         if (username.isEmpty() || password.isEmpty()) {
             return;
         }
-
         api = new DuoApi(username, password);
 
         isLoggedIn = api.getIsLoggedIn();
@@ -65,5 +64,7 @@ public class UserBean implements Serializable {
             System.err.println(e.getMessage());
         }
     }
+    
+    
 
 }
