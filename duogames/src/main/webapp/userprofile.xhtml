@@ -11,15 +11,16 @@
         <b:container id="center">
             <b:row>
                 <b:column col-xs="6">
-                    <b:panel>
-                        <h2>Skills</h2>
-                        <p>Known words:</p>
+                    <b:panel title="Skills" collapsible="false">
+                        <p>Number of known words: #{user.api.getKnownWords.size()}</p>
+                        <p>Number of known languages:</p>
                     </b:panel>
                 </b:column>
                 <b:column col-xs="6">
-                    <b:panel>
-                        <h2>Game stats</h2>
+                    <b:panel title="Game stats" collapsible="false">
                         <p>Quickest game:</p>
+                        <p>Longest win streak:</p>
+                        <p>Games played:</p>
                     </b:panel>
                 </b:column>
             </b:row>
