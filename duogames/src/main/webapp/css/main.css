@@ -13,7 +13,21 @@ and open the template in the editor.
 #body {
     padding-top: 100px;
 }
+#center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+}
 .navbar-brand{
     color:#0037B2;
 }
 
+.row {
+    margin-bottom: 10px;
+}
+.centered-form {
+    width: 200px;
+    margin: 0 auto;
+}

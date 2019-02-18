@@ -8,29 +8,28 @@
     <h:outputStylesheet library="css" name="css/main.css"  />
     <ui:define name="content"> 
 
-        <b:container>
+        <b:container id="center">
+                <b:form class="centered-form">
+                        <b:row>
+                            <b:inputText placeholder="Username" required="true">
+                            <f:facet name="prepend">
+                              <b:icon name="user" />
+                            </f:facet>
+                          </b:inputText>
+                            </b:row>
+                            <b:row>
+                          <b:inputText placeholder="Password" required="true">
+                            <f:facet name="prepend">
+                              <b:iconAwesome name="key" />
+                            </f:facet>
+                          </b:inputText>
+                        </b:row>
+                        <b:row>
+                            <b:button value="Log in"></b:button>
+                        </b:row>
+                    </b:form>
             <b:row>
-                <b:form>
-                <b:container>
-                      <b:inputText placeholder="Username" required="true" label="Username" colMd="10" labelColMd="2">
-                        <f:facet name="prepend">
-                          <b:icon name="user" />
-                        </f:facet>
-                      </b:inputText>
-
-                      <b:inputText placeholder="Password" label="Password" colMd="10" labelColMd="2">
-                        <f:facet name="prepend">
-                          <b:iconAwesome name="key" />
-                        </f:facet>
-                      </b:inputText>
-                    <b:row>
-                        <b:button value="Log in"></b:button>
-                    </b:row>
-                </b:container>
-                </b:form>
-            </b:row>
-            <b:row>
-                
+                <p>You need a Duolingo account to use this website, register for one <a href="https://www.duolingo.com/register" target="_blank">here</a>.</p>
             </b:row>
         </b:container>   
 
