@@ -112,14 +112,7 @@ public class DuoApi {
         String url = "https://www.duolingo.com/switch_language";
 
         JsonObject res = makeRequest(url, data);
-        try {
-            JsonObject trackingProperties = res.getAsJsonObject("tracking_properties");
-            if (trackingProperties.get("learning_language").getAsString().equals(languageAbbr)) {
-                getData();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to switch language");
-        }
+        getData();
     }
 
     /**
@@ -222,6 +215,7 @@ public class DuoApi {
      */
     private void getData() {
         this.userData = makeRequest(this.userUrl, null);
+        login();
     }
 
     /**

@@ -42,7 +42,6 @@ public class UserBean implements Serializable {
     
      */
     public void signin() {
-
         if (username == null || password == null) {
             return;
         }

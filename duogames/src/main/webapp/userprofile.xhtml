@@ -13,15 +13,24 @@
             <b:row>
 
                 <b:column col-xs="6">
-                    <b:panel title="Skills" collapsible="false">
+                    <c:set var="currLang" value="#{user.api.currentLanguage}"/>
+                    <b:panel title="Skills at #{user.api.getLanguageFromAbbreviataion(currLang)}" collapsible="false">
                         <p>Number of known words: #{user.api.knownWords.size()}</p>
-                        <p>Number of known languages:</p>
-                        <c:forEach var="langAbbr" items="#{user.api.getLanguages(true)}">
-                            <font size="12"><span class="flag-icon flag-icon-#{langAbbr}"></span></font>
-                        </c:forEach>
-
+                        <p>Number of known topics: #{user.api.knownTopics.size()}</p>
                     </b:panel>
                 </b:column>
+                
+                 <b:column col-xs="6">
+                    <b:panel title="Active courses" collapsible="false">
+                        <c:forEach var="langAbbr" items="#{user.api.getLanguages(true)}">
+                            <h:form style="display:inline">
+                            <h:commandLink action="#{user.api.switchLanguage(langAbbr)}"><font size="12"><span class="flag-icon flag-icon-#{langAbbr}"></span></font>
+                            </h:commandLink>
+                            </h:form>
+                        </c:forEach>
+                    </b:panel>
+                </b:column>
+                
                 <b:column col-xs="6">
                     <b:panel title="Game stats" collapsible="false">
                         <p>Quickest game:</p>
