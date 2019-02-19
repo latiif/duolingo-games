@@ -540,4 +540,13 @@ public class DuoApi {
         return res;
     }
 
+    /**
+     * 
+     * @return a full url to the user's image
+     */
+    public String getImageUrl(){
+        String url = userData.get("avatar").getAsString();
+        
+        return "https:"+url+"/xlarge";
+    }
 }
