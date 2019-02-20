@@ -5,14 +5,25 @@
  */
 package cth.webapp.duogames.duogames.services;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -44,10 +55,10 @@ public class DuoApi {
         this.password = password;
 
         userUrl = String.format(userUrl, username);
-        userData = getUserData();
+        // userData = getUserData();
 
         if (password != null) {
-            isLoggedIn = login();
+            isLoggedIn = getData();
         }
     }
 
@@ -63,16 +74,16 @@ public class DuoApi {
      */
     public List<String> getLanguages(boolean inAbbr) {
         List<String> res = new ArrayList<String>();
-        if(userData != null){
-           for (JsonElement element : userData.getAsJsonArray("languages")) {
-            if (element.getAsJsonObject().get("learning").getAsBoolean()) {
-                if (inAbbr) {
-                    res.add(element.getAsJsonObject().get("language").getAsString());
-                } else {
-                    res.add(element.getAsJsonObject().get("language_string").getAsString());
+        if (userData != null) {
+            for (JsonElement element : userData.getAsJsonArray("languages")) {
+                if (element.getAsJsonObject().get("learning").getAsBoolean()) {
+                    if (inAbbr) {
+                        res.add(element.getAsJsonObject().get("language").getAsString());
+                    } else {
+                        res.add(element.getAsJsonObject().get("language_string").getAsString());
+                    }
                 }
             }
-        } 
         }
         return res;
     }
@@ -119,7 +130,22 @@ public class DuoApi {
      * @return A raw json representation of the user data
      */
     public JsonObject getUserData() {
-        return makeRequest(userUrl, null);
+
+        String raw = "{}";
+
+        try {
+            raw = new String(Jsoup.connect(userUrl).ignoreContentType(true).maxBodySize(1200000).method(Connection.Method.GET).execute().body());
+        } catch (Exception ex) {
+            Logger.getLogger(DuoApi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+     
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(raw));
+        reader.setLenient(true);
+       
+        return gson.fromJson(reader, JsonObject.class);
+
     }
 
     /**
@@ -198,7 +224,8 @@ public class DuoApi {
                 cookies = response.cookies();
 
             } else {
-                object = parser.parse(Jsoup.connect(url).ignoreContentType(true).cookies(cookies).execute().body()).getAsJsonObject();
+                String raw = Jsoup.connect(url).ignoreContentType(true).cookies(cookies).execute().body();
+                object = parser.parse(raw).getAsJsonObject();
             }
             return object;
         } catch (Exception e) {
@@ -213,9 +240,9 @@ public class DuoApi {
      * After a successful login, it retrieves the raw data from Duolingo about
      * the current user
      */
-    private void getData() {
-        this.userData = makeRequest(this.userUrl, null);
-        login();
+    private boolean getData() {
+        this.userData = getUserData();
+        return login();
     }
 
     /**
@@ -541,12 +568,12 @@ public class DuoApi {
     }
 
     /**
-     * 
+     *
      * @return a full url to the user's image
      */
-    public String getImageUrl(){
+    public String getImageUrl() {
         String url = userData.get("avatar").getAsString();
-        
-        return "https:"+url+"/xlarge";
+
+        return "https:" + url + "/xlarge";
     }
 }
