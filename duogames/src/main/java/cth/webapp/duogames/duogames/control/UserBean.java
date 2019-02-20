@@ -5,7 +5,7 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.model.User;
+import cth.webapp.duogames.duogames.database.entity.User;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.io.IOException;
 import java.io.Serializable;

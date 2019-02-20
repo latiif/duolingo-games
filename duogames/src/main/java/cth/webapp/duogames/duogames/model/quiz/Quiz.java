@@ -6,7 +6,7 @@
 package cth.webapp.duogames.duogames.model.quiz;
 
 import cth.webapp.duogames.duogames.model.Game;
-import cth.webapp.duogames.duogames.model.User;
+import cth.webapp.duogames.duogames.database.entity.User;
 import java.util.List;
 
 /**

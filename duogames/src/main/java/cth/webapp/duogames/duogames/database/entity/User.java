@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cth.webapp.duogames.duogames.model;
+package cth.webapp.duogames.duogames.database.entity;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +15,13 @@ import lombok.Setter;
  *
  * @author latiif
  */
+@Entity
 public class User {
 
     @Getter
     private String name;
-
+    
+    @Id
     @Getter
     private String id;
 

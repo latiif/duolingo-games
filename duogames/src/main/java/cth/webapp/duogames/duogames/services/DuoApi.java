@@ -63,8 +63,8 @@ public class DuoApi {
      */
     public List<String> getLanguages(boolean inAbbr) {
         List<String> res = new ArrayList<String>();
-
-        for (JsonElement element : userData.getAsJsonArray("languages")) {
+        if(userData != null){
+           for (JsonElement element : userData.getAsJsonArray("languages")) {
             if (element.getAsJsonObject().get("learning").getAsBoolean()) {
                 if (inAbbr) {
                     res.add(element.getAsJsonObject().get("language").getAsString());
@@ -72,8 +72,8 @@ public class DuoApi {
                     res.add(element.getAsJsonObject().get("language_string").getAsString());
                 }
             }
+        } 
         }
-
         return res;
     }
 
