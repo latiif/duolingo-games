@@ -224,7 +224,7 @@ public class DuoApi {
                 cookies = response.cookies();
 
             } else {
-                String raw = Jsoup.connect(url).ignoreContentType(true).cookies(cookies).execute().body();
+                String raw = Jsoup.connect(url).ignoreContentType(true).maxBodySize(1200000).cookies(cookies).execute().body();
                 object = parser.parse(raw).getAsJsonObject();
             }
             return object;
@@ -572,8 +572,11 @@ public class DuoApi {
      * @return a full url to the user's image
      */
     public String getImageUrl() {
+      
         String url = userData.get("avatar").getAsString();
 
         return "https:" + url + "/xlarge";
+        
+   
     }
 }
