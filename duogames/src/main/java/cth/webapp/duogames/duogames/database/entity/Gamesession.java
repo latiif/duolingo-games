@@ -54,7 +54,7 @@ public class Gamesession implements Serializable {
     private short score;
     @JoinColumn(name = "userid", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Users userid;
+    private User userid;
 
     public Gamesession() {
     }
@@ -102,11 +102,11 @@ public class Gamesession implements Serializable {
         this.score = score;
     }
 
-    public Users getUserid() {
+    public User getUserid() {
         return userid;
     }
 
-    public void setUserid(Users userid) {
+    public void setUserid(User userid) {
         this.userid = userid;
     }
 

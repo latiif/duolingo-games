@@ -6,6 +6,7 @@
 package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.entity.User;
+import cth.webapp.duogames.duogames.database.entity.User;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.io.IOException;
 import java.io.Serializable;
@@ -38,10 +39,12 @@ public class UserBean implements Serializable {
     @Getter
     private Boolean isLoggedIn = false;
 
+    User u = new User();
     /*
     
      */
     public void signin() {
+        //TODO fixa
         if (username == null || password == null) {
             return;
         }
@@ -50,7 +53,11 @@ public class UserBean implements Serializable {
             return;
         }
         api = new DuoApi(username, password);
-
+        /*
+        u.get(username)
+                if u = null
+                        u.create user
+                            */    
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn)
                 redirect();
