@@ -23,7 +23,6 @@ import org.jsoup.Jsoup;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -567,16 +566,13 @@ public class DuoApi {
         return res;
     }
 
+  
     /**
-     *
-     * @return a full url to the user's image
-     */
-    public String getImageUrl() {
-      
-        String url = userData.get("avatar").getAsString();
-
-        return "https:" + url + "/xlarge";
-        
-   
+     * Extracts useful profile information from user
+     * @return an instnace of DuollingoProfileInfo
+     * @see DuolingoProfileInfo
+     */  
+    public DuolingoProfileInfo getProfileInfo(){
+        return new DuolingoProfileInfo(userData);
     }
 }
