@@ -5,38 +5,57 @@
  */
 package cth.webapp.duogames.duogames.database.entity;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
- * @author latiif
+ * @author stina
  */
 @Entity
-public class User {
+@Table(name = "users")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
+    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
+    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")})
+@Data
+@NoArgsConstructor
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    @Getter
-    private String name;
-    
     @Id
-    @Getter
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column
+    private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column
+    private String username;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<Gamesession> gamesessionCollection;
 
-    @Getter
-    private List<String> langs;
-
-    @Getter
-    @Setter
-    private String currLang;
-
-    public User(String name, String id) {
-
-        this.name = name;
-        this.id = id;
-
+    public User(String username) {
+        this.username = username;
     }
-
 }
