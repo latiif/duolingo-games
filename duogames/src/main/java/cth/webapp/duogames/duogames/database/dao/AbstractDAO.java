@@ -31,10 +31,11 @@ public abstract class AbstractDAO<T> {
         return null;
     }
     public List<T> findRange(){
-        CriteriaQuery q = em.getCriteriaBuilder().createQuery();
-        q.select(q.from(cl));
-        Query qq = em.getCriteriaBuilder().createQuery(q);
+        //CriteriaQuery q = em.getCriteriaBuilder().createQuery();
+        //q.select(q.from(cl));
+        //Query qq = em.getCriteriaBuilder().createQuery(q);
+        return null;
     }
-    
+
     
 }

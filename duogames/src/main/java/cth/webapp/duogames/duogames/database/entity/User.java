@@ -33,10 +33,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")})
 @Data
 @NoArgsConstructor
 public class User implements Serializable {
