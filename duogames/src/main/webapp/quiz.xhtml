@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">  
+
+    <ui:define name="content"> 
+
+        <b:container id="center">
+            <c:set var="duoInfo" value ="#{user.api.profileInfo}" />
+
+            <b:row>
+                <b:column>
+                    <b:form>
+                        <b:carousel id="quiz" 
+                                    startAnimation="false"
+                                    showIndicators="true"
+                                    wrap="false">
+                          <b:carouselItem>
+                              <b:panel title="Question 1" collapsible="false">
+                                  <p>Here goes the question text..</p>
+                            </b:panel>
+                          </b:carouselItem>
+                          <b:carouselItem>
+                            <b:panel title="Question 2" look="danger  ">
+                                  <p>Here goes the question text..</p>
+                            </b:panel>
+                          </b:carouselItem>
+                          <b:carouselItem>
+                            <b:panel title="Question 3" look="success">
+                                  <p>Here goes the question text..</p>
+                            </b:panel>
+                          </b:carouselItem>
+                          <b:carouselControl direction="right" >
+                            <b:button value="Previous"
+                                      onclick=""
+                                       />
+                          </b:carouselControl>
+                          <b:carouselControl direction="left">
+                            <b:button value="Next" style="position:absolute;right:0px"
+                                      onclick=""
+                                      />
+                          </b:carouselControl>
+                        </b:carousel>
+                      </b:form>
+                </b:column>
+            </b:row>
+        </b:container>   
+
+    </ui:define>
+</ui:composition>

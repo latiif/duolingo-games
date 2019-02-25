@@ -10,6 +10,8 @@ import cth.webapp.duogames.duogames.database.entity.User;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -61,6 +63,10 @@ public class UserBean implements Serializable {
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn)
                 redirect();
+    }
+    
+    public void startQuiz(){
+            //TODO this should probably be moved!
     }
 
     public void redirect() {
