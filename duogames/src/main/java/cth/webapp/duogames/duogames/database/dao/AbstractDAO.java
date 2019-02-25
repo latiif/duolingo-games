@@ -27,13 +27,17 @@ public abstract class AbstractDAO<T> {
 
     public List<T> findAll(){
         em.createNamedQuery("Users.findAll");
-        
+       
         return null;
     }
     public List<T> findRange(){
         CriteriaQuery q = em.getCriteriaBuilder().createQuery();
         q.select(q.from(cl));
-        Query qq = em.getCriteriaBuilder().createQuery(q);
+        Query qq = em.createQuery(q);
+        qq.setFirstResult(0);
+        qq.setMaxResults(5);
+        return qq.getResultList();
+        
     }
     
     

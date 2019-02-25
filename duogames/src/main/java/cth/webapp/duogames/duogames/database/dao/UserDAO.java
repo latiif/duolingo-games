@@ -14,12 +14,5 @@ import javax.persistence.PersistenceContext;
  * @author nicla
  */
 public class UserDAO<T> {
-    @PersistenceContext
-    private EntityManager em;
-
-    public List<T> findAll(){
-        em.createNamedQuery("Users.findAll");
-        
-        return null;
-    }
+   
 }
