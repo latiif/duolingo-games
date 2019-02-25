@@ -7,12 +7,91 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
     <h:outputStylesheet library="css" name="css/main.css"  />
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+    <h:head>
+        <link rel = "stylesheet" type = "text/css" href = "css/play.css" />
+    </h:head>
+        <ui:define name="content"> 
+                <h2>Games</h2>
+                <b:row>
+                    <b:column medium-screen="4">
+                        <div>
+                            <b:row>
+                                <b:column medium-screen="2"></b:column>
+                                <b:column medium-screen="8">
+                                <img id="playIcon" src="css/questionmark.jpg"/>
+                                </b:column>
+                                <b:column medium-screen="2"> </b:column>
+                            </b:row>
+                           <b:row>
+                                <b:column medium-screen="4"></b:column>
+                                <b:column medium-screen="4">
+                                    <h2>Quiz</h2>
+                                </b:column>
+                                <b:column medium-screen="4"></b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="3"></b:column>
+                                <b:column medium-screen="6">
+                                    <b:button href="#" value="Play!" class="fill"></b:button>
+                                </b:column>
+                                <b:column medium-screen="3"> </b:column>
+                            </b:row>
+                        </div>
+                    </b:column>
+                    <b:column medium-screen="4">
+                        <div>
+                            <b:row>
+                                <b:column medium-screen="2"></b:column>
+                                <b:column medium-screen="8">
+                                <img id="playIcon" src="css/questionmark.jpg"/>
+                                </b:column>
+                                <b:column medium-screen="2"> </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="4"></b:column>
+                                <b:column medium-screen="4">
+                                    <h2>Game:2</h2>
+                                </b:column>
+                                <b:column medium-screen="4"></b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="3"></b:column>
+                                <b:column medium-screen="6">
+                                    <b:button href="#" value="Play!" class="fill"></b:button>
+                                </b:column>
+                                <b:column medium-screen="3"> </b:column>
+                            </b:row>
+                        </div>
+                    </b:column>
+                    <b:column medium-screen="4">
+                        <div>
+                            <b:row>
+                                <b:column medium-screen="2"></b:column>
+                                <b:column medium-screen="8">
+                                <img id="playIcon" src="css/questionmark.jpg"/>
+                                </b:column>
+                                <b:column medium-screen="2"> </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="4"></b:column>
+                                <b:column medium-screen="4">
+                                    <h2>Game:3</h2>
+                                </b:column>
+                                <b:column medium-screen="4"></b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="3"></b:column>
+                                <b:column medium-screen="6">
+                                    <b:button href="#" value="Play!" class="fill"></b:button>
+                                </b:column>
+                                <b:column medium-screen="3"> </b:column>
+                            </b:row>
+                        </div>
+                    </b:column>
+                </b:row>
+           
+        
+
+    </ui:define>
+            
+    </ui:composition>

@@ -14,8 +14,4 @@
         <pattern value="/userprofile"/>
         <view-id value ="/duogames/userprofile.xhtml"/>
     </url-mapping>
-    <url-mapping id="play">
-        <pattern value="/play"/>
-        <view-id value ="/duogames/play.xhtml"/>
-    </url-mapping>
 </pretty-config>    
