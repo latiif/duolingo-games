@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">  
+
+    <ui:define name="content"> 
+
+        <b:container id="center">
+            <c:set var="duoInfo" value ="#{user.api.profileInfo}" />
+
+            <b:row>
+                <b:column col-xs="6">
+                    <c:set var="currLang" value="#{user.api.currentLanguage}"/>
+                    <b:panel title="Quiz" collapsible="false">
+                        <h:form>
+                            <p>TODO: when database is connected - put in datatable</p>
+                          </h:form>
+                    </b:panel>
+                </b:column>
+
+                <b:column col-xs="6">
+                    <b:panel title="Game 2" collapsible="false">
+                       
+                    </b:panel>
+                </b:column>
+
+                <b:column col-xs="6">
+                    <b:panel title="Game 3" collapsible="false">
+                    </b:panel>
+                </b:column>
+            </b:row>
+        </b:container>   
+
+    </ui:define>
+</ui:composition>

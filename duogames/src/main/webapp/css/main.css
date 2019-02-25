@@ -7,8 +7,24 @@ and open the template in the editor.
     Created on : 2019-feb-18, 11:34:09
     Author     : nicla
 */
+
+/* colors: https://coolors.co/export/pdf/ffb405-00a6a6-e01a4f-f15946-53b3cb */
 #nav{
     background-color: #FFB405;
+}
+#nav a {
+    color: white;
+}
+.dropdown-menu {
+    background-color: #FFB405;
+}
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #00A6A6;
+    color: white;
+}
+h4.panel-title {
+    font-weight: bold;
 }
 #body {
     padding-top: 100px;
