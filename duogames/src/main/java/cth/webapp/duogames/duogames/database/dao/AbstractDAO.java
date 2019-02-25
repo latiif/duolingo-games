@@ -38,7 +38,8 @@ public abstract class AbstractDAO<T> {
         qq.setMaxResults(5);
         return qq.getResultList();
         
+
     }
-    
+
     
 }

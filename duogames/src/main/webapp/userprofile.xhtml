@@ -16,14 +16,12 @@
     <ui:define name="content"> 
 
         <b:container id="center">
+            <c:set var="duoInfo" value ="#{user.api.profileInfo}" />
 
             <b:row>
-                <b:jumbotron>
-                    <c:set var ="duoInfo" value="#{user.api.profileInfo}"/>
-                    <h3>#{duoInfo.fullname} @ #{duoInfo.username}</h3>
-                    <b:image value="#{duoInfo.imgurl}"/>
-                    <p>#{duoInfo.created}</p>
-                </b:jumbotron>
+                <b:container>
+                    <ui:include src="components/profilecard.xhtml"/>
+                </b:container>
             </b:row>
 
             <b:row>
@@ -37,7 +35,7 @@
 
                 <b:column col-xs="6">
                     <b:panel title="Active courses" collapsible="false">
-                        <c:forEach var="langAbbr" items="#{user.api.getLanguages(true)}">
+                        <c:forEach var="langAbbr" items="#{duoInfo.languages}">
                             <h:form style="display:inline">
                                 <h:commandLink action="#{user.api.switchLanguage(langAbbr)}"><font size="12"><span class="flag-icon flag-icon-#{langAbbr}"></span></font>
                                 </h:commandLink>

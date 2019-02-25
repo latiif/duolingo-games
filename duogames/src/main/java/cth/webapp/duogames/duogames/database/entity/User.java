@@ -35,6 +35,7 @@ import lombok.NoArgsConstructor;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")})
+
 @Data
 @NoArgsConstructor
 public class User implements Serializable {
