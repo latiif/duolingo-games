@@ -7,27 +7,84 @@ package cth.webapp.duogames.duogames.model.quiz;
 
 import cth.webapp.duogames.duogames.model.Game;
 import cth.webapp.duogames.duogames.database.entity.User;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
- * @author nicla
+ * @author nicla, latiif
  */
-public class Quiz extends Game {
 
-    Question[] questions;
+public class Quiz {
 
-    public Quiz() {
-        questions = new Question[10];
-        for (int i = 0; i < questions.length; i++) {
-            questions[i] = generetQuestion();
+
+    private Map<String, List<String>> mDict;
+    private int quizLength;
+    private int nChoices;
+
+
+    public Quiz(Map<String, List<String>> dict, int quizLength, int nChoices) {
+        this.mDict = dict;
+        this.quizLength = quizLength;
+        this.nChoices = nChoices;
+    }
+
+    private List<String> generateWrongAnswers(List<String> allAnswers, List<String> rightAnswers) {
+        List<String> result = new LinkedList<>();
+
+        Collections.shuffle(allAnswers);
+        final int N = nChoices;
+
+        result = allAnswers
+                .stream()
+                .limit(N)
+                .filter(s -> !(rightAnswers.contains(s.toLowerCase())))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    private Map<String, List<String>> cleanDict(Map<String, List<String>> dict) {
+        Map<String, List<String>> result = new HashMap<>();
+
+        for (String key : dict.keySet()) {
+            List<String> translations = dict.get(key);
+
+            if (translations == null || translations.isEmpty())
+                continue;
+
+            result.put(key, translations);
+        }
+        return result;
+    }
+
+    public List<Question> generateQuestions() {
+        List<Question> result = new LinkedList<>();
+
+        Map<String, List<String>> cleanDict = cleanDict(mDict);
+
+        List<String> words = new LinkedList<>(cleanDict.keySet());
+        List<String> allTranslations = mDict.values().stream()
+                .flatMap((name) -> name.stream())
+                .collect(Collectors.toList());
+
+        int count = 0;
+        while (!words.isEmpty() && count < quizLength) {
+
+            int random = (int) (Math.random() * words.size());
+            String tWord = words.get(random);
+            List<String> tRight = cleanDict.get(tWord);
+            result.add(new Question(tWord, generateWrongAnswers(allTranslations, tRight), tRight.get(0)));
+
+            words.remove(random);
+            count++;
         }
 
+        return result;
     }
 
-    private Question generetQuestion() {
-        //TODO testing implementation
-        String[] ans = {"dog", "cat", "bye"};
-        return new Question("hej", "hi", ans);
-    }
 }
