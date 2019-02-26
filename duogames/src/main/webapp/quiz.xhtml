@@ -8,10 +8,12 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
 
-    <ui:define name="content"> 
 
+    <ui:define name="content"> 
         <b:container id="center">
-            <c:set var="duoInfo" value ="#{user.api.profileInfo}" />
+         
+            <c:set var="questions" value="#{quiz.getQuizInformation(user)}"/>
+
 
             <b:row>
                 <b:column>
@@ -20,33 +22,22 @@
                                     startAnimation="false"
                                     showIndicators="true"
                                     wrap="false">
-                          <b:carouselItem>
-                              <b:panel title="Question 1" collapsible="false">
-                                  <p>Here goes the question text..</p>
-                            </b:panel>
-                          </b:carouselItem>
-                          <b:carouselItem>
-                            <b:panel title="Question 2" look="danger  ">
-                                  <p>Here goes the question text..</p>
-                            </b:panel>
-                          </b:carouselItem>
-                          <b:carouselItem>
-                            <b:panel title="Question 3" look="success">
-                                  <p>Here goes the question text..</p>
-                            </b:panel>
-                          </b:carouselItem>
-                          <b:carouselControl direction="right" >
-                            <b:button value="Previous"
-                                      onclick=""
-                                       />
-                          </b:carouselControl>
-                          <b:carouselControl direction="left">
-                            <b:button value="Next" style="position:absolute;right:0px"
-                                      onclick=""
-                                      />
-                          </b:carouselControl>
+                            <c:forEach var="question" items="#{questions}">
+
+                                <b:carouselItem>
+                                    <b:panel title="Question 1" collapsible="false">
+                                        <p>Translate #{question.word}</p>
+                                        <b:radiobutton value="#{quiz.answer}">
+                                             <f:selectItems value="#{question.options}" />
+                                        </b:radiobutton>
+                                    </b:panel>
+                                </b:carouselItem>
+
+                            </c:forEach>
+
+
                         </b:carousel>
-                      </b:form>
+                    </b:form>
                 </b:column>
             </b:row>
         </b:container>   

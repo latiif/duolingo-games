@@ -25,7 +25,7 @@ import lombok.Setter;
  *
  * @author latiif
  */
-@Named("user")
+@Named(value="user")
 //@RequestScoped
 @SessionScoped
 public class UserBean implements Serializable {
@@ -69,9 +69,8 @@ public class UserBean implements Serializable {
         }
         redirect();
     }
-
+    
    
-
     public void redirect() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/userprofile.xhtml");

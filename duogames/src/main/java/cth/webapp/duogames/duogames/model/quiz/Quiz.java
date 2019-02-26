@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @author nicla, latiif
  */
 
-public class Quiz {
+public class Quiz extends Game{
 
 
     private Map<String, List<String>> mDict;
