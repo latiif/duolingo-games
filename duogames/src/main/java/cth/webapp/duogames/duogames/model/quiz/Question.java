@@ -7,26 +7,39 @@ package cth.webapp.duogames.duogames.model.quiz;
 
 /**
  *
- * @author nicla
+ * @author nicla, latiif
  */
-class Question {
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
-    String quest;
-    String from;
-    String[] answers;
-    String rAnswer;
-    String[] wAnswer;
+public class Question {
 
-    public Question(String from, String rAnswer, String[] wAnswers) {
-        this.from = from;
-        this.rAnswer = rAnswer;
-        quest = "Translate " + from;
-        this.wAnswer = wAnswer;
-        answers = new String[4];
-        answers[0] = rAnswer;
-        for (int i = 1; i <= wAnswer.length; i++) {
-            answers[i] = wAnswers[i - 1];
-        }
+    private String word;
+    private List<String> wrongAnswers;
+    private String rightAnswer;
 
+    public List<String> getOptions() {
+        List<String> options = new LinkedList<>(wrongAnswers);
+        options.add(rightAnswer);
+
+        Collections.shuffle(options);
+
+        return options;
     }
+
+    public Question(String word, List<String> wrongAnswers, String rightAnswer) {
+        this.word = word;
+        this.rightAnswer = rightAnswer;
+        this.wrongAnswers = wrongAnswers;
+    }
+
+    public boolean check(String answer) {
+        return rightAnswer.toLowerCase().equals(answer.toLowerCase());
+    }
+
+    public String getWord() {
+        return word;
+    }
+
 }
