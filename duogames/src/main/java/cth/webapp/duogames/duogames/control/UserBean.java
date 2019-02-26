@@ -7,9 +7,13 @@ package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.UserDAO;
 import cth.webapp.duogames.duogames.database.entity.User;
+import cth.webapp.duogames.duogames.model.quiz.Question;
+import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -28,7 +32,7 @@ public class UserBean implements Serializable {
 
     @EJB
     private UserDAO userDAO;
-    
+
     @Getter
     private DuoApi api;
 
@@ -44,6 +48,7 @@ public class UserBean implements Serializable {
     private Boolean isLoggedIn = false;
 
     User u = new User();
+
     /*
     
      */
@@ -57,16 +62,15 @@ public class UserBean implements Serializable {
             return;
         }
         api = new DuoApi(username, password);
-        
+
         isLoggedIn = api.getIsLoggedIn();
-        if (isLoggedIn)
+        if (isLoggedIn) {
             userDAO.add(new User(username));
-                redirect();
+        }
+        redirect();
     }
-    
-    public void startQuiz(){
-            //TODO this should probably be moved!
-    }
+
+   
 
     public void redirect() {
         try {
@@ -75,7 +79,5 @@ public class UserBean implements Serializable {
             System.err.println(e.getMessage());
         }
     }
-    
-    
 
 }
