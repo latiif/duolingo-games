@@ -10,10 +10,19 @@
 
 
     <ui:define name="content"> 
+        <b:messages/>
+        
         <b:container id="center">
-         
+
             <c:set var="questions" value="#{quiz.getQuizInformation(user)}"/>
 
+
+            <b:row id="info">
+                <b:messages/>
+            </b:row>
+            <b:row id="status">
+                <p><h1>#{quiz.nrCorrect}</h1></p>
+            </b:row>
 
             <b:row>
                 <b:column>
@@ -21,20 +30,26 @@
                         <b:carousel id="quiz" 
                                     startAnimation="false"
                                     showIndicators="true"
+                                    styleClass="questionsCarousel"
                                     wrap="false">
                             <c:forEach var="question" items="#{questions}">
-
                                 <b:carouselItem>
-                                    <b:panel title="Question 1" collapsible="false">
+                                    <b:panel collapsible="false">
                                         <p>Translate #{question.word}</p>
                                         <b:radiobutton value="#{quiz.answer}">
-                                             <f:selectItems value="#{question.options}" />
+                                            <f:selectItems value="#{question.options}" />
                                         </b:radiobutton>
                                     </b:panel>
                                 </b:carouselItem>
 
                             </c:forEach>
-
+                            <b:carouselControl direction="right" ajax="true">
+                                <b:commandButton value="Next question"
+                                                 onclick="ajax:quiz.validate()"
+                                                 update="status info"
+                                                 look="success"
+                                                 oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
+                            </b:carouselControl>
 
                         </b:carousel>
                     </b:form>

@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import net.bootsfaces.utils.FacesMessages;
 
 /**
  *
@@ -35,6 +36,18 @@ public class QuizBean implements Serializable {
     @Setter
     private String answer;
     
+    @Getter
+    @Setter
+    private int totalQuestions;
+    
+    @Getter
+    @Setter
+    private int currQuestion;
+    
+    
+    @Getter
+    private int nrCorrect;
+    
     private UserBean userBean;
 
     public List<Question> getQuizInformation(UserBean ub) {
@@ -46,6 +59,7 @@ public class QuizBean implements Serializable {
             quiz = startQuiz();
         }
 
+        
         return quiz;
     }
 
@@ -54,7 +68,24 @@ public class QuizBean implements Serializable {
 
         Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
 
+        currQuestion = 0;
+        nrCorrect = 0;
+        totalQuestions = 10;
+        
         return new Quiz(dict, 10, 3).generateQuestions();
 
+    }
+    
+    public void validate(){
+        if (quiz.get(currQuestion++).check(answer))
+        {
+            FacesMessages.info("Correct!");
+            nrCorrect++;
+        }
+        else{
+            FacesMessages.error("Wrong");
+        }
+        
+        
     }
 }
