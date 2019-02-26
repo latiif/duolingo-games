@@ -6,6 +6,7 @@
 package cth.webapp.duogames.duogames.database.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author stina
  */
 @Entity
-@Table(name = "gamesession")
+@Table(name = "gamesessions")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Gamesession.findAll", query = "SELECT g FROM Gamesession g"),
@@ -46,12 +47,13 @@ public class Gamesession implements Serializable {
     @Column(name = "isfinished")
     private boolean isfinished;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "time")
-    private long time;
+    private BigInteger time;
     @Basic(optional = false)
     @NotNull
     @Column(name = "score")
-    private short score;
+    private int score;
     @JoinColumn(name = "userid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userid;
@@ -63,7 +65,7 @@ public class Gamesession implements Serializable {
         this.id = id;
     }
 
-    public Gamesession(Integer id, boolean isfinished, long time, short score) {
+    public Gamesession(Integer id, boolean isfinished, BigInteger time, int score) {
         this.id = id;
         this.isfinished = isfinished;
         this.time = time;
@@ -86,19 +88,19 @@ public class Gamesession implements Serializable {
         this.isfinished = isfinished;
     }
 
-    public long getTime() {
+    public BigInteger getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(BigInteger time) {
         this.time = time;
     }
 
-    public short getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(short score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

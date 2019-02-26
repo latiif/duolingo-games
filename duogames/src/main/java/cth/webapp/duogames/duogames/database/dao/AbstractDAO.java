@@ -24,6 +24,10 @@ public abstract class AbstractDAO<T> {
      public AbstractDAO(Class c){
          this.cl = c;
      }
+     
+    protected EntityManager getEntityManager(){
+        return em;
+    }
 
     public List<T> findAll(){
         em.createNamedQuery("Users.findAll");
@@ -40,6 +44,8 @@ public abstract class AbstractDAO<T> {
         
 
     }
-
+    public void add(T entity){
+        em.persist(entity);
+    }
     
 }

@@ -35,7 +35,7 @@
 
                 <b:column col-xs="6">
                     <b:panel title="Active courses" collapsible="false">
-                        <c:forEach var="langAbbr" items="#{user.api.profileInfo.languages}">
+                        <c:forEach var="langAbbr" items="#{duoInfo.languages}">
                             <h:form style="display:inline">
                                 <h:commandLink action="#{user.api.switchLanguage(langAbbr)}"><font size="12"><span class="flag-icon flag-icon-#{langAbbr}"></span></font>
                                 </h:commandLink>

@@ -5,7 +5,9 @@
  */
 package cth.webapp.duogames.duogames.database.dao;
 
+import cth.webapp.duogames.duogames.database.entity.User;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,6 +15,12 @@ import javax.persistence.PersistenceContext;
  *
  * @author nicla
  */
-public class UserDAO<T> {
+@Stateless
+public class UserDAO extends AbstractDAO<User> {
    
+    public UserDAO() {
+        super(User.class);
+    }
+    
+    
 }

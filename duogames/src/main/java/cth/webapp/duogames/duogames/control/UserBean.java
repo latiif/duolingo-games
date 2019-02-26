@@ -5,13 +5,12 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.database.entity.User;
+import cth.webapp.duogames.duogames.database.dao.UserDAO;
 import cth.webapp.duogames.duogames.database.entity.User;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -27,6 +26,9 @@ import lombok.Setter;
 @SessionScoped
 public class UserBean implements Serializable {
 
+    @EJB
+    private UserDAO userDAO;
+    
     @Getter
     private DuoApi api;
 
@@ -55,13 +57,10 @@ public class UserBean implements Serializable {
             return;
         }
         api = new DuoApi(username, password);
-        /*
-        u.get(username)
-                if u = null
-                        u.create user
-                            */    
+        
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn)
+            userDAO.add(new User(username));
                 redirect();
     }
     
