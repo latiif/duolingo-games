@@ -5,16 +5,11 @@
  */
 package cth.webapp.duogames.duogames.database.dao;
 
-import cth.webapp.duogames.duogames.database.entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
 
 
 /**
@@ -22,13 +17,13 @@ import javax.persistence.criteria.Root;
  * @author nicla
  */
 public abstract class AbstractDAO<T> {
-     @PersistenceContext
-    private EntityManager em;
-     private Class cl;
+    @PersistenceContext
+    protected EntityManager em;
+    private Class cl;
      
-     public AbstractDAO(Class c){
-         this.cl = c;
-     }
+    public AbstractDAO(Class c){
+        this.cl = c;
+    }
      
     protected EntityManager getEntityManager(){
         return em;
@@ -47,19 +42,6 @@ public abstract class AbstractDAO<T> {
         return qq.getResultList();
     }
     
-    public User findUser(String username){
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> query = cb.createQuery(User.class);
-        Root<User> root = query.from(User.class);
-        query = query.select(root)
-                .where(cb.equal(root.get("username"), username));
-        try {
-            return em.createQuery(query).getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-
-    }
     /**
      * Finds and returns database entry by its primary key.
      * @param entity
