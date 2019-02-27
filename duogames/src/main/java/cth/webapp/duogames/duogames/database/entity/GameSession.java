@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Gamesession.findByIsfinished", query = "SELECT g FROM Gamesession g WHERE g.isfinished = :isfinished"),
     @NamedQuery(name = "Gamesession.findByTime", query = "SELECT g FROM Gamesession g WHERE g.time = :time"),
     @NamedQuery(name = "Gamesession.findByScore", query = "SELECT g FROM Gamesession g WHERE g.score = :score")})
-public class Gamesession implements Serializable {
+public class GameSession implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,14 +58,14 @@ public class Gamesession implements Serializable {
     @ManyToOne(optional = false)
     private User userid;
 
-    public Gamesession() {
+    public GameSession() {
     }
 
-    public Gamesession(Integer id) {
+    public GameSession(Integer id) {
         this.id = id;
     }
 
-    public Gamesession(Integer id, boolean isfinished, BigInteger time, int score) {
+    public GameSession(Integer id, boolean isfinished, BigInteger time, int score) {
         this.id = id;
         this.isfinished = isfinished;
         this.time = time;
@@ -122,10 +122,10 @@ public class Gamesession implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Gamesession)) {
+        if (!(object instanceof GameSession)) {
             return false;
         }
-        Gamesession other = (Gamesession) object;
+        GameSession other = (GameSession) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

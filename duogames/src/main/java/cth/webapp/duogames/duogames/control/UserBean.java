@@ -65,7 +65,7 @@ public class UserBean implements Serializable {
 
     private void getUser() {
         User u = new User(userData.getUsername());
-        User tmp = userDAO.findUser(u.getUsername());
+        User tmp = userDAO.findUserByUsername(u.getUsername());
         if(tmp == null){
             userDAO.add(u);
         } else {

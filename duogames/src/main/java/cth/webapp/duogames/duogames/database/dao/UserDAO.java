@@ -28,7 +28,7 @@ public class UserDAO extends AbstractDAO<User> {
      * @param username
      * @return 
      */
-    public User findUser(String username){
+    public User findUserByUsername(String username){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> query = cb.createQuery(User.class);
         Root<User> root = query.from(User.class);
