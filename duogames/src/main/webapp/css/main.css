@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 /* colors: https://coolors.co/export/pdf/ffb405-00a6a6-e01a4f-f15946-53b3cb */
-@import url('https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro|Poppins');
+@import url('https://fonts.googleapis.com/css?family=Bangers|Source+Sans+Pro|Poppins');
 #body {
     padding-top: 100px;
     font-family: 'Poppins', sans-serif;
@@ -19,7 +19,7 @@ p {
     font-size: 16px;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Bangers', sans-serif;
     text-transform: uppercase;
 }
 #nav{
@@ -27,6 +27,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 #nav a {
     color: white;
+}
+h1,
+.navbar-brand,
+.navbar-nav a {
+    font-family: 'Bangers', sans-serif;
+    font-size: 28px;
 }
 .dropdown-menu {
     background-color: #FFB405;
@@ -37,7 +43,8 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 h4.panel-title {
-    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 2px;
 }
 #center{
     position: absolute;

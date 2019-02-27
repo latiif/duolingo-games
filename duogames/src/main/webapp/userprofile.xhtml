@@ -27,7 +27,7 @@
             <b:row>
                 <b:column col-xs="6">
                     <c:set var="currLang" value="#{user.api.currentLanguage}"/>
-                    <b:panel title="Skills at #{user.api.getLanguageFromAbbreviataion(currLang)}" collapsible="false">
+                    <b:panel title="#{user.api.getLanguageFromAbbreviataion(currLang)} skills" collapsible="false">
                         <p>Number of known words: #{user.api.knownWords.size()}</p>
                         <p>Number of known topics: #{user.api.knownTopics.size()}</p>
                     </b:panel>

@@ -51,8 +51,8 @@ public class UserBean implements Serializable {
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn) {
             getUser();
-            redirect();
         }
+            redirect();
     }
    
     public void redirect() {

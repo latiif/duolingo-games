@@ -45,7 +45,7 @@ public class User implements Serializable {
     @Column(name = "username")
     private String username;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-    private Collection<GameSession> gamesessionCollection;
+    private Collection<Gamesession> gamesessionCollection;
 
     public User() {
     }
@@ -73,11 +73,11 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<GameSession> getGamesessionCollection() {
+    public Collection<Gamesession> getGamesessionCollection() {
         return gamesessionCollection;
     }
 
-    public void setGamesessionCollection(Collection<GameSession> gamesessionCollection) {
+    public void setGamesessionCollection(Collection<Gamesession> gamesessionCollection) {
         this.gamesessionCollection = gamesessionCollection;
     }
 

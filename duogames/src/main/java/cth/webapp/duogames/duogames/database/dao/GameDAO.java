@@ -1,13 +1,13 @@
 package cth.webapp.duogames.duogames.database.dao;
 
-import cth.webapp.duogames.duogames.database.entity.GameSession;
+import cth.webapp.duogames.duogames.database.entity.Gamesession;
 import javax.ejb.Stateless;
 
 @Stateless
-public class GameDAO extends AbstractDAO<GameSession> {
+public class GameDAO extends AbstractDAO<Gamesession> {
    
     public GameDAO() {
-        super(GameSession.class);
+        super(Gamesession.class);
     }
     
 }
