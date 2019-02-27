@@ -11,10 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,6 +45,7 @@ public class QuizBean implements Serializable {
     @Getter
     private int nrCorrect;
     
+    @Inject
     private UserBean userBean;
 
     public List<Question> getQuizInformation(UserBean ub) {
@@ -55,7 +53,6 @@ public class QuizBean implements Serializable {
         
         
         if (quiz == null) {
-            userBean = ub;
             quiz = startQuiz();
         }
 
@@ -63,7 +60,7 @@ public class QuizBean implements Serializable {
         return quiz;
     }
 
-    private List<Question> startQuiz() {
+    public List<Question> startQuiz() {
        
 
         Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
