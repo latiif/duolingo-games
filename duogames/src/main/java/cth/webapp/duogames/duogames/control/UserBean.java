@@ -39,7 +39,6 @@ public class UserBean implements Serializable {
     private Boolean isLoggedIn = false;
 
     public void signin() {
-        //TODO fixa
         if (userData.getUsername() == null || userData.getPassword() == null) {
             return;
         }
@@ -51,17 +50,26 @@ public class UserBean implements Serializable {
 
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn) {
-            userDAO.add(new User(userData.getUsername()));
+            getUser();
+            redirect();
         }
-        redirect();
     }
-    
    
     public void redirect() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/userprofile.xhtml");
         } catch (IOException e) {
             System.err.println(e.getMessage());
+        }
+    }
+
+    private void getUser() {
+        User u = new User(userData.getUsername());
+        User tmp = userDAO.findUser(u.getUsername());
+        if(tmp == null){
+            userDAO.add(u);
+        } else {
+            u.setId(tmp.getId());
         }
     }
 }

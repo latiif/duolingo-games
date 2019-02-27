@@ -10,6 +10,10 @@ and open the template in the editor.
 
 /* colors: https://coolors.co/export/pdf/ffb405-00a6a6-e01a4f-f15946-53b3cb */
 @import url('https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro|Poppins');
+#body {
+    padding-top: 100px;
+    font-family: 'Poppins', sans-serif;
+}
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -34,9 +38,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 h4.panel-title {
     font-weight: bold;
-}
-#body {
-    padding-top: 100px;
 }
 #center{
     position: absolute;

@@ -6,10 +6,7 @@
 package cth.webapp.duogames.duogames.database.dao;
 
 import cth.webapp.duogames.duogames.database.entity.User;
-import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  *

@@ -5,11 +5,16 @@
  */
 package cth.webapp.duogames.duogames.database.dao;
 
+import cth.webapp.duogames.duogames.database.entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 
 /**
@@ -31,7 +36,6 @@ public abstract class AbstractDAO<T> {
 
     public List<T> findAll(){
         em.createNamedQuery("Users.findAll");
-       
         return null;
     }
     public List<T> findRange(){
@@ -41,9 +45,34 @@ public abstract class AbstractDAO<T> {
         qq.setFirstResult(0);
         qq.setMaxResults(5);
         return qq.getResultList();
-        
+    }
+    
+    public User findUser(String username){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<User> query = cb.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query = query.select(root)
+                .where(cb.equal(root.get("username"), username));
+        try {
+            return em.createQuery(query).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
 
     }
+    /**
+     * Finds and returns database entry by its primary key.
+     * @param entity
+     * @return 
+     */
+    public Object findById(int id){
+       return em.find(cl, id);
+    }
+    
+    /**
+     * Adds the new entity to the database.
+     * @param entity 
+     */
     public void add(T entity){
         em.persist(entity);
     }
