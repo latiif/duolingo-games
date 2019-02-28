@@ -13,9 +13,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -223,7 +226,7 @@ public class DuoApi {
                 cookies = response.cookies();
 
             } else {
-                String raw = Jsoup.connect(url).ignoreContentType(true).maxBodySize(1200000).cookies(cookies).execute().body();
+                String raw = Jsoup.connect(url).ignoreContentType(true).cookies(cookies).execute().body();
                 object = parser.parse(raw).getAsJsonObject();
             }
             return object;
@@ -489,7 +492,7 @@ public class DuoApi {
         if (from == null) {
             from = getCurrentLanguage();
         }
-
+             
         String url = "https://d2.duolingo.com/api/1/dictionary/hints/%1$s/%2$s?tokens=%3$s";
         url = String.format(url, from, to, getListFormatted(words));
 
@@ -514,12 +517,19 @@ public class DuoApi {
      * @return A string representing quoted strings in array
      */
     private String getListFormatted(List<String> list) {
+        //tmp = "https://d2.duolingo.com/api/1/dictionary/hints/de/en?tokens=[%22trinke%22,%22trinkt%22]";
         List<String> res = new ArrayList<String>();
         for (String word : list) {
-            res.add("\"" + word + "\"");
+            try {
+                res.add("%20%22" + URLEncoder.encode(word, "UTF-8") + "%22");
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(DuoApi.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
-        return Arrays.toString(res.toArray());
+        String tmp = Arrays.toString(res.toArray());
+        tmp = tmp.replace("[%20", "[");
+        tmp = tmp.replace(" ", "");
+        return tmp;
     }
 
     /**
@@ -577,4 +587,12 @@ public class DuoApi {
     public DuolingoProfileInfo getProfileInfo(){
         return new DuolingoProfileInfo(userData);
     }
+    
+    private class MyDto {
+        Map<String, String> headers;
+        Map<String, String> args;
+        String origin;
+        String url;
+    }
+    
 }
