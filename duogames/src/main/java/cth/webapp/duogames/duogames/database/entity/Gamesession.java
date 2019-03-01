@@ -5,6 +5,7 @@
  */
 package cth.webapp.duogames.duogames.database.entity;
 
+import cth.webapp.duogames.duogames.utils.TimeFormatter;
 import java.io.Serializable;
 import java.math.BigInteger;
 import javax.persistence.Basic;
@@ -110,6 +111,10 @@ public class Gamesession implements Serializable {
 
     public void setUserid(User userid) {
         this.userid = userid;
+    }
+    
+    public String getTimeInSeconds(){
+        return TimeFormatter.format(time.longValue());
     }
 
     @Override

@@ -11,15 +11,18 @@
     <ui:define name="content"> 
 
         <b:container id="center">
-            <c:set var="duoInfo" value ="#{user.api.profileInfo}" />
-
             <b:row>
                 <b:column col-xs="6">
-                    <c:set var="currLang" value="#{user.api.currentLanguage}"/>
                     <b:panel title="Quiz" collapsible="false">
                         <h:form>
-                            <p>TODO: when database is connected - put in datatable</p>
-                          </h:form>
+                            <b:dataTable value="#{gameData.highScore}"
+                                         var="game" searching="false" paginated="false" info="false">
+                              <b:dataTableColumn value="#{game.id}" label="Game ID"/>
+                              <b:dataTableColumn value="#{game.timeInSeconds}" label="Time"/>
+                              <b:dataTableColumn value="#{game.userid.username}" label="User"/>
+                              <b:dataTableColumn value="#{game.score}" order="desc"/>
+                            </b:dataTable>
+                      </h:form>
                     </b:panel>
                 </b:column>
 
