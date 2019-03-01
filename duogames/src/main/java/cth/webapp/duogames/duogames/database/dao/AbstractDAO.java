@@ -33,12 +33,12 @@ public abstract class AbstractDAO<T> {
         em.createNamedQuery("Users.findAll");
         return null;
     }
-    public List<T> findRange(){
+    public List<T> findRange(int range){
         CriteriaQuery q = em.getCriteriaBuilder().createQuery();
         q.select(q.from(cl));
         Query qq = em.createQuery(q);
         qq.setFirstResult(0);
-        qq.setMaxResults(5);
+        qq.setMaxResults(range);
         return qq.getResultList();
     }
     

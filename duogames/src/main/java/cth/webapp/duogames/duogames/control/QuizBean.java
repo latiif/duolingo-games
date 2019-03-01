@@ -9,6 +9,7 @@ import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.database.entity.Gamesession;
 import cth.webapp.duogames.duogames.model.quiz.Question;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
+import cth.webapp.duogames.duogames.utils.TimeFormatter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -120,16 +121,16 @@ public class QuizBean implements Serializable {
                 }
         }
 
-    private void addToDatabase(long diff) {
-        score = nrCorrect * 10;
-        Gamesession game = new Gamesession(true, BigInteger.valueOf(diff), score, userBean.getUser());
+    private void addToDatabase(long gameTime) {
+        score = nrCorrect * (int) gameTime;
+        Gamesession game = new Gamesession(true, BigInteger.valueOf(gameTime), score, userBean.getUser());
         gameDAO.add(game);
     }
 
     private void endQuiz() {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime()) / 1000L;
-        time = String.format("%02d:%02d:%02d", diff / 3600, (diff % 3600) / 60, diff % 60);
+        time = TimeFormatter.format(diff);
         addToDatabase(diff);
         redirect("/duogames/score.xhtml");
     }
