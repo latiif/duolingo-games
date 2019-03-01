@@ -93,22 +93,23 @@ public class QuizBean implements Serializable {
     }
     
     public void validate(){
-        if (quiz.get(currQuestion++).check(answer))
+        if (quiz.get(currQuestion).check(answer))
         {
-            if(currQuestion == 10){
-                endTime = new Timestamp(System.currentTimeMillis());
-                long diff = (endTime.getTime() - startTime.getTime()) / 1000L;
-                time = String.format("%02d:%02d:%02d", diff / 3600, (diff % 3600) / 60, diff % 60);
-                addToDatabase(diff);
-                redirect("/duogames/score.xhtml");
-            }
             FacesMessages.info("Correct!");
             nrCorrect++;
-            
+            currQuestion++;
+            if(currQuestion == 10){
+                endQuiz();
+            }            
         }
         else{
             FacesMessages.error("Wrong");
+            currQuestion++;
+            if(currQuestion == 10){
+                endQuiz();
+            } 
         }
+       
     }
 
     private void redirect(String url) {
@@ -123,5 +124,13 @@ public class QuizBean implements Serializable {
         score = nrCorrect * 10;
         Gamesession game = new Gamesession(true, BigInteger.valueOf(diff), score, userBean.getUser());
         gameDAO.add(game);
+    }
+
+    private void endQuiz() {
+        endTime = new Timestamp(System.currentTimeMillis());
+        long diff = (endTime.getTime() - startTime.getTime()) / 1000L;
+        time = String.format("%02d:%02d:%02d", diff / 3600, (diff % 3600) / 60, diff % 60);
+        addToDatabase(diff);
+        redirect("/duogames/score.xhtml");
     }
 }
