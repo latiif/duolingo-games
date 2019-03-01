@@ -54,8 +54,13 @@ public class UserBean implements Serializable {
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn) {
             createUser();
-        }
             redirect();
+            
+        }
+        else{
+            wrongpass();
+        }
+            
     }
    
     public void redirect() {
@@ -75,6 +80,16 @@ public class UserBean implements Serializable {
             user.setId(tmp.getId());
             System.out.println(user.getId());
                     
+        }
+    }
+
+    private void wrongpass() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().addResponseHeader("LoginError", "Wrong username or password");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/index.xhtml?error=pass");
+            
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 }
