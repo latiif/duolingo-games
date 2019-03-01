@@ -65,11 +65,11 @@ public class Gamesession implements Serializable {
         this.id = id;
     }
 
-    public Gamesession(Integer id, boolean isfinished, BigInteger time, int score) {
-        this.id = id;
+    public Gamesession(boolean isfinished, BigInteger time, int score, User user) {
         this.isfinished = isfinished;
         this.time = time;
         this.score = score;
+        this.userid = user;
     }
 
     public Integer getId() {

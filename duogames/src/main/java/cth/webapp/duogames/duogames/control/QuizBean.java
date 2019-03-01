@@ -5,6 +5,8 @@
  */
 package cth.webapp.duogames.duogames.control;
 
+import cth.webapp.duogames.duogames.database.dao.GameDAO;
+import cth.webapp.duogames.duogames.database.entity.Gamesession;
 import cth.webapp.duogames.duogames.model.quiz.Question;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -31,6 +34,9 @@ public class QuizBean implements Serializable {
     
     @Inject
     private UserBean userBean;
+    
+    @EJB
+    private GameDAO gameDAO;
     
     private List<Question> quiz;
     
@@ -54,6 +60,9 @@ public class QuizBean implements Serializable {
     
     private Timestamp startTime;
     private Timestamp endTime;
+    
+    @Getter
+    private int score;
     
 
     public List<Question> getQuizInformation(UserBean ub) {
@@ -88,13 +97,14 @@ public class QuizBean implements Serializable {
         {
             if(currQuestion == 10){
                 endTime = new Timestamp(System.currentTimeMillis());
-                // = BigInteger.valueOf((endTime.getTime() - startTime.getTime()) / 1000);
                 long diff = (endTime.getTime() - startTime.getTime()) / 1000L;
                 time = String.format("%02d:%02d:%02d", diff / 3600, (diff % 3600) / 60, diff % 60);
+                addToDatabase(diff);
                 redirect("/duogames/score.xhtml");
             }
             FacesMessages.info("Correct!");
             nrCorrect++;
+            
         }
         else{
             FacesMessages.error("Wrong");
@@ -108,4 +118,10 @@ public class QuizBean implements Serializable {
                     System.err.println(e.getMessage());
                 }
         }
+
+    private void addToDatabase(long diff) {
+        score = nrCorrect * 10;
+        Gamesession game = new Gamesession(true, BigInteger.valueOf(diff), score, userBean.getUser());
+        gameDAO.add(game);
+    }
 }

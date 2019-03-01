@@ -37,6 +37,9 @@ public class UserBean implements Serializable {
     private DuoApi api;
     @Getter
     private Boolean isLoggedIn = false;
+    
+    @Getter
+    private User user;
 
     public void signin() {
         if (userData.getUsername() == null || userData.getPassword() == null) {
@@ -50,7 +53,7 @@ public class UserBean implements Serializable {
 
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn) {
-            getUser();
+            createUser();
         }
             redirect();
     }
@@ -63,13 +66,15 @@ public class UserBean implements Serializable {
         }
     }
 
-    private void getUser() {
-        User u = new User(userData.getUsername());
-        User tmp = userDAO.findUserByUsername(u.getUsername());
+    private void createUser() {
+        user = new User(userData.getUsername());
+        User tmp = userDAO.findUserByUsername(user.getUsername());
         if(tmp == null){
-            userDAO.add(u);
+            userDAO.add(user);
         } else {
-            u.setId(tmp.getId());
+            user.setId(tmp.getId());
+            System.out.println(user.getId());
+                    
         }
     }
 }
