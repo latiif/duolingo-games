@@ -16,16 +16,25 @@
                 <b:column col-xs="6">
                     <b:panel title="Results for #{userData.username}" collapsible="false">
                         <h:form>
-                            <p>Correct questions: #{quiz.nrCorrect}</p>
+                            <p>Correct questions: #{quiz.nrCorrect}/#{quiz.totalQuestions}</p>
                             <p>Score: #{quiz.score}%</p>
                             <p>Time: #{quiz.time}</p>
                           </h:form>
                     </b:panel>
                 </b:column>
+                <b:column col-xs="6">
+                    <b:panel title="Results for " collapsible="false">
+                        <h:form>
+                            <p>Correct questions: </p>
+                            <p>Score: %</p>
+                            <p>Time: </p>
+                          </h:form>
+                    </b:panel>
+                </b:column>
             </b:row>
-            <b:row>
+            <b:row class="centered-text">
                 <b:form>
-                    <b:commandButton value="Play again!" actionListener="#{quiz.resetQuiz()}"></b:commandButton>
+                    <b:commandButton look="info" value="Play again!" actionListener="#{quiz.resetQuiz()}"></b:commandButton>
                 </b:form>
             </b:row>
         </b:container>   
