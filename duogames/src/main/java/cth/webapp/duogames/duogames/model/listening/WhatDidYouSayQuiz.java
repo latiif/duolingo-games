@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class WhatDidYouSayQuiz extends Game {
 
     private Map<String, List<String>> mDict;
-    
 
     private int mQuizLength;
 
@@ -40,10 +39,10 @@ public class WhatDidYouSayQuiz extends Game {
                 .collect(Collectors.toList());
 
         Collections.shuffle(words);
-        
-        
-        
-        return  words.stream().map(w -> new ListeningQuestion(api.getWordAudio(w), w)).collect(Collectors.toList());
+
+        return words.stream()
+                .map(w -> new ListeningQuestion(api.getWordAudio(w), w))
+                .collect(Collectors.toList());
     }
 
 }
