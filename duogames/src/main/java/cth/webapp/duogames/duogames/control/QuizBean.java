@@ -114,7 +114,8 @@ public class QuizBean implements Serializable {
             currQuestion++;
             if(currQuestion == 10){
                 endQuiz();
-            }            
+            }
+            answer = "";
         }
         else{
             FacesMessages.error("Wrong");
@@ -122,6 +123,7 @@ public class QuizBean implements Serializable {
             if(currQuestion == 10){
                 endQuiz();
             } 
+            answer = "";
         }
        
     }
