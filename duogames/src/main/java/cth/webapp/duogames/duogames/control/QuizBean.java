@@ -44,6 +44,7 @@ public class QuizBean implements Serializable {
     private GameDAO gameDAO;
     
     private List<IQuestion> quiz;
+    private String gameType;
     
     @Getter
     @Setter
@@ -72,7 +73,9 @@ public class QuizBean implements Serializable {
 
     public List<IQuestion> getQuizInformation(UserBean ub, String type) {
         
-        if (quiz == null) {
+        
+        if (quiz == null || !gameType.equalsIgnoreCase(type)) {
+            this.gameType = type;
             quiz = startQuiz(type);
         }
         
