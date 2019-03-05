@@ -6,6 +6,7 @@
 package cth.webapp.duogames.duogames.model.listening;
 
 import cth.webapp.duogames.duogames.model.Game;
+import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -28,8 +29,8 @@ public class WhatDidYouSayQuiz extends Game {
         this.mQuizLength = nrQuestions;
     }
 
-    public List<ListeningQuestion> generateQuestions(DuoApi api) {
-        List<ListeningQuestion> result = new LinkedList<>();
+    public List<IQuestion> generateQuestions(DuoApi api) {
+        List<IQuestion> result = new LinkedList<>();
 
         List<String> words = mDict
                 .keySet()

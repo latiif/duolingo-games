@@ -7,6 +7,9 @@ package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.database.entity.Gamesession;
+import cth.webapp.duogames.duogames.model.Game;
+import cth.webapp.duogames.duogames.model.IQuestion;
+import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
 import cth.webapp.duogames.duogames.model.quiz.Question;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
@@ -40,7 +43,7 @@ public class QuizBean implements Serializable {
     @EJB
     private GameDAO gameDAO;
     
-    private List<Question> quiz;
+    private List<IQuestion> quiz;
     
     @Getter
     @Setter
@@ -67,16 +70,16 @@ public class QuizBean implements Serializable {
     private int score;
     
 
-    public List<Question> getQuizInformation(UserBean ub) {
+    public List<IQuestion> getQuizInformation(UserBean ub, String type) {
         
         if (quiz == null) {
-            quiz = startQuiz();
+            quiz = startQuiz(type);
         }
         
         return quiz;
     }
 
-    public List<Question> startQuiz() {
+    public List<IQuestion> startQuiz(String type) {
        
         Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
 
@@ -85,8 +88,14 @@ public class QuizBean implements Serializable {
         totalQuestions = 10;
         startTime = new Timestamp(System.currentTimeMillis());
         
-        return new Quiz(dict, 10, 3).generateQuestions();
-
+        switch (type){
+            case "quiz":
+                return new Quiz(dict, 10, 3).generateQuestions();
+            case "wdys":
+                return new WhatDidYouSayQuiz(dict, 10).generateQuestions(userBean.getApi());
+            default:
+                return new Quiz(dict, 10, 3).generateQuestions();
+        }
     }
     
     public void resetQuiz() {

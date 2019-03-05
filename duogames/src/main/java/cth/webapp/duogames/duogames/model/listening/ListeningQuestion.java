@@ -5,11 +5,13 @@
  */
 package cth.webapp.duogames.duogames.model.listening;
 
+import cth.webapp.duogames.duogames.model.IQuestion;
+
 /**
  *
  * @author latiif
  */
-public class ListeningQuestion {
+public class ListeningQuestion implements IQuestion {
     
     private String wordUrl;
     private String correctAnswer;
@@ -24,6 +26,7 @@ public class ListeningQuestion {
         return wordUrl;
     }
     
+    @Override
     public boolean check(String answer){
         return answer.toLowerCase().equals(correctAnswer.toLowerCase());
     }

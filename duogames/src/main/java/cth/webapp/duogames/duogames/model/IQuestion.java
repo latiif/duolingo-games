@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cth.webapp.duogames.duogames.view;
+package cth.webapp.duogames.duogames.model;
 
 /**
  *
  * @author stina
  */
-class User {
+public interface IQuestion {
+    
+    public boolean check(String answer);
     
 }
