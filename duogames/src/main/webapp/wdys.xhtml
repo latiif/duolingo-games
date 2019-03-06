@@ -47,21 +47,18 @@
                                                 <code>audio</code> element.
                                         </audio>
                                         <p>Type in the word you hear:</p>
-                                        <b:form>
-                                            <b:inputText span="3" value="#{quiz.answer}"></b:inputText>
-                                        </b:form>
+                                            <b:inputText span="3" value="#{quizData.answer}"></b:inputText>
                                     </b:panel>
                                 </b:carouselItem>
 
                             </c:forEach>
                             <b:carouselControl direction="right" ajax="true">
                                 <b:commandButton value="Next"
-                                                 onclick="ajax:quiz.validate()"
-                                                 update="status info counter"
+                                                 action="#{quiz.validate()}"
+                                                 update="status info counter @form"
                                                  look="success"
                                                  oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
                             </b:carouselControl>
-
                         </b:carousel>
                     </b:form>
                 </b:column>

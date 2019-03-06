@@ -7,13 +7,12 @@ package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.database.entity.Gamesession;
-import cth.webapp.duogames.duogames.model.Game;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
-import cth.webapp.duogames.duogames.model.quiz.Question;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
+import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -39,6 +38,9 @@ public class QuizBean implements Serializable {
     
     @Inject
     private UserBean userBean;
+    
+    @Inject
+    private QuizData quizData;
     
     @EJB
     private GameDAO gameDAO;
@@ -107,7 +109,7 @@ public class QuizBean implements Serializable {
     }
     
     public void validate(){
-        if (quiz.get(currQuestion).check(answer))
+        if (quiz.get(currQuestion).check(quizData.getAnswer()))
         {
             FacesMessages.info("Correct!");
             nrCorrect++;
