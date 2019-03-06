@@ -16,6 +16,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import lombok.Getter;
 
 /**
@@ -65,6 +66,7 @@ public class UserBean implements Serializable {
    
     public void redirect() {
         try {
+            
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/userprofile.xhtml");
         } catch (IOException e) {
             System.err.println(e.getMessage());
