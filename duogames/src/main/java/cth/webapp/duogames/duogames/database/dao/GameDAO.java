@@ -29,7 +29,9 @@ public class GameDAO extends AbstractDAO<Gamesession> {
         CriteriaQuery<Gamesession> query = cb.createQuery(Gamesession.class);
         Root<Gamesession> root = query.from(Gamesession.class);
         query = query.select(root)
-                .where(cb.equal(root.get("userid"), userid));
+                .where(cb.equal(root.get("userid"), userid))
+                
+                ;
         try {
             return em.createQuery(query).getFirstResult();
         } catch (NoResultException nre) {

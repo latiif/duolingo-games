@@ -42,6 +42,15 @@ public abstract class AbstractDAO<T> {
         return qq.getResultList();
     }
     
+    public List<T> findHighRange(int range){
+        CriteriaQuery q = em.getCriteriaBuilder().createQuery();
+        q.select(q.from(cl)).orderBy();
+        Query qq = em.createQuery(q);
+        qq.setFirstResult(0);
+        qq.setMaxResults(range);
+        return qq.getResultList();
+    }
+    
     /**
      * Finds and returns database entry by its primary key.
      * @param entity
