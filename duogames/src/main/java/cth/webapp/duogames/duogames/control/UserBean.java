@@ -11,6 +11,8 @@ import cth.webapp.duogames.duogames.services.DuoApi;
 import cth.webapp.duogames.duogames.view.UserData;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -92,6 +94,18 @@ public class UserBean implements Serializable {
             
         } catch (IOException e) {
             System.err.println(e.getMessage());
+        }
+    }
+    
+    public void logout(){
+        user = null;
+        isLoggedIn = false;
+        api = null;
+        userData = null;
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
