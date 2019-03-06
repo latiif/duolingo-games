@@ -7,6 +7,7 @@ package cth.webapp.duogames.duogames.model.quiz;
 
 import cth.webapp.duogames.duogames.model.Game;
 import cth.webapp.duogames.duogames.database.entity.User;
+import cth.webapp.duogames.duogames.model.IQuestion;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -48,22 +49,9 @@ public class Quiz extends Game{
         return result;
     }
 
-    private Map<String, List<String>> cleanDict(Map<String, List<String>> dict) {
-        Map<String, List<String>> result = new HashMap<>();
 
-        for (String key : dict.keySet()) {
-            List<String> translations = dict.get(key);
-
-            if (translations == null || translations.isEmpty())
-                continue;
-
-            result.put(key, translations);
-        }
-        return result;
-    }
-
-    public List<Question> generateQuestions() {
-        List<Question> result = new LinkedList<>();
+    public List<IQuestion> generateQuestions() {
+        List<IQuestion> result = new LinkedList<>();
 
         Map<String, List<String>> cleanDict = cleanDict(mDict);
 

@@ -14,7 +14,7 @@
         
         <b:container id="center">
 
-            <c:set var="questions" value="#{quiz.getQuizInformation(user, 'quiz')}"/>
+            <c:set var="questions" value="#{quiz.getQuizInformation(user, 'wdys')}"/>
 
 
             <b:row id="info">
@@ -42,10 +42,14 @@
                             <c:forEach var="question" items="#{questions}">
                                 <b:carouselItem>
                                     <b:panel collapsible="false">
-                                        <p>Translate #{question.word}</p>
-                                        <b:radiobutton value="#{quiz.answer}">
-                                            <f:selectItems value="#{question.options}" />
-                                        </b:radiobutton>
+                                        <audio controls="true" src="#{question.url}">
+                                                Your browser does not support the
+                                                <code>audio</code> element.
+                                        </audio>
+                                        <p>Type in the word you hear:</p>
+                                        <b:form>
+                                            <b:inputText span="3" value="#{quiz.answer}"></b:inputText>
+                                        </b:form>
                                     </b:panel>
                                 </b:carouselItem>
 

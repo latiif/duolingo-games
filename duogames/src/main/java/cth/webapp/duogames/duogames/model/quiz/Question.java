@@ -9,11 +9,12 @@ package cth.webapp.duogames.duogames.model.quiz;
  *
  * @author nicla, latiif
  */
+import cth.webapp.duogames.duogames.model.IQuestion;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Question {
+public class Question implements IQuestion {
 
     private String word;
     private List<String> wrongAnswers;
@@ -34,6 +35,7 @@ public class Question {
         this.wrongAnswers = wrongAnswers;
     }
 
+    @Override
     public boolean check(String answer) {
         return rightAnswer.toLowerCase().equals(answer.toLowerCase());
     }
