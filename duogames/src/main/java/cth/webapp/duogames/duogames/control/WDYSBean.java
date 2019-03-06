@@ -5,24 +5,19 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.database.entity.Gamesession;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
-import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
-import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,17 +25,11 @@ import net.bootsfaces.utils.FacesMessages;
 
 /**
  *
- * @author latiif
+ * @author nicla
  */
-@Named(value="quiz")
+@Named(value="wdys")
 @SessionScoped
-public class QuizBean extends GameBean implements Serializable {
-    
-    
-    
-    private List<IQuestion> quiz;
-    private String gameType;
-    
+public class WDYSBean extends GameBean implements Serializable {
     @Getter
     @Setter
     private String answer;
@@ -65,33 +54,20 @@ public class QuizBean extends GameBean implements Serializable {
     @Getter
     private int score;
     
-
-    public List<IQuestion> getQuizInformation(UserBean ub, String type) {
-        
-        
-        if (quiz == null || !gameType.equalsIgnoreCase(type)) {
-            this.gameType = type;
-            quiz = startGame();
-        }
-        
-        return quiz;
-    }
+     private List<IQuestion> quiz;
+    
     @Override
-    public List startGame() {
-       
-        Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
+    public List<IQuestion> startGame() {
+         Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
 
         currQuestion = 0;
         nrCorrect = 0;
         totalQuestions = 10;
         startTime = new Timestamp(System.currentTimeMillis());
 
-                return new Quiz(dict, 10, 3).generateQuestions();
-                
-           
-        }
-    
-    
+        
+       return new WhatDidYouSayQuiz(dict, 10).generateQuestions(super.getUserBean().getApi());
+    }
     public void resetQuiz() {
         quiz = null;
         redirect("/duogames/play.xhtml");
@@ -141,8 +117,8 @@ public class QuizBean extends GameBean implements Serializable {
         addToDatabase(seconds);
         redirect("/duogames/score.xhtml");
     }
-
     
-
+    
+    
     
 }

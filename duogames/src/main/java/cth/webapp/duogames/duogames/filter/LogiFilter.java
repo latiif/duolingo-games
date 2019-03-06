@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author nicla
  */
 
-@WebFilter("/userprofile.xhtml")
+@WebFilter({"/userprofile.xhtml", "/play.xhtml", "/quiz.xhtml"})
 public class LogiFilter implements Filter {
     @Inject
     UserBean user;

@@ -38,6 +38,7 @@ public class GameData implements Serializable {
     }
     
     public String getQuickestGame(){
+        System.out.println(gameDAO.findQuickestTime().longValue());
         return TimeFormatter.format(gameDAO.findQuickestTime().longValue());
     }
     
