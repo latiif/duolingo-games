@@ -36,6 +36,7 @@ public class WhatDidYouSayQuiz extends Game {
                 .keySet()
                 .stream()
                 .filter(w -> !w.contains(" "))
+                .map(String::toLowerCase)
                 .limit(this.mQuizLength)
                 .collect(Collectors.toList());
 
