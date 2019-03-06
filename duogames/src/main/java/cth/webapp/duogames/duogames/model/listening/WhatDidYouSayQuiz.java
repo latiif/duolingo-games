@@ -9,6 +9,7 @@ import cth.webapp.duogames.duogames.model.Game;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,19 +33,24 @@ public class WhatDidYouSayQuiz extends Game {
     public List<IQuestion> generateQuestions(DuoApi api) {
         List<IQuestion> result = new LinkedList<>();
 
+        AudioMapper am = AudioMapper.getInstance();
+        
+        String currLang = api.getCurrentLanguage();
+        
         List<String> words = mDict
                 .keySet()
                 .stream()
                 .filter(w -> !w.contains(" "))
-                .map(String::toLowerCase)
                 .limit(this.mQuizLength)
+                .map(String::toLowerCase)
                 .collect(Collectors.toList());
 
         Collections.shuffle(words);
 
         return words.stream()
-                .map(w -> new ListeningQuestion(api.getWordAudio(w), w))
+               
+                .map(w -> new ListeningQuestion(am.getAudioUrl(w, currLang),w))
                 .collect(Collectors.toList());
     }
-
+    
 }
