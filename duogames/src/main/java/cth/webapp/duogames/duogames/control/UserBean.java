@@ -7,6 +7,7 @@ package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.UserDAO;
 import cth.webapp.duogames.duogames.database.entity.User;
+import cth.webapp.duogames.duogames.model.listening.AudioMapper;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import cth.webapp.duogames.duogames.view.UserData;
 import java.io.IOException;
@@ -106,5 +107,10 @@ public class UserBean implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    //TODO Find a better place for this function
+    public boolean hasSupportForWDYS(){
+        return AudioMapper.getInstance().isValidLanguage(api.getCurrentLanguage());
     }
 }
