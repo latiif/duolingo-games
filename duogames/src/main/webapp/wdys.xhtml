@@ -11,7 +11,7 @@
 
     <ui:define name="content"> 
         <b:messages/>
-        
+
         <b:container id="center">
 
             <c:set var="questions" value="#{quiz.getQuizInformation(user, 'wdys')}"/>
@@ -19,8 +19,8 @@
 
             <b:row id="info">
                 <b:growl globalOnly="true"
-                    showDetail="true"
-                    severity="info" placement-from="bottom" placement-align="center"/>
+                         showDetail="true"
+                         severity="info" placement-from="bottom" placement-align="center"/>
             </b:row>
             <b:row>
                 <b:column span="6" id="status">
@@ -33,34 +33,34 @@
 
             <b:row>
                 <b:column>
-                    <b:form>
-                        <b:carousel id="quiz" 
-                                    startAnimation="false"
-                                    showIndicators="true"
-                                    styleClass="questionsCarousel"
-                                    wrap="false">
-                            <c:forEach var="question" items="#{questions}">
-                                <b:carouselItem>
+                    <b:carousel id="quiz" 
+                                startAnimation="false"
+                                showIndicators="true"
+                                styleClass="questionsCarousel" show-controls="false"
+                                wrap="false">
+                        <c:forEach var="question" items="#{questions}">
+                            <b:carouselItem>
+                                <b:form>
                                     <b:panel collapsible="false">
                                         <audio controls="true" src="#{question.url}">
-                                                Your browser does not support the
-                                                <code>audio</code> element.
+                                            Your browser does not support the
+                                            <code>audio</code> element.
                                         </audio>
                                         <p>Type in the word you hear:</p>
-                                            <b:inputText span="3" value="#{quizData.answer}"></b:inputText>
+                                        <b:inputText span="3" value="#{quizData.answer}"></b:inputText>
                                     </b:panel>
-                                </b:carouselItem>
+                                    <b:carouselControl direction="right" ajax="true">
+                                        <b:commandButton value="Next"
+                                                         action="#{quiz.validate()}"
+                                                         update="status info counter"
+                                                         look="success"
+                                                         oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
+                                    </b:carouselControl>
+                                </b:form>
+                            </b:carouselItem>
 
-                            </c:forEach>
-                            <b:carouselControl direction="right" ajax="true">
-                                <b:commandButton value="Next"
-                                                 action="#{quiz.validate()}"
-                                                 update="status info counter @form"
-                                                 look="success"
-                                                 oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
-                            </b:carouselControl>
-                        </b:carousel>
-                    </b:form>
+                        </c:forEach>
+                    </b:carousel>
                 </b:column>
             </b:row>
         </b:container>   

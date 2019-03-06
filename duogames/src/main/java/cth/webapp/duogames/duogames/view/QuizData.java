@@ -20,6 +20,10 @@ import lombok.Setter;
 public class QuizData implements Serializable {
     
     @Getter
-    @Setter
     private String answer = "";
+    
+    public void setAnswer(String answer) {
+        System.out.println("Setting answer:" + answer);
+        this.answer = answer;
+    }
 }
