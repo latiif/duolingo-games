@@ -6,7 +6,7 @@
 package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
-import cth.webapp.duogames.duogames.database.entity.Gamesession;
+import cth.webapp.duogames.duogames.database.entity.GameSession;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
@@ -47,10 +47,6 @@ public class QuizBean implements Serializable {
     
     private List<IQuestion> quiz;
     private String gameType;
-    
-    @Getter
-    @Setter
-    private String answer;
     
     @Getter
     @Setter
@@ -117,7 +113,6 @@ public class QuizBean implements Serializable {
             if(currQuestion == 10){
                 endQuiz();
             }
-            answer = "";
         }
         else{
             FacesMessages.error("Wrong");
@@ -125,7 +120,6 @@ public class QuizBean implements Serializable {
             if(currQuestion == 10){
                 endQuiz();
             } 
-            answer = "";
         }
        
     }
@@ -139,7 +133,7 @@ public class QuizBean implements Serializable {
         }
 
     private void addToDatabase(long gameTime) {
-        Gamesession game = new Gamesession(true, BigInteger.valueOf(gameTime), score, userBean.getUser());
+        GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, gameType, userBean.getUser());
         gameDAO.add(game);
     }
 
