@@ -53,7 +53,7 @@ public abstract class AbstractDAO<T> {
     
     /**
      * Finds and returns database entry by its primary key.
-     * @param entity
+     * @param id
      * @return 
      */
     public Object findById(int id){

@@ -28,9 +28,13 @@ public class GameData implements Serializable {
     @EJB
     private GameDAO gameDAO;
     
-    public List<Gamesession> getHighScore(){
+    /*public List<Gamesession> getHighScore(){
         List<Gamesession> games = gameDAO.findRange(10);
         return games;
+    }*/
+    
+    public List<Gamesession>getHighScore(){
+        return gameDAO.findHighestScores(10);
     }
     
     public String getQuickestGame(){
