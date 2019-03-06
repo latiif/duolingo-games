@@ -46,9 +46,9 @@
 
                 <b:column col-xs="6">
                     <b:panel title="Game stats" collapsible="false">
-                        <p>Quickest game: #{gameData.getQuickestGame(user.user.id)}</p>
+                        <p>Quickest game: #{gameData.quickestGame}</p>
                         <p>Longest win streak:</p>
-                        <p>Games played:</p>
+                        <p>Games played: #{gameData.totalGames}</p>
                     </b:panel>
                 </b:column>
             </b:row>

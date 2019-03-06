@@ -2,40 +2,31 @@ package cth.webapp.duogames.duogames.database.dao;
 
 import cth.webapp.duogames.duogames.control.UserBean;
 import cth.webapp.duogames.duogames.database.entity.Gamesession;
-import cth.webapp.duogames.duogames.database.entity.Gamesession_;
-import cth.webapp.duogames.duogames.database.entity.User;
 import java.math.BigInteger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.Query;
 
 @Stateless
 public class GameDAO extends AbstractDAO<Gamesession> {
+    
+    @Inject
+    UserBean user;
    
     public GameDAO() {
         super(Gamesession.class);
     }
     
-        /**
-     * Searches the database for a user with the supplied username. Returns null if none is found.
-     * @param userid
-     * @return 
-     */
-    public int findShortestTimeById(Integer userid){
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Gamesession> query = cb.createQuery(Gamesession.class);
-        Root<Gamesession> root = query.from(Gamesession.class);
-        query = query.select(root)
-                .where(cb.equal(root.get("userid"), userid))
-                
-                ;
-        try {
-            return em.createQuery(query).getFirstResult();
-        } catch (NoResultException nre) {
-            return 55;
-        }
+    public BigInteger findQuickestTime(){
+        Query q = em.createQuery("SELECT MIN(g.time) FROM Gamesession g WHERE g.userid = :userid");
+        q.setParameter("userid",user.getUser());
+        return (BigInteger) q.getSingleResult();
+    }
+
+    public int findTotalGames() {
+        Query q = em.createQuery("SELECT COUNT(g) FROM Gamesession g WHERE g.userid = :userid");
+        q.setParameter("userid",user.getUser());
+        long l = (long) q.getSingleResult();
+        return (int) l;
     }
 }

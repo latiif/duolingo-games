@@ -33,7 +33,11 @@ public class GameData implements Serializable {
         return games;
     }
     
-    public int getQuickestGame(Integer id){
-        return gameDAO.findShortestTimeById(id);
+    public String getQuickestGame(){
+        return TimeFormatter.format(gameDAO.findQuickestTime().longValue());
+    }
+    
+    public int getTotalGames(){
+        return gameDAO.findTotalGames();
     }
 }
