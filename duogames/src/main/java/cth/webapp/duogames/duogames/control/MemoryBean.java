@@ -5,7 +5,7 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.control.Memory;
+import cth.webapp.duogames.duogames.model.quiz.Memory;
 import java.util.List;
 
 /**
