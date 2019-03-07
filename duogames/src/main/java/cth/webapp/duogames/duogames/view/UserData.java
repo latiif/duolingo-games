@@ -5,7 +5,9 @@
  */
 package cth.webapp.duogames.duogames.view;
 
+import cth.webapp.duogames.duogames.utils.AchievementTracker;
 import java.io.Serializable;
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import javax.enterprise.context.SessionScoped;
@@ -26,4 +28,7 @@ public class UserData implements Serializable {
     @Setter
     private String password = "";
     
+    public Map<String, String> getAchievements(){
+        return AchievementTracker.getInstance().getAchievements();
+    }
 }

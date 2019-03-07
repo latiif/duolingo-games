@@ -43,12 +43,20 @@
                         </c:forEach>
                     </b:panel>
                 </b:column>
-
                 <b:column col-xs="6">
                     <b:panel title="Game stats" collapsible="false">
                         <p>Quickest game: #{gameData.quickestGame}</p>
                         <p>Longest win streak:</p>
                         <p>Games played: #{gameData.totalGames}</p>
+                    </b:panel>
+                </b:column>
+                <b:column col-xs="6">
+                    <b:panel title="Achievements" collapsible="false">
+                        <c:forEach var="ach" items="#{userData.achievements}">
+                            <h:form style="display:inline-block; padding: 5px;">
+                                <a href="achievements.xhtml"><b:image name="#{ach.key}" value="#{ach.value}"></b:image></a>
+                            </h:form>
+                        </c:forEach>
                     </b:panel>
                 </b:column>
             </b:row>

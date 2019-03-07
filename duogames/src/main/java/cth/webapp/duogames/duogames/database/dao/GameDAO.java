@@ -25,6 +25,14 @@ public class GameDAO extends AbstractDAO<GameSession> {
         q.setMaxResults(range);
         return q.getResultList();
     }
+    
+    public int findSingleHighestScore(){
+        Query q = em.createQuery("SELECT MAX(g.score) FROM GameSession g WHERE g.userid = :userid");
+        q.setParameter("userid",user.getUser());
+        Integer i = (int) q.getSingleResult();
+        return i;
+    }
+    
     public BigInteger findQuickestTime(){
         Query q = em.createQuery("SELECT MIN(g.time) FROM GameSession g WHERE g.userid = :userid");
         q.setParameter("userid",user.getUser());
