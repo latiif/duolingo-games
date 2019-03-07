@@ -34,7 +34,7 @@ public class IndexFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpreq = (HttpServletRequest) request;
         HttpServletResponse httpres = (HttpServletResponse) response; 
-        String s = httpreq.getHeader("referer");
+       
         chain.doFilter(request, response);
         
         

@@ -19,11 +19,8 @@ import lombok.Setter;
 @Named
 public class QuizData implements Serializable {
     
+    @Setter
     @Getter
     private String answer = "";
-    
-    public void setAnswer(String answer) {
-        System.out.println("Setting answer:" + answer);
-        this.answer = answer;
-    }
+   
 }

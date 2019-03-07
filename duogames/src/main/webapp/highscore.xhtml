@@ -9,13 +9,13 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
 
     <ui:define name="content"> 
-
-        <b:container id="center">
+        <h1>High Score</h1>
+        <b:container>
             <b:row>
                 <b:column col-xs="6">
                     <b:panel title="Quiz" collapsible="false">
                         <h:form>
-                            <b:dataTable value="#{gameData.highScore}"
+                            <b:dataTable value="#{gameData.getHighScore('quiz')}"
                                          var="game" searching="false" paginated="false" info="false" border="false" striped="false">
                                 <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
                                 <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
@@ -27,7 +27,14 @@
 
                 <b:column col-xs="6">
                     <b:panel title="What did you say?" collapsible="false">
-                       
+                       <h:form>
+                            <b:dataTable value="#{gameData.getHighScore('wdys')}"
+                                         var="game" searching="false" paginated="false" info="false" border="false" striped="false">
+                                <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
+                                <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
+                                <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
+                            </b:dataTable>
+                      </h:form>
                     </b:panel>
                 </b:column>
 

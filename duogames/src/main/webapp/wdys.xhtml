@@ -14,7 +14,7 @@
 
         <b:container id="center">
 
-            <c:set var="questions" value="#{quiz.getQuizInformation(user, 'wdys')}"/>
+            <c:set var="questions" value="#{wdys.getQuizInformation(user)}"/>
 
 
             <b:row id="info">
@@ -24,10 +24,10 @@
             </b:row>
             <b:row>
                 <b:column span="6" id="status">
-                    <p>Correct answers: #{quiz.nrCorrect}/10</p>
+                    <p>Correct answers: #{wdys.nrCorrect}/10</p>
                 </b:column>
                 <b:column class="text-right" span="6" id="counter">
-                    <p>Current question: #{quiz.currQuestion + 1}/10</p>
+                    <p>Current question: #{wdys.currQuestion + 1}/10</p>
                 </b:column>
             </b:row>
 
@@ -51,7 +51,7 @@
                                     </b:panel>
                                     <b:carouselControl direction="right" ajax="true">
                                         <b:commandButton value="Next"
-                                                         action="#{quiz.validate()}"
+                                                         action="#{wdys.validate()}"
                                                          update="status info counter"
                                                          look="success"
                                                          oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>

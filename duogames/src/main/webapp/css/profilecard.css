@@ -1,0 +1,97 @@
+ /* CSS design by @jofpin */
+          @import url(https://fonts.googleapis.com/css?family=Bangers|Poppins);
+          @import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+          /* fontawesome */
+          [class*="fontawesome-"]:before {
+          font-family: 'FontAwesome', sans-serif;
+          }
+          
+          .title-pen {
+              color: #333;
+              font-family: "Bangers", sans-serif;
+              text-align: center;
+          }
+          .title-pen span {
+              color: #55acee;
+          }
+
+          .user-profile {
+              margin: 30px auto 30px auto;
+              width: 50%; 
+              border-color: #d8985e;
+              border-width: 10cm;
+              border-radius: .3em;
+          }
+
+          .user-profile  h2 {
+              margin: auto;
+              padding-top: 45px;
+              padding-left: 20px;
+              text-align: center;
+              color: #333;
+              font-size: 28px;
+              font-family: "Bangers", sans-serif;
+          }
+          .user-profile  .bio {
+              margin: auto;
+              padding-left: 20px;
+              text-align: center;
+              color: #333; 
+              font-size: 16px;
+              font-family: "Poppins", sans-serif;
+          }
+          .user-profile .location {
+              margin: auto;
+              padding-left: 20px;
+              text-align: center;
+              font-weight: bold;
+              color: #333; 
+              font-size: 16px;
+              font-family: "Poppins", sans-serif;
+          }
+          .avatar {
+              padding: .7em;
+              height: 150px;
+              width: 150px;
+              border-radius: 18em;
+          }
+
+          .user-profile ul.data {
+              height: 3.5em;
+              background: #ffb405;
+              text-align: center;
+              border-radius: .3em .3em .3em .3em;
+              margin-bottom: -10px;
+          }
+          .user-profile li {
+              color: white;
+              padding-left: 25px; 
+              padding-top: 10px;
+              width: 33.33334%;
+              display: table-cell;
+              text-align: center;
+          }
+
+          .user-profile span {
+              font-family: "Poppins", sans-serif;
+              color: white;
+              white-space: nowrap;
+              font-size: 20px;
+              font-weight: bold;
+              padding-left: 30px;
+          }
+
+          footer > h1 {
+              display: block;
+              text-align: center;
+              clear: both;
+              font-family: "Bangers", sans-serif;
+              color: #343f3d;
+              line-height: 6;
+              font-size: 1.6em;
+          }
+          footer > h1 a {
+              text-decoration: none;
+              color: #ea4c89;
+          }

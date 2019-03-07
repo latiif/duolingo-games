@@ -10,90 +10,92 @@
     <h:head>
         <link rel = "stylesheet" type = "text/css" href = "css/play.css" />
     </h:head>
-        <ui:define name="content"> 
-                <h2>Games</h2>
-                <b:row>
-                    <b:column medium-screen="4">
-                        <div>
-                            <b:row>
-                                <b:column medium-screen="2"></b:column>
-                                <b:column medium-screen="8">
+    <ui:define name="content"> 
+        <h1>Games</h1>
+        <b:row>
+            <b:column medium-screen="4">
+                <div>
+                    <b:row>
+                        <b:column medium-screen="2"></b:column>
+                        <b:column medium-screen="8">
+                            <img id="playIcon" src="css/questionmark.jpg"/>
+                        </b:column>
+                        <b:column medium-screen="2"> </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="4"></b:column>
+                        <b:column medium-screen="4">
+                            <h2>Quiz</h2>
+                        </b:column>
+                        <b:column medium-screen="4"></b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="3"></b:column>
+                        <b:column medium-screen="6">
+                            <b:form>
+                                <b:button look="primary" href="quiz.xhtml" value="Play!" class="fill" ></b:button>
+                            </b:form>
+                        </b:column>
+                        <b:column medium-screen="3"> </b:column>
+                    </b:row>
+                </div>
+            </b:column>
+            <c:if test="#{user.hasSupportForWDYS()}">
+                <b:column medium-screen="4">
+                    <div>
+                        <b:row>
+                            <b:column medium-screen="2"></b:column>
+                            <b:column medium-screen="8">
                                 <img id="playIcon" src="css/questionmark.jpg"/>
-                                </b:column>
-                                <b:column medium-screen="2"> </b:column>
-                            </b:row>
-                           <b:row>
-                                <b:column medium-screen="4"></b:column>
-                                <b:column medium-screen="4">
-                                    <h2>Quiz</h2>
-                                </b:column>
-                                <b:column medium-screen="4"></b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column medium-screen="3"></b:column>
-                                <b:column medium-screen="6">
-                                    <b:form>
-                                    <b:button look="primary" href="quiz.xhtml" value="Play!" class="fill" ></b:button>
-                                    </b:form>
-                                </b:column>
-                                <b:column medium-screen="3"> </b:column>
-                            </b:row>
-                        </div>
-                    </b:column>
-                    <b:column medium-screen="4">
-                        <div>
-                            <b:row>
-                                <b:column medium-screen="2"></b:column>
-                                <b:column medium-screen="8">
-                                <img id="playIcon" src="css/questionmark.jpg"/>
-                                </b:column>
-                                <b:column medium-screen="2"> </b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column medium-screen="4"></b:column>
-                                <b:column medium-screen="4">
-                                    <h2>What did you say?</h2>
-                                </b:column>
-                                <b:column medium-screen="4"></b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column medium-screen="3"></b:column>
-                                <b:column medium-screen="6">
-                                    <b:button look="warning" href="wdys.xhtml" value="Play!" class="fill"></b:button>
-                                </b:column>
-                                <b:column medium-screen="3"> </b:column>
-                            </b:row>
-                        </div>
-                    </b:column>
-                    <b:column medium-screen="4">
-                        <div>
-                            <b:row>
-                                <b:column medium-screen="2"></b:column>
-                                <b:column medium-screen="8">
-                                <img id="playIcon" src="css/questionmark.jpg"/>
-                                </b:column>
-                                <b:column medium-screen="2"> </b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column medium-screen="4"></b:column>
-                                <b:column medium-screen="4">
-                                    <h2>Memory</h2>
-                                </b:column>
-                                <b:column medium-screen="4"></b:column>
-                            </b:row>
-                            <b:row>
-                                <b:column medium-screen="3"></b:column>
-                                <b:column medium-screen="6">
-                                    <b:button look="success" href="memory.xhtml" value="Play!" class="fill"></b:button>
-                                </b:column>
-                                <b:column medium-screen="3"> </b:column>
-                            </b:row>
-                        </div>
-                    </b:column>
-                </b:row>
-           
-        
+                            </b:column>
+                            <b:column medium-screen="2"> </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column medium-screen="4"></b:column>
+                            <b:column medium-screen="4">
+                                <h2>What did you say?</h2>
+                            </b:column>
+                            <b:column medium-screen="4"></b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column medium-screen="3"></b:column>
+                            <b:column medium-screen="6">
+                                <b:button look="warning" href="wdys.xhtml" value="Play!" class="fill"></b:button>
+                            </b:column>
+                            <b:column medium-screen="3"> </b:column>
+                        </b:row>
+                    </div>
+                </b:column>
+            </c:if>
+            <b:column medium-screen="4">
+                <div>
+                    <b:row>
+                        <b:column medium-screen="2"></b:column>
+                        <b:column medium-screen="8">
+                            <img id="playIcon" src="css/questionmark.jpg"/>
+                        </b:column>
+                        <b:column medium-screen="2"> </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="4"></b:column>
+                        <b:column medium-screen="4">
+                            <h2>Game:3</h2>
+                        </b:column>
+                        <b:column medium-screen="4"></b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="3"></b:column>
+                        <b:column medium-screen="6">
+                            <b:button look="success" href="#" value="Play!" class="fill"></b:button>
+                        </b:column>
+                        <b:column medium-screen="3"> </b:column>
+                    </b:row>
+                </div>
+            </b:column>
+        </b:row>
+
+
 
     </ui:define>
-            
-    </ui:composition>
+
+</ui:composition>

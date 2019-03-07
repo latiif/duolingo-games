@@ -5,10 +5,8 @@
  */
 package cth.webapp.duogames.duogames.database.dao;
 
-import cth.webapp.duogames.duogames.control.UserBean;
 import cth.webapp.duogames.duogames.database.entity.User;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

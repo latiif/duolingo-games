@@ -5,16 +5,13 @@
  */
 package cth.webapp.duogames.duogames.view;
 
-import cth.webapp.duogames.duogames.control.UserBean;
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
-import cth.webapp.duogames.duogames.database.entity.Gamesession;
+import cth.webapp.duogames.duogames.database.entity.GameSession;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -33,12 +30,11 @@ public class GameData implements Serializable {
         return games;
     }*/
     
-    public List<Gamesession>getHighScore(){
-        return gameDAO.findHighestScores(10);
+    public List<GameSession>getHighScore(String type){
+        return gameDAO.findHighestScores(10, type);
     }
     
     public String getQuickestGame(){
-        System.out.println(gameDAO.findQuickestTime().longValue());
         return TimeFormatter.format(gameDAO.findQuickestTime().longValue());
     }
     

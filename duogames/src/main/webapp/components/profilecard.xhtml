@@ -6,138 +6,34 @@
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
   <h:head>
-    
-    <style type="text/css">
-          /* CSS design by @jofpin */
-          @import url(https://fonts.googleapis.com/css?family=Raleway|Varela+Round|Coda);
-          @import url(http://weloveiconfonts.com/api/?family=fontawesome);
-
-          /* fontawesome */
-          [class*="fontawesome-"]:before {
-          font-family: 'FontAwesome', sans-serif;
-          }
-          
-          .title-pen {
-              color: #333;
-              font-family: "Coda", sans-serif;
-              text-align: center;
-          }
-          .title-pen span {
-              color: #55acee;
-          }
-
-          .user-profile {
-
-              margin: auto;
-              width: 25em; 
-              height: 11em;
-              background: #fff;
-              border-color: #d8985e;
-              border-width: 10cm;
-              border-radius: .3em;
-          }
-
-          .user-profile  .username {
-              margin: auto;
-              margin-top: -4.40em;
-              margin-left: 5.80em;
-              color: #658585;
-              font-size: 1.53em;
-              font-family: "Coda", sans-serif;
-              font-weight: bold;
-          }
-          .user-profile  .bio {
-              margin: auto;
-              display: inline-block;
-              margin-left: 10.43em;
-              color: #e76043; 
-              font-size: .87em;
-              font-family: "varela round", sans-serif;
-          }
-          .user-profile > .description {
-              margin: auto;
-              margin-top: 1.35em;
-              margin-right: 4.43em;
-              width: 14em;
-              color: #0E1313; 
-              font-size: .87em;
-              font-family: "varela round", sans-serif;
-          }
-          .user-profile > img.avatar {
-              padding: .7em;
-              margin-left: .3em;
-              margin-top: .3em;
-              height: 6.23em;
-              width: 6.23em;
-              border-radius: 18em;
-          }
-
-          .user-profile ul.data {
-              margin: 2em auto;
-              height: 3.70em;
-              background: #ffb405;
-              text-align: center;
-              border-radius: 0 0 .3em .3em;
-          }
-          .user-profile li {
-              margin: 0 auto;
-              padding: 1.30em; 
-              width: 33.33334%;
-              display: table-cell;
-              text-align: center;
-          }
-
-          .user-profile span {
-              font-family: "varela round", sans-serif;
-              color: #9D6E00;
-              white-space: nowrap;
-              font-size: 1.27em;
-              font-weight: bold;
-          }
-          .user-profile span:hover {
-              color: #6A3B00;
-          }
-
-          footer > h1 {
-              display: block;
-              text-align: center;
-              clear: both;
-              font-family: "Coda", sans-serif;
-              color: #343f3d;
-              line-height: 6;
-              font-size: 1.6em;
-          }
-          footer > h1 a {
-              text-decoration: none;
-              color: #ea4c89;
-          }
-      </style>
+        <link rel = "stylesheet" type = "text/css" href = "css/profilecard.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/main.css" />
   </h:head>
-
- 
-  <div class="user-profile">
-    <img class="avatar"
-      src="#{duoInfo.imgurl}"
-      alt="Profile image" />
-    <div class="username">#{duoInfo.fullname} @ #{duoInfo.username}</div>
-    <div class="bio">
-      #{duoInfo.location}
-    </div>
-    <div class="description">
-      #{duoInfo.bio}
-    </div>
-    <ul class="data">
-      <li>
-          <b:iconAwesome name="fa-diamond"/><span class="fontawesome">#{duoInfo.rupees}</span>
-      </li>
-      <li>
-          <b:iconAwesome name="fa-fire"/> <span class="fontawesome">#{duoInfo.streak}</span>
-      </li>
-      <li>
-        <b:iconAwesome name="fa-language"/> <span class="fontawesome">#{duoInfo.languages.size()}</span>
-      </li>
-    </ul>
-  </div>
-  <footer>
-  </footer>
+    <h:body>
+    <b:container fluid="true" class="user-profile">
+        <b:row>
+            <b:column span="2">
+            <img class="avatar" src="#{duoInfo.imgurl}" alt="Profile image" />
+            </b:column>
+            <b:column span="10">
+                    <h2>#{duoInfo.fullname} @ #{duoInfo.username}</h2>
+                    <p class="location">#{duoInfo.location}</p>
+                    <p class="bio">#{duoInfo.bio}</p>
+            </b:column>
+        </b:row>
+        <b:row>
+            <ul class="data">
+                <li>
+                    <b:iconAwesome name="fa-diamond" tooltip="Rupees"/><span class="fontawesome">#{duoInfo.rupees}</span>
+                </li>
+                <li>
+                    <b:iconAwesome name="fa-fire" tooltip="Streaks"/> <span class="fontawesome">#{duoInfo.streak}</span>
+                </li>
+                <li>
+                  <b:iconAwesome name="fa-language" tooltip="# of languages"/> <span class="fontawesome">#{duoInfo.languages.size()}</span>
+                </li>
+              </ul>
+        </b:row>
+    </b:container>
+   </h:body>
 </ui:composition>

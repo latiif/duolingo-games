@@ -5,7 +5,7 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.database.entity.Gamesession;
+import cth.webapp.duogames.duogames.database.entity.GameSession;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
@@ -56,6 +56,17 @@ public class WDYSBean extends GameBean implements Serializable {
     
      private List<IQuestion> quiz;
     
+     public List<IQuestion> getQuizInformation(UserBean ub) {
+        
+        
+
+            if (quiz == null) {
+            quiz = startGame();
+        }
+        
+        return quiz;
+    }
+     
     @Override
     public List<IQuestion> startGame() {
          Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
@@ -104,7 +115,7 @@ public class WDYSBean extends GameBean implements Serializable {
         }
 
     private void addToDatabase(long gameTime) {
-        Gamesession game = new Gamesession(true, BigInteger.valueOf(gameTime), score, super.getUserBean().getUser());
+        GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, "wdys",super.getUserBean().getUser());
         super.getGameDAO().add(game);
     }
 

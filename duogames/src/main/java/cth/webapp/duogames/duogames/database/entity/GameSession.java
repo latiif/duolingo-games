@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,12 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "gamesessions")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Gamesession.findAll", query = "SELECT g FROM Gamesession g"),
-    @NamedQuery(name = "Gamesession.findById", query = "SELECT g FROM Gamesession g WHERE g.id = :id"),
-    @NamedQuery(name = "Gamesession.findByIsfinished", query = "SELECT g FROM Gamesession g WHERE g.isfinished = :isfinished"),
-    @NamedQuery(name = "Gamesession.findByTime", query = "SELECT g FROM Gamesession g WHERE g.time = :time"),
-    @NamedQuery(name = "Gamesession.findByScore", query = "SELECT g FROM Gamesession g WHERE g.score = :score")})
-public class Gamesession implements Serializable {
+    @NamedQuery(name = "GameSession.findAll", query = "SELECT g FROM GameSession g"),
+    @NamedQuery(name = "GameSession.findById", query = "SELECT g FROM GameSession g WHERE g.id = :id"),
+    @NamedQuery(name = "GameSession.findByTime", query = "SELECT g FROM GameSession g WHERE g.time = :time"),
+    @NamedQuery(name = "GameSession.findByScore", query = "SELECT g FROM GameSession g WHERE g.score = :score"),
+    @NamedQuery(name = "GameSession.findByType", query = "SELECT g FROM GameSession g WHERE g.type = :type")})
+public class GameSession implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,31 +46,39 @@ public class Gamesession implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "isfinished")
-    private boolean isfinished;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "time")
     private BigInteger time;
     @Basic(optional = false)
     @NotNull
     @Column(name = "score")
     private int score;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 4)
+    @Column(name = "type")
+    private String type;
     @JoinColumn(name = "userid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userid;
 
-    public Gamesession() {
+    public GameSession() {
     }
 
-    public Gamesession(Integer id) {
+    public GameSession(Integer id) {
         this.id = id;
     }
 
-    public Gamesession(boolean isfinished, BigInteger time, int score, User user) {
-        this.isfinished = isfinished;
+    public GameSession(Integer id, BigInteger time, int score, String type) {
+        this.id = id;
         this.time = time;
         this.score = score;
+        this.type = type;
+    }
+    
+    public GameSession(BigInteger time, int score, String type, User user) {
+        this.time = time;
+        this.score = score;
+        this.type = type;
         this.userid = user;
     }
 
@@ -79,14 +88,6 @@ public class Gamesession implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public boolean getIsfinished() {
-        return isfinished;
-    }
-
-    public void setIsfinished(boolean isfinished) {
-        this.isfinished = isfinished;
     }
 
     public BigInteger getTime() {
@@ -103,6 +104,14 @@ public class Gamesession implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public User getUserid() {
@@ -127,10 +136,10 @@ public class Gamesession implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Gamesession)) {
+        if (!(object instanceof GameSession)) {
             return false;
         }
-        Gamesession other = (Gamesession) object;
+        GameSession other = (GameSession) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -139,7 +148,7 @@ public class Gamesession implements Serializable {
 
     @Override
     public String toString() {
-        return "cth.webapp.duogames.duogames.database.entity.Gamesession[ id=" + id + " ]";
+        return "cth.webapp.duogames.duogames.database.entity.GameSession[ id=" + id + " ]";
     }
     
 }
