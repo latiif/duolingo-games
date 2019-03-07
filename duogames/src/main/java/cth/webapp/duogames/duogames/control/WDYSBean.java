@@ -5,24 +5,19 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.database.entity.GameSession;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
-import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
-import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,23 +25,14 @@ import net.bootsfaces.utils.FacesMessages;
 
 /**
  *
- * @author latiif
+ * @author nicla
  */
-@Named(value="quiz")
+@Named(value="wdys")
 @SessionScoped
-public class QuizBean implements Serializable {
-    
-    @Inject
-    private UserBean userBean;
-    
-    @Inject
-    private QuizData quizData;
-    
-    @EJB
-    private GameDAO gameDAO;
-    
-    private List<IQuestion> quiz;
-    private String gameType;
+public class WDYSBean extends GameBean implements Serializable {
+    @Getter
+    @Setter
+    private String answer;
     
     @Getter
     @Setter
@@ -68,36 +54,38 @@ public class QuizBean implements Serializable {
     @Getter
     private int score;
     
+     private List<IQuestion> quiz;
+    
+     public List<IQuestion> getQuizInformation(UserBean ub) {
+        
+        
 
-    public List<IQuestion> getQuizInformation(UserBean ub) {
-        
-        
-        if (quiz == null) {
-            quiz = startQuiz();
+            if (quiz == null) {
+            quiz = startGame();
         }
         
         return quiz;
     }
-
-    public List<IQuestion> startQuiz() {
-       
-        Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
+     
+    @Override
+    public List<IQuestion> startGame() {
+         Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
 
         currQuestion = 0;
         nrCorrect = 0;
         totalQuestions = 10;
         startTime = new Timestamp(System.currentTimeMillis());
-        return new Quiz(dict, 10, 3).generateQuestions();
-            
+
+        
+       return new WhatDidYouSayQuiz(dict, 10).generateQuestions(super.getUserBean().getApi());
     }
-    
     public void resetQuiz() {
         quiz = null;
         redirect("/duogames/play.xhtml");
     }
     
     public void validate(){
-        if (quiz.get(currQuestion).check(quizData.getAnswer()))
+        if (quiz.get(currQuestion).check(super.getQuizData().getAnswer()))
         {
             FacesMessages.info("Correct!");
             nrCorrect++;
@@ -105,6 +93,7 @@ public class QuizBean implements Serializable {
             if(currQuestion == 10){
                 endQuiz();
             }
+            answer = "";
         }
         else{
             FacesMessages.error("Wrong");
@@ -112,6 +101,7 @@ public class QuizBean implements Serializable {
             if(currQuestion == 10){
                 endQuiz();
             } 
+            answer = "";
         }
        
     }
@@ -125,8 +115,8 @@ public class QuizBean implements Serializable {
         }
 
     private void addToDatabase(long gameTime) {
-        GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, "quiz", userBean.getUser());
-        gameDAO.add(game);
+        GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, "wdys",super.getUserBean().getUser());
+        super.getGameDAO().add(game);
     }
 
     private void endQuiz() {
@@ -138,5 +128,8 @@ public class QuizBean implements Serializable {
         addToDatabase(seconds);
         redirect("/duogames/score.xhtml");
     }
-
+    
+    
+    
+    
 }
