@@ -5,7 +5,6 @@
  */
 package cth.webapp.duogames.duogames.model.listening;
 
-import com.sun.javafx.binding.StringFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
