@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +34,10 @@ public class WDYSBean extends GameBean implements Serializable {
     @Getter
     @Setter
     private String answer;
+    
+    @Inject
+    private ScoreBean scorebean;
+
     
     @Getter
     @Setter
@@ -79,7 +84,8 @@ public class WDYSBean extends GameBean implements Serializable {
         
        return new WhatDidYouSayQuiz(dict, 10).generateQuestions(super.getUserBean().getApi());
     }
-    public void resetQuiz() {
+    @Override
+    public void resetGame() {
         quiz = null;
         redirect("/duogames/play.xhtml");
     }
@@ -91,7 +97,7 @@ public class WDYSBean extends GameBean implements Serializable {
             nrCorrect++;
             currQuestion++;
             if(currQuestion == 10){
-                endQuiz();
+                endGame();
             }
             answer = "";
         }
@@ -99,7 +105,7 @@ public class WDYSBean extends GameBean implements Serializable {
             FacesMessages.error("Wrong");
             currQuestion++;
             if(currQuestion == 10){
-                endQuiz();
+                endGame();
             } 
             answer = "";
         }
@@ -119,13 +125,14 @@ public class WDYSBean extends GameBean implements Serializable {
         super.getGameDAO().add(game);
     }
 
-    private void endQuiz() {
+    @Override
+    public void endGame() {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime());
         long seconds = diff / 1000L;
         time = TimeFormatter.format(seconds);
         score = ScoreCalculator.calculateScore(nrCorrect, diff);
-        addToDatabase(seconds);
+        scorebean.setGamebean(this);
         redirect("/duogames/score.xhtml");
     }
     

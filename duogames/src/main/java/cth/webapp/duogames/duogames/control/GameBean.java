@@ -28,6 +28,10 @@ public abstract class GameBean<E>{
     private GameDAO gameDAO;
     
     public abstract List<E> startGame();
+    
+    public abstract void endGame();
+    
+    public abstract void resetGame();
 
 
 }

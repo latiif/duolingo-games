@@ -34,10 +34,13 @@ import net.bootsfaces.utils.FacesMessages;
  */
 @Named(value="quiz")
 @SessionScoped
-public class QuizBean implements Serializable {
+public class QuizBean extends GameBean implements Serializable {
     
     @Inject
     private UserBean userBean;
+    
+    @Inject
+    private ScoreBean scorebean;
     
     @Inject
     private QuizData quizData;
@@ -73,13 +76,14 @@ public class QuizBean implements Serializable {
         
         
         if (quiz == null) {
-            quiz = startQuiz();
+            quiz = startGame();
         }
         
         return quiz;
     }
 
-    public List<IQuestion> startQuiz() {
+    @Override
+    public List<IQuestion> startGame() {
        
         Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
 
@@ -91,7 +95,8 @@ public class QuizBean implements Serializable {
             
     }
     
-    public void resetQuiz() {
+    @Override
+    public void resetGame() {
         quiz = null;
         redirect("/duogames/play.xhtml");
     }
@@ -103,14 +108,14 @@ public class QuizBean implements Serializable {
             nrCorrect++;
             currQuestion++;
             if(currQuestion == 10){
-                endQuiz();
+                endGame();
             }
         }
         else{
             FacesMessages.error("Wrong");
             currQuestion++;
             if(currQuestion == 10){
-                endQuiz();
+                endGame();
             } 
         }
        
@@ -129,14 +134,18 @@ public class QuizBean implements Serializable {
         gameDAO.add(game);
     }
 
-    private void endQuiz() {
+    @Override
+    public void endGame() {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime());
         long seconds = diff / 1000L;
         time = TimeFormatter.format(seconds);
         score = ScoreCalculator.calculateScore(nrCorrect, diff);
+        scorebean.setGamebean(this);
         addToDatabase(seconds);
         redirect("/duogames/score.xhtml");
     }
+
+    
 
 }

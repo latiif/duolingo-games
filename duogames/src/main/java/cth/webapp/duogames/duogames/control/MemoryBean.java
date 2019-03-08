@@ -19,4 +19,14 @@ public class MemoryBean extends GameBean {
     public List<String> startGame(){
         return null;
     }
+
+    @Override
+    public void endGame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void resetGame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
