@@ -5,28 +5,58 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.model.quiz.Memory;
+import cth.webapp.duogames.duogames.model.IQuestion;
+import cth.webapp.duogames.duogames.model.memory.Memory;
+import cth.webapp.duogames.duogames.model.memory.Pair;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author nicla
  */
-public class MemoryBean extends GameBean {
+@Named(value="memory")
+@SessionScoped
+public class MemoryBean extends GameBean implements Serializable {
     private Memory game;
+    private Timestamp startTime;
     
+    private List<String> quiz;
     
+    public List<String> getQuizInformation(UserBean ub) {
+        
+        if (quiz == null) {
+            quiz = startGame();
+        }
+        
+        return quiz;
+    }
+    
+    @Override
     public List<String> startGame(){
-        return null;
+        Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
+
+        //currQuestion = 0;
+        //nrCorrect = 0;
+        //totalQuestions = 10;
+        startTime = new Timestamp(System.currentTimeMillis());
+        return new Memory(dict, 6).generatePairs();
     }
 
     @Override
     public void endGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        redirect("/duogames/score.xhtml");
     }
 
     @Override
     public void resetGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        quiz = null;
+        redirect("/duogames/play.xhtml");
     }
 }

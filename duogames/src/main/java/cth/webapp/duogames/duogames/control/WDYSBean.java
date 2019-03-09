@@ -112,14 +112,6 @@ public class WDYSBean extends GameBean implements Serializable {
        
     }
 
-    private void redirect(String url) {
-        try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-        }
-
     private void addToDatabase(long gameTime) {
         GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, "wdys",super.getUserBean().getUser());
         super.getGameDAO().add(game);
@@ -133,6 +125,7 @@ public class WDYSBean extends GameBean implements Serializable {
         time = TimeFormatter.format(seconds);
         score = ScoreCalculator.calculateScore(nrCorrect, diff);
         scorebean.setGamebean(this);
+        addToDatabase(seconds);
         redirect("/duogames/score.xhtml");
     }
     

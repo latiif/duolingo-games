@@ -121,14 +121,6 @@ public class QuizBean extends GameBean implements Serializable {
        
     }
 
-    private void redirect(String url) {
-        try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-        }
-
     private void addToDatabase(long gameTime) {
         GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, "quiz", userBean.getUser());
         gameDAO.add(game);
