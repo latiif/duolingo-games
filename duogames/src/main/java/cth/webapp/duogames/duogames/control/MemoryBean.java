@@ -5,15 +5,11 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.memory.Memory;
-import cth.webapp.duogames.duogames.model.memory.Pair;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 

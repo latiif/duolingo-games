@@ -45,11 +45,8 @@ public class QuizBean extends GameBean implements Serializable {
     @Inject
     private QuizData quizData;
     
-    @EJB
-    private GameDAO gameDAO;
-    
     private List<IQuestion> quiz;
-    private String gameType;
+    private final String type = "quiz";
     
     @Getter
     @Setter
@@ -70,21 +67,16 @@ public class QuizBean extends GameBean implements Serializable {
     
     @Getter
     private int score;
-    
 
     public List<IQuestion> getQuizInformation(UserBean ub) {
-        
-        
         if (quiz == null) {
             quiz = startGame();
         }
-        
         return quiz;
     }
 
     @Override
     public List<IQuestion> startGame() {
-       
         Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
 
         currQuestion = 0;
@@ -92,7 +84,6 @@ public class QuizBean extends GameBean implements Serializable {
         totalQuestions = 10;
         startTime = new Timestamp(System.currentTimeMillis());
         return new Quiz(dict, 10, 3).generateQuestions();
-            
     }
     
     @Override
@@ -118,12 +109,6 @@ public class QuizBean extends GameBean implements Serializable {
                 endGame();
             } 
         }
-       
-    }
-
-    private void addToDatabase(long gameTime) {
-        GameSession game = new GameSession(BigInteger.valueOf(gameTime), score, "quiz", userBean.getUser());
-        gameDAO.add(game);
     }
 
     @Override
@@ -134,10 +119,8 @@ public class QuizBean extends GameBean implements Serializable {
         time = TimeFormatter.format(seconds);
         score = ScoreCalculator.calculateScore(nrCorrect, diff);
         scorebean.setGamebean(this);
-        addToDatabase(seconds);
+        addToDatabase(score, seconds, type);
         redirect("/duogames/score.xhtml");
     }
-
-    
 
 }

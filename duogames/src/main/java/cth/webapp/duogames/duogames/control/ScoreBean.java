@@ -7,7 +7,6 @@ package cth.webapp.duogames.duogames.control;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,7 @@ import lombok.Setter;
  *
  * @author nicla
  */
-@Named(value="score")
+@Named(value="scorebean")
 @SessionScoped
 public class ScoreBean implements Serializable {
     
