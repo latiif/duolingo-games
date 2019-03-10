@@ -5,18 +5,10 @@
  */
 package cth.webapp.duogames.duogames.model.quiz;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author nicla
  */
-public class Memory {
-       
-    public List<Card> generatePairs(){
-       List<Card> cards = new ArrayList<>();
-        
-        return cards;
-    }
+public class Card {
+    
 }
