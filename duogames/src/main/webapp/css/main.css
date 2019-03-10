@@ -67,6 +67,29 @@ h4.panel-title {
     width: 200px;
     margin: 0 auto;
 }
+.centered {
+    float: none;
+    margin: 0 auto;
+}
 .centered-text{
     text-align: center;
 }
+.card {
+    text-align: center;
+    font-family: 'Bangers', sans-serif;
+    font-size: 36px;
+    line-height: 1em;
+}
+.carousel-inner > .item > img, .carousel-inner > .item > a > img{
+    height: 140px !important;
+}
+.carousel-control.left, .carousel-control.right {
+   background-image:none !important;
+   filter:none !important;
+}
+
+.borderless {
+    border: 0;
+    box-shadow: none;
+}
+

@@ -10,18 +10,31 @@
 
 
     <ui:define name="content"> 
+        <c:set var="gameid"  value="TEST_GAME"/>
+
+
+        <script type="text/javascript" src="js/quizmultiplayer.js"></script> 
+        <script>
+            $(function() {
+               open('#{gameid}');
+            });
+        </script>
+
         <h1>Quiz</h1>
         <b:messages/>
-        
+
         <b:container id="center">
 
             <c:set var="questions" value="#{quiz.getQuizInformation(user)}"/>
 
+            <b:row>
+                <div id='eventlog'></div>
+            </b:row>
 
             <b:row id="info">
                 <b:growl globalOnly="true"
-                    showDetail="true"
-                    severity="info" placement-from="bottom" placement-align="center"/>
+                         showDetail="true"
+                         severity="info" placement-from="bottom" placement-align="center"/>
             </b:row>
             <b:row>
                 <b:column span="6" id="status">
@@ -52,11 +65,14 @@
 
                             </c:forEach>
                             <b:carouselControl direction="right" ajax="true">
-                                <b:commandButton value="Next"
+                                <b:commandButton id='checkanswer' value="Next"
                                                  onclick="ajax:quiz.validate()"
-                                                 update="status info counter"
+                                                 update="status info counter checkanswer"
                                                  look="success"
-                                                 oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
+                                                 oncomplete="$('.questionsCarousel').carousel('next');
+                                                 $('.questionsCarousel').carousel('pause'); 
+                                                 sendMessage('#{userData.username}','#{quiz.currQuestion+1}','#{quiz.nrCorrect}'); 
+                                                 return false;"/>
                             </b:carouselControl>
 
                         </b:carousel>

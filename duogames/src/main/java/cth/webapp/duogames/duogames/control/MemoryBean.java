@@ -5,6 +5,7 @@
  */
 package cth.webapp.duogames.duogames.control;
 
+
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.quiz.Card;
@@ -22,12 +23,11 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 
+
 /**
  *
  * @author nicla
  */
-
-
 @Named(value="memory")
 @SessionScoped
 public class MemoryBean extends GameBean implements Serializable {
@@ -45,6 +45,8 @@ public class MemoryBean extends GameBean implements Serializable {
     @EJB
     private GameDAO gameDAO;
     
+    
+    @Getter
     private List<IQuestion> quiz;
     private String gameType;
     
@@ -70,34 +72,64 @@ public class MemoryBean extends GameBean implements Serializable {
     
     List<Card> cards;
     
-    public List<Card> getQuizInformation(UserBean ub) {
+
+    @Getter
+    private int nrOfPairs = 6;
+    
+    
+    @Getter
+    private List<Pair> pairs;
+    
+    public List<String> getQuizInformation(UserBean ub) {
         
-        
-        
-        if (cards == null) {
-            cards = startGame();
+        if (quiz == null) {
+            quiz = startGame();
         }
         
-        return cards;
+        return quiz;
     }
     
-    public List<Card> startGame(){
-        game = new Memory();
-        Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
-        currQuestion = 0;
-        nrCorrect = 0;
-        totalQuestions = 10;
+    @Override
+    public List<String> startGame(){
+        Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
+
+        //currQuestion = 0;
+        //nrCorrect = 0;
+        //totalQuestions = 10;
         startTime = new Timestamp(System.currentTimeMillis());
-        return game.generatePairs();
+        pairs = new Memory(dict, 6).generatePairs();
+        quiz = new ArrayList<>();
+        
+        pairs.forEach(p -> 
+                {
+                    quiz.add(p.getWord());
+                    quiz.add(p.getAnswer());
+                });
+        Collections.shuffle(quiz);
+        return quiz;
     }
 
     @Override
     public void endGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        redirect("/duogames/score.xhtml");
     }
 
     @Override
     public void resetGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        quiz = null;
+        redirect("/duogames/play.xhtml");
+    }
+    
+    public boolean checkPair(String word, String answer){
+        for(Pair oldPair : pairs){
+            if(oldPair.getWord().equals(word) 
+                    || oldPair.getAnswer().equals(answer)){
+                return oldPair.equals(new Pair(word, answer));
+            } else if (oldPair.getAnswer().equals(word) 
+                    || oldPair.getWord().equals(answer)) {
+                return oldPair.equals(new Pair(answer, word));
+            }
+        }
+        return false;
     }
 }
