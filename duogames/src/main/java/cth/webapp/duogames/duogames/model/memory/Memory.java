@@ -36,8 +36,8 @@ public class Memory extends Game {
 //        return cards;
 //    }
     
-     public List<String> generatePairs() {
-        List<String> result = new LinkedList<>();
+     public List<Pair> generatePairs() {
+        List<Pair> result = new LinkedList<>();
 
         Map<String, List<String>> cleanDict = cleanDict(mDict);
 
@@ -52,8 +52,7 @@ public class Memory extends Game {
             int random = (int) (Math.random() * words.size());
             String tWord = words.get(random);
             List<String> tRight = cleanDict.get(tWord);
-            result.add(tWord);
-            result.add(tRight.get(0));
+            result.add(new Pair(tWord, tRight.get(0)));
 
             words.remove(random);
             count++;

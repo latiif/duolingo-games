@@ -1,9 +1,6 @@
 package cth.webapp.duogames.duogames.model.memory;
 
 import cth.webapp.duogames.duogames.model.IQuestion;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import lombok.Getter;
 
 public class Pair implements IQuestion {
@@ -30,6 +27,11 @@ public class Pair implements IQuestion {
     @Override
     public boolean check(String answer) {
         return answer.toLowerCase().equals(word.toLowerCase());
+    }
+    
+    public boolean equals(Pair newPair){
+        return (this.answer.equalsIgnoreCase(newPair.getAnswer()) 
+                && this.word.equalsIgnoreCase(newPair.getWord()));
     }
 
 }

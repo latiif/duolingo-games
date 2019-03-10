@@ -7,23 +7,26 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
-
     <ui:define name="content"> 
+    <script type="text/javascript" src="js/memory.js"></script> 
         <h1>Find the pairs</h1>
         <c:set var="pairs" value="#{memory.getQuizInformation(user)}"/>
-        <b:container>
-            <b:row>
-                <b:column col-xs="10" offset="1" >
-                    <b:panel class="centered centered-text">
+        <h:inputHidden id="hidden" value="#{memory.quiz}" /> 
+        <h:inputHidden id="nrof" value="#{memory.nrOfPairs}" /> 
+        <b:container id="container">
+            <b:row id="row">
+                <b:column col-xs="10" offset="1" id="column">
+                    <b:panel class="centered centered-text" id="panel">
                             <c:forEach var="word" items="#{pairs}">
-                            <h:form style="display:inline-block; padding: 20px">
-                                <b:carousel id="parque" style="height:120px; width:240px" start-animation="false" interval="false" show-indicators="false">
+                            <h:form style="display:inline-block; padding: 20px" id="mem">
+                                <b:carousel style="height:120px; width:240px" start-animation="false" interval="false" show-indicators="false"
+                                            id="card_#{pairs.indexOf(word)}">
                                         <b:carouselItem>
                                           <img src="css/mem.jpg" alt="Card" />
                                         </b:carouselItem>
                                         <b:carouselItem>
                                             <b:panel class="centered-text borderless" style="height:120px; width:240px">
-                                                <span class="card"><br />#{word}</span>
+                                                <span class="card" id="word_#{pairs.indexOf(word)}"><br />#{word}</span>
                                             </b:panel>
                                         </b:carouselItem>
                                  </b:carousel> 
