@@ -8,12 +8,15 @@ package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.model.IQuestion;
+import cth.webapp.duogames.duogames.model.memory.Memory;
+import cth.webapp.duogames.duogames.model.memory.Pair;
 import cth.webapp.duogames.duogames.model.quiz.Card;
-import cth.webapp.duogames.duogames.model.quiz.Memory;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
@@ -47,7 +50,7 @@ public class MemoryBean extends GameBean implements Serializable {
     
     
     @Getter
-    private List<IQuestion> quiz;
+    private List<String> quiz;
     private String gameType;
     
     @Getter

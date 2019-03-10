@@ -7,61 +7,6 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
-<<<<<<< HEAD
-
-
-    <ui:define name="content"> 
-        <b:messages/>
-        
-        <b:container id="center">
-
-            <c:set var="questions" value="#{memory.getQuizInformation(user)}"/>
-
-
-            <b:row id="info">
-                <b:growl globalOnly="true"
-                    showDetail="true"
-                    severity="info" placement-from="bottom" placement-align="center"/>
-            </b:row>
-            <b:row>
-                <b:column span="6" id="status">
-                    <p>Correct answers: #{memory.nrCorrect}/10</p>
-                </b:column>
-                <b:column class="text-right" span="6" id="counter">
-                    <p>Current question: #{memory.currQuestion + 1}/10</p>
-                </b:column>
-            </b:row>
-
-            <b:row>
-                <b:column>
-                    <b:form>
-                        <b:carousel id="quiz" 
-                                    startAnimation="false"
-                                    showIndicators="true"
-                                    styleClass="questionsCarousel"
-                                    wrap="false">
-                            <c:forEach var="question" items="#{questions}">
-                                <b:carouselItem>
-                                    <b:panel collapsible="false">
-                                        <p>Translate #{question.word}</p>
-                                        <b:radiobutton value="#{quizData.answer}">
-                                            <f:selectItems value="#{question.options}" />
-                                        </b:radiobutton>
-                                    </b:panel>
-                                </b:carouselItem>
-
-                            </c:forEach>
-                            <b:carouselControl direction="right" ajax="true">
-                                <b:commandButton value="Next"
-                                                 onclick="ajax:quiz.validate()"
-                                                 update="status info counter"
-                                                 look="success"
-                                                 oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
-                            </b:carouselControl>
-
-                        </b:carousel>
-                    </b:form>
-=======
     <ui:define name="content"> 
     <script type="text/javascript" src="js/memory.js"></script> 
         <h1>Find the pairs</h1>
