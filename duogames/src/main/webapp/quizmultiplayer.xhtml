@@ -6,17 +6,17 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets">  
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <ui:define name="content"> 
+    <ui:define name="content">
         <c:set var="gameid"  value="TEST_GAME"/>
 
 
-        <script type="text/javascript" src="js/quizmultiplayer.js"></script> 
+        <script type="text/javascript" src="js/quizmultiplayer.js"></script>
         <script>
             $(function() {
-               open('#{gameid}');
+               open('#{gameid}','#{userData.username}');
             });
         </script>
 
@@ -26,10 +26,17 @@
         <b:container id="center">
 
             <b:row>
+                <h4>Participants</h4>
+                <div  id="participants"></div>
+            </b:row>
+
+            <b:row>
+                <h4>Standings</h4>
+
                 <div id="standings">
                 </div>
             </b:row>
-            
+
             <c:set var="questions" value="#{quiz.getQuizInformation(user)}"/>
 
             <b:row>
@@ -53,7 +60,7 @@
             <b:row>
                 <b:column>
                     <b:form>
-                        <b:carousel id="quiz" 
+                        <b:carousel id="quiz"
                                     startAnimation="false"
                                     showIndicators="true"
                                     styleClass="questionsCarousel"
@@ -75,8 +82,8 @@
                                                  update="status info counter"
                                                  look="success"
                                                  oncomplete="$('.questionsCarousel').carousel('next');
-                                                 $('.questionsCarousel').carousel('pause'); 
-                                                 sendMessage('#{userData.username}',$('#nrCorrect').html()); 
+                                                 $('.questionsCarousel').carousel('pause');
+                                                 sendMessage('#{userData.username}',$('#nrCorrect').html());
                                                  return false;"/>
                             </b:carouselControl>
 
@@ -84,7 +91,7 @@
                     </b:form>
                 </b:column>
             </b:row>
-        </b:container>   
+        </b:container>
 
     </ui:define>
 </ui:composition>
