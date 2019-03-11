@@ -25,6 +25,11 @@
 
         <b:container id="center">
 
+            <b:row>
+                <div id="standings">
+                </div>
+            </b:row>
+            
             <c:set var="questions" value="#{quiz.getQuizInformation(user)}"/>
 
             <b:row>
@@ -38,7 +43,7 @@
             </b:row>
             <b:row>
                 <b:column span="6" id="status">
-                    <p>Correct answers: #{quiz.nrCorrect}/10</p>
+                    <p>Correct answers: <span id="nrCorrect">#{quiz.nrCorrect}</span>/10</p>
                 </b:column>
                 <b:column class="text-right" span="6" id="counter">
                     <p>Current question: #{quiz.currQuestion + 1}/10</p>
@@ -65,13 +70,13 @@
 
                             </c:forEach>
                             <b:carouselControl direction="right" ajax="true">
-                                <b:commandButton id='checkanswer' value="Next"
+                                <b:commandButton value="Next"
                                                  onclick="ajax:quiz.validate()"
-                                                 update="status info counter checkanswer"
+                                                 update="status info counter"
                                                  look="success"
                                                  oncomplete="$('.questionsCarousel').carousel('next');
                                                  $('.questionsCarousel').carousel('pause'); 
-                                                 sendMessage('#{userData.username}','#{quiz.currQuestion+1}','#{quiz.nrCorrect}'); 
+                                                 sendMessage('#{userData.username}',$('#nrCorrect').html()); 
                                                  return false;"/>
                             </b:carouselControl>
 
