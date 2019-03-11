@@ -82,7 +82,7 @@ public class DuolingoProfileInfo {
     private String safeRetrieve(JsonObject userData, String field, String defaulValue) {
         JsonElement element = userData.get(field);
 
-        if (element.isJsonNull()) {
+        if (element == null || element.isJsonNull()) {
             return defaulValue;
         }
 

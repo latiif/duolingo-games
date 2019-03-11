@@ -94,4 +94,7 @@ h4.panel-title {
     border: 0;
     box-shadow: none;
 }
+.loading{
+    display: none;
+}
 

@@ -5,20 +5,24 @@
  */
 package cth.webapp.duogames.duogames.control;
 
+import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.model.memory.Memory;
 import cth.webapp.duogames.duogames.model.memory.Pair;
+import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.context.RequestContext;
+
 
 /**
  *
@@ -28,13 +32,47 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class MemoryBean extends GameBean implements Serializable {
     private Memory game;
-    private Timestamp startTime;
     
-    @Getter
-    private int nrOfPairs = 6;
+    @Inject
+    private UserBean userBean;
+    
+    @Inject
+    private ScoreBean scorebean;
+    
+    @Inject
+    private QuizData quizData;
+    
+    @EJB
+    private GameDAO gameDAO;
+    
     
     @Getter
     private List<String> quiz;
+    private String gameType;
+    
+    @Getter
+    @Setter
+    private int totalQuestions;
+    
+    @Getter
+    @Setter
+    private int currQuestion;
+    
+    @Getter
+    private int nrCorrect;
+    
+    @Getter
+    private String time;
+    
+    private Timestamp startTime;
+    private Timestamp endTime;
+    
+    @Getter
+    private int score;
+
+    @Getter
+    private int nrOfPairs = 6;
+    
     
     @Getter
     private List<Pair> pairs;
