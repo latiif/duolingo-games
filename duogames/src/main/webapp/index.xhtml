@@ -22,11 +22,12 @@
         </script>
         <script>
             $(document).ready(function(){
-            $('.login').click(function(){
-   		$('.loading').css("display", "block")
-                
-	});
-    });
+                $('.login').click(function(){
+                    $('.loading').css("display", "block")
+
+                    });
+            });
+            
         </script>
 
         <c:if test="#{user.isLoggedIn}">
