@@ -14,8 +14,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
+import lombok.Setter;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -35,6 +38,15 @@ public class MemoryBean extends GameBean implements Serializable {
     
     @Getter
     private List<Pair> pairs;
+    @Getter
+    @Setter
+    private String word = "";
+    @Getter
+    @Setter
+    private String answer = "";
+    @Getter
+    private boolean result;
+    
     
     public List<String> getQuizInformation(UserBean ub) {
         
@@ -76,16 +88,30 @@ public class MemoryBean extends GameBean implements Serializable {
         redirect("/duogames/play.xhtml");
     }
     
-    public boolean checkPair(String word, String answer){
+    public void checkPair(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        word = context.getExternalContext().getRequestParameterMap().get("word");
+        answer = context.getExternalContext().getRequestParameterMap().get("answer");
+        System.out.println("word: " + word);
+        System.out.println("answer: " + answer);
         for(Pair oldPair : pairs){
-            if(oldPair.getWord().equals(word) 
-                    || oldPair.getAnswer().equals(answer)){
-                return oldPair.equals(new Pair(word, answer));
-            } else if (oldPair.getAnswer().equals(word) 
-                    || oldPair.getWord().equals(answer)) {
-                return oldPair.equals(new Pair(answer, word));
+            if(oldPair.getWord().equalsIgnoreCase(word)){
+                Pair p = new Pair(word, answer);
+                result = oldPair.equals(p);
+                return;
+            } else if(oldPair.getAnswer().equalsIgnoreCase(answer)){
+                Pair p = new Pair(word, answer);
+                result = oldPair.equals(p);
+                return;
+                    } else if (oldPair.getAnswer().equalsIgnoreCase(word)) {
+                Pair p = new Pair(answer, word);
+                result = oldPair.equals(p);
+                return;
+                    }else if (oldPair.getWord().equalsIgnoreCase(answer)) {
+                Pair p = new Pair(answer, word);
+                result = oldPair.equals(p);
+                return;
             }
         }
-        return false;
     }
 }

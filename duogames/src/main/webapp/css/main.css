@@ -79,6 +79,8 @@ h4.panel-title {
     font-family: 'Bangers', sans-serif;
     font-size: 36px;
     line-height: 1em;
+    margin-top: 35px !important;
+    display: block;
 }
 .carousel-inner > .item > img, .carousel-inner > .item > a > img{
     height: 140px !important;
