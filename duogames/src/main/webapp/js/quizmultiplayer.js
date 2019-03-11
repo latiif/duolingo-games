@@ -7,20 +7,66 @@
 
 var websocketSession;
 
+var standings;
+
+
+
+var currQuestion;
+
 function f_onmessage(evt) {
-    websocketMessages = document.getElementById('eventlog');
-    
+
+
     var info = JSON.parse(evt.data);
-    
-    var msg = `User ${info.username} is now at question nr ${info.currQuestion} out of which ${info.numCorrect} is/are correct`;
-    
-    websocketMessages.innerHTML = websocketMessages.innerHTML + msg + '<br/>';
+
+    switch (info.type) {
+        case "ANSWER":
+            handleANSWER(info);
+            break;
+
+        case "LOGIN":
+            handleLOGIN(info);
+            break;
+    }
+
 }
 
-function open(gameid) {
+
+function handleANSWER(info) {
+    websocketMessages = document.getElementById('standings');
+    var html = ''
+
+    console.log(info)
+
+    standings[`${info.username}`] = info;
+
+    for (var user in standings) {
+        if (standings.hasOwnProperty(`${user}`)) {
+            userinfo = standings[`${user}`];
+            html += `<p>${user}</p><div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" style="width:${userinfo.numCorrect * 10}%"></div><div class="progress-bar progress-bar-warning" role="progressbar" style="width:${(userinfo.currQuestion - userinfo.numCorrect) * 10}%"></div></div></br>`
+        }
+    }
+
+    websocketMessages.innerHTML = html;
+}
+
+function handleLOGIN(info) {
+    participantsLog = document.getElementById('participants');
+
+
+   var html = `<div class="alert alert-info" role="alert">${info.username} just joined!</div></br>`
+
+    participantsLog.innerHTML += html;
+}
+
+
+
+function open(gameid,userName) {
     if (!websocketSession) {
-        websocketSession = new WebSocket('ws://' + document.location.host  +`/duogames/quizmultiplayer/${gameid}`);
+        websocketSession = new WebSocket('ws://' + document.location.host + `/duogames/quizmultiplayer/${gameid}`);
         websocketSession.onmessage = f_onmessage;
+        websocketSession.onopen = () => login(userName)
+        standings = {}
+        currQuestion = 1;
     }
 }
 
@@ -30,12 +76,23 @@ function close() {
     }
 }
 
-function sendMessage(userName,currentQuestion,numberCorrect) {
+function sendMessage(userName, numberCorrect) {
     msg = {
+        type: "ANSWER",
         username: userName,
-        currQuestion: currentQuestion,
+        currQuestion: currQuestion++,
         numCorrect: numberCorrect
     };
-    
+
+    websocketSession.send(JSON.stringify(msg));
+}
+
+
+function login(userName) {
+    msg = {
+        type: "LOGIN",
+        username: userName
+    };
+
     websocketSession.send(JSON.stringify(msg));
 }
