@@ -8,6 +8,8 @@ package cth.webapp.duogames.duogames.control;
 import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.model.memory.Memory;
 import cth.webapp.duogames.duogames.model.memory.Pair;
+import cth.webapp.duogames.duogames.utils.ScoreCalculator;
+import cth.webapp.duogames.duogames.utils.TimeFormatter;
 import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -29,37 +31,13 @@ import lombok.Setter;
  */
 @Named(value="memory")
 @SessionScoped
-public class MemoryBean extends GameBean implements Serializable {
-    private Memory game;
-    
-    @Inject
-    private UserBean userBean;
-    
+public class MemoryBean extends GameBean implements Serializable {    
     @Inject
     private ScoreBean scorebean;
     
-    @Inject
-    private QuizData quizData;
-    
-    @EJB
-    private GameDAO gameDAO;
-    
-    
     @Getter
     private List<String> quiz;
-    private String gameType;
-    
-    @Getter
-    @Setter
-    private int totalQuestions;
-    
-    @Getter
-    @Setter
-    private int currQuestion;
-    
-    @Getter
-    private int nrCorrect;
-    
+        
     @Getter
     private String time;
     
@@ -70,8 +48,8 @@ public class MemoryBean extends GameBean implements Serializable {
     private int score;
 
     @Getter
-    private int nrOfPairs = 6;
-    
+    final private int nrOfPairs = 6;
+    final private String type = "pair";
     
     @Getter
     private List<Pair> pairs;
@@ -98,9 +76,6 @@ public class MemoryBean extends GameBean implements Serializable {
     public List<String> startGame(){
         Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
 
-        //currQuestion = 0;
-        //nrCorrect = 0;
-        //totalQuestions = 10;
         startTime = new Timestamp(System.currentTimeMillis());
         pairs = new Memory(dict, 6).generatePairs();
         quiz = new ArrayList<>();
@@ -116,6 +91,13 @@ public class MemoryBean extends GameBean implements Serializable {
 
     @Override
     public void endGame() {
+        endTime = new Timestamp(System.currentTimeMillis());
+        long diff = (endTime.getTime() - startTime.getTime());
+        long seconds = diff / 1000L;
+        time = TimeFormatter.format(seconds);
+        score = ScoreCalculator.calculateScore(nrOfPairs * 2, diff);
+        scorebean.setGamebean(this);
+        addToDatabase(score, seconds, type);
         redirect("/duogames/score.xhtml");
     }
 
@@ -129,8 +111,6 @@ public class MemoryBean extends GameBean implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         word = context.getExternalContext().getRequestParameterMap().get("word");
         answer = context.getExternalContext().getRequestParameterMap().get("answer");
-        System.out.println("word: " + word);
-        System.out.println("answer: " + answer);
         for(Pair oldPair : pairs){
             if(oldPair.getWord().equalsIgnoreCase(word)){
                 Pair p = new Pair(word, answer);
@@ -140,11 +120,11 @@ public class MemoryBean extends GameBean implements Serializable {
                 Pair p = new Pair(word, answer);
                 result = oldPair.equals(p);
                 return;
-                    } else if (oldPair.getAnswer().equalsIgnoreCase(word)) {
+            } else if (oldPair.getAnswer().equalsIgnoreCase(word)) {
                 Pair p = new Pair(answer, word);
                 result = oldPair.equals(p);
                 return;
-                    }else if (oldPair.getWord().equalsIgnoreCase(answer)) {
+            } else if (oldPair.getWord().equalsIgnoreCase(answer)) {
                 Pair p = new Pair(answer, word);
                 result = oldPair.equals(p);
                 return;

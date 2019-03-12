@@ -13,9 +13,11 @@
         <c:set var="pairs" value="#{memory.getQuizInformation(user)}"/>
         <h:inputHidden id="hidden" value="#{memory.quiz}" /> 
         <h:inputHidden id="nrof" value="#{memory.nrOfPairs}" /> 
+        <h:inputHidden id="result" value="#{memory.result}" />
        
-        <b:remoteCommand name="callEquals" id="remoteCommand" parameters="word,answer" actionListener="#{memory.checkPair()}" oncomplete="thing()"/>
-        
+        <b:remoteCommand name="callEquals" id="remoteCommand" parameters="word,answer" actionListener="#{memory.checkPair()}" update="result" oncomplete="handleResult()"/>
+        <b:remoteCommand name="endGame" id="endCommand" actionListener="#{memory.endGame()}"/>
+
         <b:container id="container">
             <b:row id="row">
                 <b:column col-xs="10" offset="1" id="column">
@@ -23,7 +25,7 @@
                             <c:forEach var="word" items="#{pairs}">
                             <h:form style="display:inline-block; padding: 20px" id="m_#{pairs.indexOf(word)}">
                                 <b:carousel style="height:120px; width:240px" start-animation="false" interval="false" show-indicators="false"
-                                            id="card_#{pairs.indexOf(word)}">
+                                            id="card_#{pairs.indexOf(word)}" disabled="false">
                                         <b:carouselItem>
                                           <img src="css/mem.jpg" alt="Card" />
                                         </b:carouselItem>

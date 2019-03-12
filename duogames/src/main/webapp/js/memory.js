@@ -1,414 +1,153 @@
-function thing(){
-    console.log('hello');
-}
-
-var result;
-    
-$(document).ready(function() {
-    var words = $('#hidden').get(0)['value'];
-    var nrOfPairs = $('#nrof').get(0)['value'];
-    var openCards = 0;
-    
-    var card1 = null;
-    var card2 = null;
-    var word1 = null;
-    var word2 = null;
-    
-    $('#m_0_card_0').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_0').html();
+async function handleResult(){
+    var result = $('#result').get(0)['value'];
+    if(result === 'true'){
+        disableCards();
+        openCards = 0;
+        correctPairs++;
+        if(correctPairs === parseInt(nrOfPairs, 10)){
+            console.log('inside if');
+            endGame();
+        }
+    } else {
+        await sleep(1000);
+        turnCards();
     }
-    if (word1 !== $('#word_0').html() && word2 === null){
-        word2 = $('#word_0').html();
+    await sleep(200);
+    resetVars();
+    console.log(correctPairs + ' ' + nrOfPairs);
+    
+}
+function disableCards(){
+    document.getElementById(card1).getElementsByTagName('a')[0].setAttribute('style', 'display: none');
+    document.getElementById(card1).getElementsByTagName('a')[1].setAttribute('style', 'display: none');
+    document.getElementById(card2).getElementsByTagName('a')[0].setAttribute('style', 'display: none');
+    document.getElementById(card2).getElementsByTagName('a')[1].setAttribute('style', 'display: none');
+}
+function turnCards(){
+    openCards = -2;
+    document.getElementById(card1).getElementsByTagName('a')[1].click();
+    document.getElementById(card2).getElementsByTagName('a')[1].click();
+}
+function incAndCheckCards(){
+    openCards++;
+    if(openCards === 2){
+        callEquals(word1, word2);
+    }
+}
+function setVars(currentWord, currentCard){
+    if(word1 === null){
+        word1 = currentWord;
+    }
+    if (word1 !== currentWord && word2 === null){
+        word2 = currentWord;
     }
     if(card1 === null){
-        card1 = $('m_0_card_0');
-    } else if (card2 === null){
-        card2 = $('m_0_card_0');
+        card1 = currentCard;
+    } else if (card1 !== currentCard && card2 === null){
+        card2 = currentCard;
     }
-    if(openCards === 2){
-        openCards = 0;
-        
-        if(callEquals(word1, word2)){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+}
+function resetVars(){
+    card1 = null;
+    card2 = null;
+    word1 = null;
+    word2 = null;
+}
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+var nrOfPairs;
+var correctPairs = 0;
+var card1 = null;
+var card2 = null;
+var word1 = null;
+var word2 = null;
+var openCards = 0;
+    
+$(document).ready(function() {
+    nrOfPairs = $('#nrof').get(0)['value'];
+    
+    $('#m_0_card_0').bind('slid.bs.carousel', function () {
+        var currentWord = $('#word_0').html();
+        var currentCard = 'm_0_card_0';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_1_card_1').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_1').html();
-    }
-    if (word1 !== $('#word_1').html() && word2 === null){
-        word2 = $('#word_1').html();
-    }
-    if(card1 === null){
-        card1 = $('m_1_card_1');
-    } else if (card2 === null){
-        card2 = $('m_1_card_1');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_1').html();
+        var currentCard = 'm_1_card_1';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
 
     $('#m_2_card_2').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_2').html();
-    }
-    if (word1 !== $('#word_2').html() && word2 === null){
-        word2 = $('#word_2').html();
-    }
-    if(card1 === null){
-        card1 = $('m_2_card_2');
-    } else if (card2 === null){
-        card2 = $('m_2_card_2');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_2').html();
+        var currentCard = 'm_2_card_2';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_3_card_3').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_3').html();
-    }
-    if (word1 !== $('#word_3').html() && word2 === null){
-        word2 = $('#word_3').html();
-    }
-    if(card1 === null){
-        card1 = $('m_3_card_3');
-    } else if (card2 === null){
-        card2 = $('m_3_card_3');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_3').html();
+        var currentCard = 'm_3_card_3';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_4_card_4').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_4').html();
-    }
-    if (word1 !== $('#word_4').html() && word2 === null){
-        word2 = $('#word_4').html();
-    }
-    if(card1 === null){
-        card1 = $('m_4_card_4');
-    } else if (card2 === null){
-        card2 = $('m_4_card_4');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_4').html();
+        var currentCard = 'm_4_card_4';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
 
     $('#m_5_card_5').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_5').html();
-    }
-    if (word1 !== $('#word_5').html() && word2 === null){
-        word2 = $('#word_5').html();
-    }
-    if(card1 === null){
-        card1 = $('m_5_card_5');
-    } else if (card2 === null){
-        card2 = $('m_5_card_5');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_5').html();
+        var currentCard = 'm_5_card_5';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_6_card_6').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_6').html();
-    }
-    if (word1 !== $('#word_6').html() && word2 === null){
-        word2 = $('#word_6').html();
-    }
-    if(card1 === null){
-        card1 = $('m_6_card_6');
-    } else if (card2 === null){
-        card2 = $('m_6_card_6');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_6').html();
+        var currentCard = 'm_6_card_6';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_7_card_7').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_7').html();
-    }
-    if (word1 !== $('#word_7').html() && word2 === null){
-        word2 = $('#word_7').html();
-    }
-    if(card1 === null){
-        card1 = $('m_7_card_7');
-    } else if (card2 === null){
-        card2 = $('m_7_card_7');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_7').html();
+        var currentCard = 'm_7_card_7';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_8_card_8').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_8').html();
-    }
-    if (word1 !== $('#word_8').html() && word2 === null){
-        word2 = $('#word_8').html();
-    }
-    if(card1 === null){
-        card1 = $('m_8_card_8');
-    } else if (card2 === null){
-        card2 = $('m_8_card_8');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_8').html();
+        var currentCard = 'm_8_card_8';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_9_card_9').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_9').html();
-    }
-    if (word1 !== $('#word_9').html() && word2 === null){
-        word2 = $('#word_9').html();
-    }
-    if(card1 === null){
-        card1 = $('m_9_card_9');
-    } else if (card2 === null){
-        card2 = $('m_9_card_9');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_9').html();
+        var currentCard = 'm_9_card_9';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_10_card_10').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_10').html();
-    }
-    if (word1 !== $('#word_10').html() && word2 === null){
-        word2 = $('#word_10').html();
-    }
-    if(card1 === null){
-        card1 = $('m_10_card_10');
-    } else if (card2 === null){
-        card2 = $('m_10_card_10');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
+        var currentWord = $('#word_10').html();
+        var currentCard = 'm_10_card_10';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
     });
     
     $('#m_11_card_11').bind('slide.bs.carousel', function () {
-    openCards++;
-    if(word1 === null){
-        word1 = $('#word_11').html();
-    }
-    if (word1 !== $('#word_11').html() && word2 === null){
-        word2 = $('#word_11').html();
-    }
-    if(card1 === null){
-        card1 = $('m_11_card_11');
-    } else if (card2 === null){
-        card2 = $('m_11_card_11');
-    }
-    if(openCards === 2){
-        openCards = 0;
-        callEquals(word1, word2);
-        if(result){
-            console.log('true');
-            card1.setAttribute('class', 'hidden-xs');
-            card2.setAttribute('class', 'hidden-xs');
-        } else {
-            console.log('false');
-            card1.carousel('next');
-            card2.carousel('next');
-        }
-        card1 = null;
-        card2 = null;
-        word1 = null;
-        word2 = null;
-    }
-    });
-
-        //document.getElementById('m_1_card_1').setAttribute('class', 'carousel slide');
-        //document.getElementById('m_1_card_1').setAttribute('class', 'hidden-xs');
-    //console.log($('#word_0').html());
-
-    $('#mem_card_1').bind('slid.bs.carousel', function () {
-        console.log("end slide!");
-    });
-    
-    
+        var currentWord = $('#word_11').html();
+        var currentCard = 'm_11_card_11';
+        setVars(currentWord, currentCard);
+        incAndCheckCards();
+    });   
 });
-
-function reset(){
-    
-}

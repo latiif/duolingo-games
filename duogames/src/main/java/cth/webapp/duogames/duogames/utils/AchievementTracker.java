@@ -12,10 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-import lombok.Getter;
 
 /**
  *
@@ -25,7 +23,6 @@ import lombok.Getter;
 public class AchievementTracker implements Serializable {
     
     @EJB
-    @Getter
     GameDAO gameDAO;
     @Inject
     UserBean userBean;
@@ -59,9 +56,6 @@ public class AchievementTracker implements Serializable {
     }
     
     public Map<String, String> getAchievements(){
-        for(String s : achievements.keySet()){
-            System.out.println(s + " " + achievements.get(s));
-        }
         return achievements;
     }
     
