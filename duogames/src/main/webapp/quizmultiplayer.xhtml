@@ -10,9 +10,15 @@
 
 
     <ui:define name="content">
-        
+
         <c:set var="gameid"  value="#{request.getParameter('gameid')}"/>
-        
+
+
+        <c:if test="#{!multi.tryGame(gameid, userData.username, user.api.knownWords.size(), user.api.currentLanguage)}">
+            <script>
+                window.location.href = "play.xhtml";
+            </script>
+        </c:if>
 
 
         <script type="text/javascript" src="js/quizmultiplayer.js"></script>

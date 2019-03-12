@@ -6,7 +6,9 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 
+   
     <script>
+     
         $(document).ready(function () {
             $('#btncreate').click(function () {
                 
@@ -17,15 +19,15 @@
             });
 
         });
-
+  
     </script>
 
     <b:modal id="gamemodal" title="Quiz Multiplayer" styleClass="modalPseudoClass">
 
-        <input type="text" class="form-control" id="gameid" placeholder="GameId"/>
+        <input type="text" class="form-control" id="gameid" placeholder="GameId" value="#{multi.generateGameID()}"/>
         <f:facet name="footer">
             <b:button value="Close" dismiss="modal" />
-            <b:button id="btncreate" value="Create" look="primary" dismiss="modal"/>
+            <b:button id="btncreate" value="Join Game" look="primary" dismiss="modal" />
         </f:facet>
     </b:modal>
 

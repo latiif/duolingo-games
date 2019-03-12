@@ -25,6 +25,7 @@ public class MultiplayerGame {
     public MultiplayerGame(int nrWords, String language,String creator){
         this.nrWords = nrWords;
         this.language = language;
+        participants = new LinkedList<>();
         addParticipant(creator, nrWords, language);
     }
     

@@ -28,17 +28,28 @@ public class MultiplayerBean {
     public MultiplayerBean() {
         games = new HashMap<>();
     }
+    
+    public boolean tryGame(String gameid, String uid, int nrWords, String language){
+        
+        Boolean canJoin = joinGame(gameid, uid, nrWords, language);
+        Boolean canCreate = createGame(gameid, uid, nrWords, language);
+        Boolean canStart = canJoin | canCreate;
+        
+        
+        return canStart;
+        
+    }
 
-    public boolean createGame(String gameid, String uid, int nrWords, String language) {
+    private boolean createGame(String gameid, String uid, int nrWords, String language) {
         if (games.containsKey(gameid)) {
             return false;
         }
 
-        games.put(uid, new MultiplayerGame(nrWords, language, uid));
+        games.put(gameid, new MultiplayerGame(nrWords, language, uid));
         return true;
     }
 
-    public boolean joinGame(String gameid, String uid, int nrWords, String language) {
+    private boolean joinGame(String gameid, String uid, int nrWords, String language) {
         if (!games.containsKey(gameid)) {
             return false;
         }
@@ -52,7 +63,7 @@ public class MultiplayerBean {
         return " ";
     }
 
-    void redirect(String url) {
+    private void redirect(String url) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
         } catch (IOException e) {
