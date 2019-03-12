@@ -11,7 +11,8 @@
 
     <ui:define name="content">
         
-        <c:set var="gameid"  value="TEST_GAME"/>
+        <c:set var="gameid"  value="#{request.getParameter('gameid')}"/>
+        
 
 
         <script type="text/javascript" src="js/quizmultiplayer.js"></script>
