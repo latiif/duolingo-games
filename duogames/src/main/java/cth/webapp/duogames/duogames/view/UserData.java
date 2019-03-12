@@ -11,6 +11,7 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -28,7 +29,10 @@ public class UserData implements Serializable {
     @Setter
     private String password = "";
     
+    @Inject
+    private AchievementTracker achieve;
+    
     public Map<String, String> getAchievements(){
-        return AchievementTracker.getInstance().getAchievements();
+        return achieve.getAchievements();
     }
 }

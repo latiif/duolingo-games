@@ -10,10 +10,12 @@ import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import lombok.Getter;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.inject.Inject;
 public class AchievementTracker implements Serializable {
     
     @EJB
+    @Getter
     GameDAO gameDAO;
     @Inject
     UserBean userBean;
@@ -30,20 +33,22 @@ public class AchievementTracker implements Serializable {
     private static AchievementTracker INSTANCE = null;
     private Map<String, String> achievements;
     
-    private AchievementTracker() {
+    @PostConstruct
+    private void setup() {
         achievements = new HashMap<>();
-        //if(gameDAO.findQuickestTime().intValue() < 20){
+        
+        if(gameDAO.findQuickestTime().intValue() < 20){
             achievements.put("quick", "res/bolt.png");
-        //}
-        //if(gameDAO.findSingleHighestScore() >= 1500){
+        }
+        if(gameDAO.findSingleHighestScore() >= 1500){
             achievements.put("star", "res/star.png");
-        //}
-        //if(gameDAO.findTotalGames() >= 100){
+        }
+        if(gameDAO.findTotalGames() >= 100){
             achievements.put("gold", "res/gold.png");
-        //}
-        //if(userBean.getUser().getId() < 100){
+        }
+        if(userBean.getUser().getId() < 100){
             achievements.put("early", "res/shoot.png");
-        //}
+        }
     }
     
     public static AchievementTracker getInstance() {
