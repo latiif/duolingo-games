@@ -42,8 +42,8 @@
                     <b:navLink value="High Score" href="highscore.xhtml"></b:navLink>
                     <b:navLink></b:navLink>
                     <b:navLink value="Achivements" href="achievements.xhtml"></b:navLink>
-                    <b:form>
-                    <b:navCommandLink value="Logout" action="#{user.logout()}" href="index.xhtml"></b:navCommandLink>
+                    <b:form id="navForm">
+                    <b:navCommandLink id="logoutLink" value="Logout" action="#{user.logout()}" href="index.xhtml"></b:navCommandLink>
                     </b:form>
                 </b:dropMenu>
             </b:navbarLinks>
