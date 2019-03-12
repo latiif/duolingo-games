@@ -5,17 +5,28 @@
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+
+    <script>
+        $(document).ready(function () {
+            $('#btncreate').click(function () {
+                
+                currGameId = $("#gameid")[0].value;
+                currGameId = currGameId.toString();                
+                link = "quizmultiplayer.xhtml?gameid=".concat(currGameId);
+                window.location.href = link;
+            });
+
+        });
+
+    </script>
+
     <b:modal id="gamemodal" title="Quiz Multiplayer" styleClass="modalPseudoClass">
-        <b:form>
-            <b:inputText placeholder="GameId" value="#{multi.generateGameID()}"
-               onkeyup="ajax:inputTextBean.capitalizeText()" update="@next" delay="1000" />        <b:form>
+
+        <input type="text" class="form-control" id="gameid" placeholder="GameId"/>
         <f:facet name="footer">
             <b:button value="Close" dismiss="modal" />
-            <b:button value="Create" look="primary" dismiss="modal" />
-            <b:button value="Join" look="primary" dismiss="modal" />
+            <b:button id="btncreate" value="Create" look="primary" dismiss="modal"/>
         </f:facet>
-            </b:form>
-        </b:form>
     </b:modal>
 
 </ui:composition>
