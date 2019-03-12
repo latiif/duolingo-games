@@ -1,5 +1,5 @@
-function handleBoolean(param){
-    result = param;
+function thing(){
+    console.log('hello');
 }
 
 var result;
@@ -29,8 +29,8 @@ $(document).ready(function() {
     }
     if(openCards === 2){
         openCards = 0;
-        callEquals(word1, word2);
-        if(result){
+        
+        if(callEquals(word1, word2)){
             console.log('true');
             card1.setAttribute('class', 'hidden-xs');
             card2.setAttribute('class', 'hidden-xs');

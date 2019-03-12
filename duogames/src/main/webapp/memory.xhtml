@@ -14,8 +14,7 @@
         <h:inputHidden id="hidden" value="#{memory.quiz}" /> 
         <h:inputHidden id="nrof" value="#{memory.nrOfPairs}" /> 
        
-        <b:remoteCommand name="callEquals" id="remoteCommand" parameters="word,answer" actionListener="#{memory.checkPair()}"
-                         oncomplete="handleBoolean(#{memory.result})"/>
+        <b:remoteCommand name="callEquals" id="remoteCommand" parameters="word,answer" actionListener="#{memory.checkPair()}" oncomplete="thing()"/>
         
         <b:container id="container">
             <b:row id="row">
