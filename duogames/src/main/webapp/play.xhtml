@@ -11,7 +11,12 @@
         <link rel = "stylesheet" type = "text/css" href = "css/play.css" />
     </h:head>
     <ui:define name="content"> 
+
         <h1>Games</h1>
+        <b:row>
+            <ui:include src="components/gamemodal.xhtml"/>
+        </b:row>
+        
         <b:row>
             <b:column medium-screen="4">
                 <div>
@@ -34,8 +39,8 @@
                         <b:column medium-screen="6">
                             <b:form>
                                 <b:button look="primary" href="quiz.xhtml" value="Play! (Solo)" class="fill" ></b:button>
-                                <b:button look="primary" href="quizmultiplayer.xhtml" value="Play! (Multiplayer)" class="fill" ></b:button>
                             </b:form>
+                            <a id="atrigger" class="btn btn-primary btn-lg" href="#gamemodal" data-toggle="modal">Multiplayer</a>
                         </b:column>
                         <b:column medium-screen="3"> </b:column>
                     </b:row>

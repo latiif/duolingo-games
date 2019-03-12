@@ -10,13 +10,14 @@
 
 
     <ui:define name="content">
+        
         <c:set var="gameid"  value="TEST_GAME"/>
 
 
         <script type="text/javascript" src="js/quizmultiplayer.js"></script>
         <script>
-            $(function() {
-               open('#{gameid}','#{userData.username}');
+            $(function () {
+                open('#{gameid}', '#{userData.username}');
             });
         </script>
 

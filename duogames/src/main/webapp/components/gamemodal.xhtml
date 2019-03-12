@@ -5,8 +5,10 @@
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
-        
+    <b:modal id="gamemodal" title="Quiz Multiplayer" styleClass="modalPseudoClass">
+        <b:form>
+            <b:inputText placeholder="GameId" value="#{multi.generateGameID()}"
+               onkeyup="ajax:inputTextBean.capitalizeText()" update="@next" delay="1000" />        <b:form>
         <f:facet name="footer">
             <b:button value="Close" dismiss="modal" />
             <b:button value="Create" look="primary" dismiss="modal" />
