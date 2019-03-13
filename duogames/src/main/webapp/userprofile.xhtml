@@ -14,9 +14,6 @@
 
 
     <ui:define name="content"> 
-
-        <h1>User profile</h1>
-        <b:container id="center">
             <c:set var="duoInfo" value ="#{user.api.profileInfo}" />
             <b:row>
                 <b:container>
@@ -59,8 +56,7 @@
                         </c:forEach>
                     </b:panel>
                 </b:column>
-            </b:row>
-        </b:container>   
+            </b:row>   
 
     </ui:define>
 </ui:composition>

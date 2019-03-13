@@ -46,6 +46,7 @@ public class QuizBean extends GameBean implements Serializable {
     private QuizData quizData;
     
     private List<IQuestion> quiz;
+    @Getter
     private final String type = "quiz";
     
     @Getter

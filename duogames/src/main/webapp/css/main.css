@@ -97,4 +97,18 @@ h4.panel-title {
 .loading{
     display: none;
 }
+.customButton {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 14px;
+    height: 35px;
+    padding-top: 8px;
+}
 
+#navForm\:logoutLink>a{
+    margin-left: 20px!important;
+    
+}
+#navForm\:logoutLink>a:hover{
+    text-decoration: none;
+}

@@ -5,19 +5,16 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.database.dao.GameDAO;
 import cth.webapp.duogames.duogames.model.memory.Memory;
 import cth.webapp.duogames.duogames.model.memory.Pair;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
-import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -49,6 +46,7 @@ public class MemoryBean extends GameBean implements Serializable {
 
     @Getter
     final private int nrOfPairs = 6;
+    @Getter
     final private String type = "pair";
     
     @Getter

@@ -53,6 +53,7 @@ public class WDYSBean extends GameBean implements Serializable {
     private Timestamp startTime;
     private Timestamp endTime;
     private List<IQuestion> quiz;
+    @Getter
     private final String type = "wdys";
     
      public List<IQuestion> getQuizInformation(UserBean ub) {
