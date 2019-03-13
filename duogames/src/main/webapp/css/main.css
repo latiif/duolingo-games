@@ -112,3 +112,12 @@ h4.panel-title {
 #navForm\:logoutLink>a:hover{
     text-decoration: none;
 }
+
+#overlay {
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    display: none;
+    margin: 0;
+    position: fixed;
+}

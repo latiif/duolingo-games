@@ -1,22 +1,26 @@
-async function handleResult(){
+function handleResult(){
     var result = $('#result').get(0)['value'];
+    console.log(result);
     if(result === 'true'){
         disableCards();
         openCards = 0;
         correctPairs++;
         if(correctPairs === parseInt(nrOfPairs, 10)){
-            console.log('inside if');
             endGame();
         }
     } else {
-        await sleep(1000);
-        turnCards();
+        card1_extra = card1;
+        card2_extra = card2;
+        document.getElementById('overlay').setAttribute('style', 'display: inline');
+        sleep(800).then(() => {
+            turnCards();
+        });
     }
-    await sleep(200);
-    resetVars();
-    console.log(correctPairs + ' ' + nrOfPairs);
-    
+    sleep(1600).then(() => {
+        resetVars(); 
+    });
 }
+
 function disableCards(){
     document.getElementById(card1).getElementsByTagName('a')[0].setAttribute('style', 'display: none');
     document.getElementById(card1).getElementsByTagName('a')[1].setAttribute('style', 'display: none');
@@ -25,8 +29,11 @@ function disableCards(){
 }
 function turnCards(){
     openCards = -2;
-    document.getElementById(card1).getElementsByTagName('a')[1].click();
-    document.getElementById(card2).getElementsByTagName('a')[1].click();
+    document.getElementById(card1_extra).getElementsByTagName('a')[1].click();
+    document.getElementById(card2_extra).getElementsByTagName('a')[1].click();
+    sleep(750).then (() => {
+        document.getElementById('overlay').setAttribute('style', 'display: none');
+    })
 }
 function incAndCheckCards(){
     openCards++;
@@ -59,7 +66,9 @@ const sleep = (milliseconds) => {
 var nrOfPairs;
 var correctPairs = 0;
 var card1 = null;
+var card1_extra = null;
 var card2 = null;
+var card2_extra = null;
 var word1 = null;
 var word2 = null;
 var openCards = 0;
