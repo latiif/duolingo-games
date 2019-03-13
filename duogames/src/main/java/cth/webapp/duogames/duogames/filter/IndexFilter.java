@@ -41,8 +41,6 @@ public class IndexFilter implements Filter {
         //httpreq.get
         //httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
         
-        
-        
     }
     
 

@@ -106,6 +106,5 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "cth.webapp.duogames.duogames.database.entity.User[ id=" + id + " ]";
-    }
-    
+    } 
 }

@@ -69,7 +69,7 @@ public class UserBean implements Serializable {
     public void redirect() {
         try {
             
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/userprofile.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/play.xhtml");
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
