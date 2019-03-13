@@ -63,6 +63,15 @@ public class MultiplayerBean {
         return " ";
     }
 
+    public int getRanking(String gameid,String userid,Integer score){
+        MultiplayerGame game = games.get(gameid);
+        
+        game.addScore(userid, score);
+        
+        return game.getRanking(userid);
+        
+    }
+    
     private void redirect(String url) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);

@@ -27,6 +27,7 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import net.bootsfaces.utils.FacesMessages;
+import org.ocpsoft.common.util.Strings;
 
 /**
  *
@@ -48,6 +49,10 @@ public class QuizBean extends GameBean implements Serializable {
     
     @Getter
     private final String type = "quiz";
+    
+    @Getter
+    @Setter
+    private String gameid;
     
     
     
@@ -75,12 +80,18 @@ public class QuizBean extends GameBean implements Serializable {
     
     @Override
     public void resetGame() {
+
         quizData.setIQuiz(null);
+        gameid = "";
+
         redirect("/duogames/play.xhtml");
     }
     
     public void validate(){
+
+        
         if (quizData.getIQuiz().get(quizData.getCurrQuestion()).check(quizData.getAnswer()))
+
         {
             FacesMessages.info("Correct!");
             int x =  quizData.getNrCorrect() +1;
@@ -111,8 +122,13 @@ public class QuizBean extends GameBean implements Serializable {
         quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
         scorebean.setGamebean(this);
         addToDatabase(quizData.getScore(), seconds, type);
+
         quizData.setIQuiz(null);
-        redirect("/duogames/score.xhtml");
+        if (Strings.isNullOrEmpty(gameid))
+            redirect("/duogames/score.xhtml");
+        else
+            redirect("/duogames/score.xhtml?gameid="+gameid);
+
     }
 
 }

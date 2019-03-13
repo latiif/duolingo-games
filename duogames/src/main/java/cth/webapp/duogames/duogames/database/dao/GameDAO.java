@@ -38,6 +38,13 @@ public class GameDAO extends AbstractDAO<GameSession> {
         q.setParameter("userid",user.getUser());
         return Optional.ofNullable((BigInteger) q.getSingleResult()).orElse(BigInteger.valueOf(0));
     }
+    
+    public BigInteger findSlowestTime(){
+        Query q = em.createQuery("SELECT MAX(g.time) FROM GameSession g WHERE g.userid = :userid");
+        q.setParameter("userid",user.getUser());
+        return Optional.ofNullable((BigInteger) q.getSingleResult()).orElse(BigInteger.valueOf(0));
+    }
+    
 
     public int findTotalGames() {
         Query q = em.createQuery("SELECT COUNT(g) FROM GameSession g WHERE g.userid = :userid");
