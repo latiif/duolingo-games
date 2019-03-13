@@ -46,6 +46,9 @@ public class AchievementTracker implements Serializable {
         if(userBean.getUser().getId() < 100){
             achievements.put("early", "res/shoot.png");
         }
+        if(gameDAO.findSlowestTime().intValue() > 15*60){
+            achievements.put("slowest","res/guns.png");
+        }
     }
     
     public static AchievementTracker getInstance() {
