@@ -106,6 +106,7 @@ public class MemoryBean extends GameBean implements Serializable {
     }
     
     public void checkPair(){
+        System.out.println("in java bean");
         FacesContext context = FacesContext.getCurrentInstance();
         word = context.getExternalContext().getRequestParameterMap().get("word");
         answer = context.getExternalContext().getRequestParameterMap().get("answer");

@@ -1,5 +1,6 @@
 function handleResult(){
     var result = $('#result').get(0)['value'];
+    console.log(result);
     if(result === 'true'){
         disableCards();
         openCards = 0;
@@ -13,11 +14,11 @@ function handleResult(){
         document.getElementById('overlay').setAttribute('style', 'display: inline');
         sleep(800).then(() => {
             turnCards();
-        })
+        });
     }
     sleep(1600).then(() => {
         resetVars(); 
-    })   
+    });
 }
 
 function disableCards(){
