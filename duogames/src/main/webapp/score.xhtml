@@ -9,21 +9,20 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
 
     <ui:define name="content"> 
-        
-        
+
+
         <c:set var="gameid"  value="#{request.getParameter('gameid')}"/>
 
 
         <b:container id="center">
-            
-            <c:if test='#{not empty gameid}'>
-                <b:row>
-                    <p>You came in #{multi.getRanking(gameid, userData.username, quizData.score)}</p>
-                </b:row>
-            </c:if>
+
+
 
             <b:row>
                 <b:column col-xs="6" offset="3">
+                    <c:if test='#{not empty gameid}'>
+                        <h1>You came in #{multi.getRanking(gameid, userData.username, quizData.score)}</h1>
+                    </c:if>
                     <b:panel title="Results for #{userData.username}" collapsible="false">
                         <h:form>
                             <c:if test="${scorebean.gamebean.type != 'pair'}">
@@ -31,7 +30,7 @@
                             </c:if>
                             <p>Score: #{quizData.score}</p>
                             <p>Time: #{quizData.time}</p>
-                          </h:form>
+                        </h:form>
                     </b:panel>
                 </b:column>
             </b:row>

@@ -471,9 +471,6 @@
 .flag-icon-fr.flag-icon-squared {
   background-image: url(./flags/1x1/fr.svg);
 }
-.flag-icon-ga {
-  background-image: url(./flags/4x3/ga.svg);
-}
 .flag-icon-ga.flag-icon-squared {
   background-image: url(./flags/1x1/ga.svg);
 }
@@ -663,8 +660,8 @@
 .flag-icon-iq.flag-icon-squared {
   background-image: url(./flags/1x1/iq.svg);
 }
-.flag-icon-ir {
-  background-image: url(./flags/4x3/ir.svg);
+.flag-icon-ga {
+  background-image: url(./flags/4x3/ga.svg);
 }
 .flag-icon-ir.flag-icon-squared {
   background-image: url(./flags/1x1/ir.svg);
