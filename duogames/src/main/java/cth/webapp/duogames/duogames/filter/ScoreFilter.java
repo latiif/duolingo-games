@@ -5,7 +5,7 @@
  */
 package cth.webapp.duogames.duogames.filter;
 
-import cth.webapp.duogames.duogames.control.UserBean;
+import cth.webapp.duogames.duogames.control.ScoreBean;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -23,11 +23,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author nicla
  */
-
-@WebFilter("/userprofile.xhtml")
-public class LoginFilter implements Filter {
+@WebFilter("/score.xhtml")
+public class ScoreFilter implements Filter {
     @Inject
-    UserBean user;
+    ScoreBean score;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -39,8 +38,8 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpreq = (HttpServletRequest) request;
         HttpServletResponse httpres = (HttpServletResponse) response; 
         HttpSession ses = httpreq.getSession(false);
-        if(user.getIsLoggedIn())
-        chain.doFilter(request, response);
+        if(!score.getGamebean().equals(null))
+            chain.doFilter(request, response);
         
         else{
             httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
@@ -58,5 +57,4 @@ public class LoginFilter implements Filter {
     public void destroy() {
         
     }
-    
 }

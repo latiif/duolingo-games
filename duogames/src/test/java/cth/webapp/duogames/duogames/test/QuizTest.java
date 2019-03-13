@@ -18,10 +18,12 @@ import org.junit.Test;
  */
 public class QuizTest {
     private QuizBean quiz = new QuizBean();
+    
+    
 
     @Test
     public void testValidate(){
-        assertEquals(2, 1+1);
+        
 
     }
 
