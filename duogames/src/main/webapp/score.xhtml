@@ -17,10 +17,10 @@
                     <b:panel title="Results for #{userData.username}" collapsible="false">
                         <h:form>
                             <c:if test="${scorebean.gamebean.type != 'pair'}">
-                            <p>Correct questions: #{scorebean.gamebean.nrCorrect}/#{scorebean.gamebean.totalQuestions}</p>
+                                <p>Correct questions: #{quizData.nrCorrect}/#{quizData.totalQuestions}</p>
                             </c:if>
-                            <p>Score: #{scorebean.gamebean.score}</p>
-                            <p>Time: #{scorebean.gamebean.time}</p>
+                            <p>Score: #{quizData.score}</p>
+                            <p>Time: #{quizData.time}</p>
                           </h:form>
                     </b:panel>
                 </b:column>

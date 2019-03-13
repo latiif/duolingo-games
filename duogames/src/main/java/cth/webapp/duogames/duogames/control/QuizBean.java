@@ -46,28 +46,15 @@ public class QuizBean extends GameBean implements Serializable {
     private QuizData quizData;
     
     private List<IQuestion> quiz;
+    
     @Getter
     private final String type = "quiz";
     
-    @Getter
-    @Setter
-    private int totalQuestions;
     
-    @Getter
-    @Setter
-    private int currQuestion;
-    
-    @Getter
-    private int nrCorrect;
-    
-    @Getter
-    private String time;
     
     private Timestamp startTime;
     private Timestamp endTime;
     
-    @Getter
-    private int score;
 
     public List<IQuestion> getQuizInformation(UserBean ub) {
         if (quiz == null) {
@@ -79,10 +66,9 @@ public class QuizBean extends GameBean implements Serializable {
     @Override
     public List<IQuestion> startGame() {
         Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
-
-        currQuestion = 0;
-        nrCorrect = 0;
-        totalQuestions = 10;
+        quizData.setCurrQuestion(0);
+        quizData.setTotalQuestions(10);
+        quizData.setNrCorrect(0);
         startTime = new Timestamp(System.currentTimeMillis());
         return new Quiz(dict, 10, 3).generateQuestions();
     }
@@ -94,19 +80,23 @@ public class QuizBean extends GameBean implements Serializable {
     }
     
     public void validate(){
-        if (quiz.get(currQuestion).check(quizData.getAnswer()))
+        if (quiz.get(quizData.getCurrQuestion()).check(quizData.getAnswer()))
         {
             FacesMessages.info("Correct!");
-            nrCorrect++;
-            currQuestion++;
-            if(currQuestion == 10){
+            int x =  quizData.getNrCorrect() +1;
+            quizData.setNrCorrect(x);
+            int y = quizData.getCurrQuestion() + 1;
+            quizData.setCurrQuestion(y);
+            if(quizData.getCurrQuestion() == 10){
                 endGame();
             }
         }
         else{
             FacesMessages.error("Wrong");
-            currQuestion++;
-            if(currQuestion == 10){
+            
+            int x =  quizData.getCurrQuestion() +1;
+            quizData.setCurrQuestion(x);
+            if(quizData.getCurrQuestion() == 10){
                 endGame();
             } 
         }
@@ -117,10 +107,10 @@ public class QuizBean extends GameBean implements Serializable {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime());
         long seconds = diff / 1000L;
-        time = TimeFormatter.format(seconds);
-        score = ScoreCalculator.calculateScore(nrCorrect, diff);
+        quizData.setTime(TimeFormatter.format(seconds));
+        quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
         scorebean.setGamebean(this);
-        addToDatabase(score, seconds, type);
+        addToDatabase(quizData.getScore(), seconds, type);
         redirect("/duogames/score.xhtml");
     }
 

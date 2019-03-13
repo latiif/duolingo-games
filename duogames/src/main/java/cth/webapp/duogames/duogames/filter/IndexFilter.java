@@ -36,7 +36,7 @@ public class IndexFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if(!user.equals(null)){
+        if(user != null){
             if(!user.getIsLoggedIn()){
                    chain.doFilter(request, response);
             }

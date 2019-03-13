@@ -9,6 +9,8 @@ import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
+import cth.webapp.duogames.duogames.view.QuizData;
+import cth.webapp.duogames.duogames.view.UserData;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -34,21 +36,13 @@ public class WDYSBean extends GameBean implements Serializable {
     @Inject
     private ScoreBean scorebean;
     
-    @Getter
-    @Setter
-    private int totalQuestions;
+    @Inject
+    private UserData userData;
     
-    @Getter
-    @Setter
-    private int currQuestion;
+    @Inject
+    private QuizData quizData;
     
-    @Getter
-    private int nrCorrect;
     
-    @Getter
-    private String time;
-    @Getter
-    private int score;
     
     private Timestamp startTime;
     private Timestamp endTime;
@@ -66,10 +60,9 @@ public class WDYSBean extends GameBean implements Serializable {
     @Override
     public List<IQuestion> startGame() {
          Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
-
-        currQuestion = 0;
-        nrCorrect = 0;
-        totalQuestions = 10;
+        quizData.setCurrQuestion(0);
+        quizData.setNrCorrect(0);
+        quizData.setTotalQuestions(10);
         startTime = new Timestamp(System.currentTimeMillis());
         
        return new WhatDidYouSayQuiz(dict, 10).generateQuestions(super.getUserBean().getApi());
@@ -82,19 +75,19 @@ public class WDYSBean extends GameBean implements Serializable {
     }
     
     public void validate(){
-        if (quiz.get(currQuestion).check(super.getQuizData().getAnswer()))
+        if (quiz.get(quizData.getCurrQuestion()).check(super.getQuizData().getAnswer()))
         {
             FacesMessages.info("Correct!");
-            nrCorrect++;
-            currQuestion++;
-            if(currQuestion == 10){
+            quizData.setNrCorrect(quizData.getNrCorrect() + 1);
+            quizData.setCurrQuestion(quizData.getCurrQuestion() + 1);
+            if(quizData.getCurrQuestion() == 10){
                 endGame();
             }
         }
         else{
             FacesMessages.error("Wrong");
-            currQuestion++;
-            if(currQuestion == 10){
+            quizData.setCurrQuestion(quizData.getCurrQuestion() + 1);
+            if(quizData.getCurrQuestion() == 10){
                 endGame();
             } 
         }
@@ -105,10 +98,10 @@ public class WDYSBean extends GameBean implements Serializable {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime());
         long seconds = diff / 1000L;
-        time = TimeFormatter.format(seconds);
-        score = ScoreCalculator.calculateScore(nrCorrect, diff);
+        quizData.setTime(TimeFormatter.format(seconds));
+        quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
         scorebean.setGamebean(this);
-        addToDatabase(score, seconds, type);
+        addToDatabase(quizData.getScore(), seconds, type);
         redirect("/duogames/score.xhtml");
     }
    

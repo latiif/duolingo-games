@@ -38,7 +38,7 @@ public class ScoreFilter implements Filter {
         HttpServletRequest httpreq = (HttpServletRequest) request;
         HttpServletResponse httpres = (HttpServletResponse) response; 
         HttpSession ses = httpreq.getSession(false);
-        if(!score.getGamebean().equals(null))
+        if(score.getGamebean() != null)
             chain.doFilter(request, response);
         
         else{
