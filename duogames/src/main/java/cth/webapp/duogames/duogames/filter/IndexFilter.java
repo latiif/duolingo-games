@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author nicla
  */
-@WebFilter("/index.xhtml")
+
 public class IndexFilter implements Filter {
 
     @Override
@@ -40,8 +40,6 @@ public class IndexFilter implements Filter {
         
         //httpreq.get
         //httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
-        
-        
         
     }
     
