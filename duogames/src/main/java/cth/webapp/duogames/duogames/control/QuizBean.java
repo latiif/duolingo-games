@@ -69,6 +69,7 @@ public class QuizBean extends GameBean implements Serializable {
         quizData.setCurrQuestion(0);
         quizData.setTotalQuestions(10);
         quizData.setNrCorrect(0);
+        quizData.setAnswer("");
         startTime = new Timestamp(System.currentTimeMillis());
         return new Quiz(dict, 10, 3).generateQuestions();
     }
@@ -111,6 +112,7 @@ public class QuizBean extends GameBean implements Serializable {
         quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
         scorebean.setGamebean(this);
         addToDatabase(quizData.getScore(), seconds, type);
+        quiz = null;
         redirect("/duogames/score.xhtml");
     }
 

@@ -63,6 +63,7 @@ public class WDYSBean extends GameBean implements Serializable {
         quizData.setCurrQuestion(0);
         quizData.setNrCorrect(0);
         quizData.setTotalQuestions(10);
+        quizData.setAnswer("");
         startTime = new Timestamp(System.currentTimeMillis());
         
        return new WhatDidYouSayQuiz(dict, 10).generateQuestions(super.getUserBean().getApi());
@@ -104,6 +105,7 @@ public class WDYSBean extends GameBean implements Serializable {
         quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
         scorebean.setGamebean(this);
         addToDatabase(quizData.getScore(), seconds, type);
+        quiz = null;
         redirect("/duogames/score.xhtml");
     }
    
