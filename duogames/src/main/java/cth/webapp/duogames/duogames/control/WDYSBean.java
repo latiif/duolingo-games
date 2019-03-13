@@ -78,8 +78,10 @@ public class WDYSBean extends GameBean implements Serializable {
         if (quiz.get(quizData.getCurrQuestion()).check(super.getQuizData().getAnswer()))
         {
             FacesMessages.info("Correct!");
-            quizData.setNrCorrect(quizData.getNrCorrect() + 1);
-            quizData.setCurrQuestion(quizData.getCurrQuestion() + 1);
+            int x =  quizData.getNrCorrect() +1;
+            quizData.setNrCorrect(x);
+            int y = quizData.getCurrQuestion() + 1;
+            quizData.setCurrQuestion(y);
             if(quizData.getCurrQuestion() == 10){
                 endGame();
             }
