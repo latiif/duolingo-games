@@ -9,6 +9,7 @@ import cth.webapp.duogames.duogames.model.memory.Memory;
 import cth.webapp.duogames.duogames.model.memory.Pair;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
+import cth.webapp.duogames.duogames.view.QuizData;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -32,17 +33,15 @@ public class MemoryBean extends GameBean implements Serializable {
     @Inject
     private ScoreBean scorebean;
     
-    @Getter
-    private List<String> quiz;
-        
-    @Getter
-    private String time;
+    @Inject
+    private QuizData quizData;
     
+    
+    
+
     private Timestamp startTime;
     private Timestamp endTime;
     
-    @Getter
-    private int score;
 
     @Getter
     final private int nrOfPairs = 6;
@@ -63,11 +62,11 @@ public class MemoryBean extends GameBean implements Serializable {
     
     public List<String> getQuizInformation(UserBean ub) {
         
-        if (quiz == null) {
-            quiz = startGame();
+        if (quizData.getQuiz() == null) {
+            quizData.setQuiz(startGame());
         }
         
-        return quiz;
+        return quizData.getQuiz();
     }
     
     @Override
@@ -76,15 +75,15 @@ public class MemoryBean extends GameBean implements Serializable {
 
         startTime = new Timestamp(System.currentTimeMillis());
         pairs = new Memory(dict, 6).generatePairs();
-        quiz = new ArrayList<>();
+        quizData.setQuiz(new ArrayList<>());
         
         pairs.forEach(p -> 
                 {
-                    quiz.add(p.getWord());
-                    quiz.add(p.getAnswer());
+                    quizData.getQuiz().add(p.getWord());
+                    quizData.getQuiz().add(p.getAnswer());
                 });
-        Collections.shuffle(quiz);
-        return quiz;
+        Collections.shuffle(quizData.getQuiz());
+        return quizData.getQuiz();
     }
 
     @Override
@@ -92,16 +91,16 @@ public class MemoryBean extends GameBean implements Serializable {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime());
         long seconds = diff / 1000L;
-        time = TimeFormatter.format(seconds);
-        score = ScoreCalculator.calculateScore(nrOfPairs * 2, diff);
+        quizData.setTime(TimeFormatter.format(seconds));
+        quizData.setScore(ScoreCalculator.calculateScore(nrOfPairs * 2, diff));
         scorebean.setGamebean(this);
-        addToDatabase(score, seconds, type);
+        addToDatabase(quizData.getScore(), seconds, type);
         redirect("/duogames/score.xhtml");
     }
 
     @Override
     public void resetGame() {
-        quiz = null;
+        quizData.setQuiz(null);
         redirect("/duogames/play.xhtml");
     }
     

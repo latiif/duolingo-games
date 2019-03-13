@@ -5,7 +5,9 @@
  */
 package cth.webapp.duogames.duogames.view;
 
+import cth.webapp.duogames.duogames.model.IQuestion;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -44,6 +46,14 @@ public class QuizData implements Serializable {
     @Getter
     @Setter
     private int score;
+    
+    @Getter
+    @Setter
+    private List<String> quiz;
+    @Getter
+    @Setter
+    private List<IQuestion> iQuiz;
+    
     
     
     

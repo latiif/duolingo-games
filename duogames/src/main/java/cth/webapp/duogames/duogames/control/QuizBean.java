@@ -45,7 +45,6 @@ public class QuizBean extends GameBean implements Serializable {
     @Inject
     private QuizData quizData;
     
-    private List<IQuestion> quiz;
     
     @Getter
     private final String type = "quiz";
@@ -57,10 +56,10 @@ public class QuizBean extends GameBean implements Serializable {
     
 
     public List<IQuestion> getQuizInformation(UserBean ub) {
-        if (quiz == null) {
-            quiz = startGame();
+        if (quizData.getIQuiz() == null) {
+            quizData.setIQuiz(startGame());
         }
-        return quiz;
+        return quizData.getIQuiz();
     }
 
     @Override
@@ -76,12 +75,12 @@ public class QuizBean extends GameBean implements Serializable {
     
     @Override
     public void resetGame() {
-        quiz = null;
+        quizData.setIQuiz(null);
         redirect("/duogames/play.xhtml");
     }
     
     public void validate(){
-        if (quiz.get(quizData.getCurrQuestion()).check(quizData.getAnswer()))
+        if (quizData.getIQuiz().get(quizData.getCurrQuestion()).check(quizData.getAnswer()))
         {
             FacesMessages.info("Correct!");
             int x =  quizData.getNrCorrect() +1;
@@ -112,7 +111,7 @@ public class QuizBean extends GameBean implements Serializable {
         quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
         scorebean.setGamebean(this);
         addToDatabase(quizData.getScore(), seconds, type);
-        quiz = null;
+        quizData.setIQuiz(null);
         redirect("/duogames/score.xhtml");
     }
 
