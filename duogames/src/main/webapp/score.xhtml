@@ -9,8 +9,18 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
 
     <ui:define name="content"> 
+        
+        
+        <c:set var="gameid"  value="#{request.getParameter('gameid')}"/>
+
 
         <b:container id="center">
+            
+            <c:if test='#{not empty gameid}'>
+                <b:row>
+                    <p>You came in #{multi.getRanking(gameid, userData.username, quizData.score)}</p>
+                </b:row>
+            </c:if>
 
             <b:row>
                 <b:column col-xs="6" offset="3">

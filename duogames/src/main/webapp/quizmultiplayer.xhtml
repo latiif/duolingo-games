@@ -20,7 +20,6 @@
             </script>
         </c:if>
 
-
         <script type="text/javascript" src="js/quizmultiplayer.js"></script>
         <script>
             $(function () {
@@ -32,7 +31,7 @@
         <b:messages/>
 
         <b:container id="center">
-
+            #{quiz.gameid=gameid}
             <b:row>
                 <h4>Participants</h4>
                 <div  id="participants"></div>
@@ -58,10 +57,10 @@
             </b:row>
             <b:row>
                 <b:column span="6" id="status">
-                    <p>Correct answers: <span id="nrCorrect">#{quiz.nrCorrect}</span>/10</p>
+                    <p>Correct answers: <span id="nrCorrect">#{quizData.nrCorrect}</span>/10</p>
                 </b:column>
                 <b:column class="text-right" span="6" id="counter">
-                    <p>Current question: #{quiz.currQuestion + 1}/10</p>
+                    <p>Current question: #{quizData.currQuestion + 1}/10</p>
                 </b:column>
             </b:row>
 
