@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author nicla
  */
-@WebFilter("/index.xhtml")
+
 public class IndexFilter implements Filter {
 
     @Override

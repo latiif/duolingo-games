@@ -101,7 +101,6 @@ public class UserBean implements Serializable {
         user = null;
         isLoggedIn = false;
         api = null;
-        userData = null;
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/index.xhtml");
         } catch (IOException ex) {
