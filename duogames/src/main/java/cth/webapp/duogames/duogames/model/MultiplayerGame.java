@@ -40,9 +40,13 @@ public class MultiplayerGame {
             return false;
         }
         
+        
+        //Take out fair play criteria, for demo
+        /*
         if (abs(nrWords-this.nrWords)>50){
             return false;
-        }
+        }  
+        */
         
         participants.add(uid);
         return true;
