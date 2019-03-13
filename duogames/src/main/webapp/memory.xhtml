@@ -9,9 +9,10 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
     <ui:define name="content"> 
     <script type="text/javascript" src="js/memory.js"></script> 
+        <div id="overlay"></div>
+
         <h1>Find the pairs</h1>
         <c:set var="pairs" value="#{memory.getQuizInformation(user)}"/>
-        <h:inputHidden id="hidden" value="#{memory.quiz}" /> 
         <h:inputHidden id="nrof" value="#{memory.nrOfPairs}" /> 
         <h:inputHidden id="result" value="#{memory.result}" />
        
