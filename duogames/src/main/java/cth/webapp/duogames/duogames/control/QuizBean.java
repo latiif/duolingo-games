@@ -5,23 +5,16 @@
  */
 package cth.webapp.duogames.duogames.control;
 
-import cth.webapp.duogames.duogames.database.dao.GameDAO;
-import cth.webapp.duogames.duogames.database.entity.GameSession;
 import cth.webapp.duogames.duogames.model.IQuestion;
-import cth.webapp.duogames.duogames.model.listening.WhatDidYouSayQuiz;
 import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import cth.webapp.duogames.duogames.utils.TimeFormatter;
 import cth.webapp.duogames.duogames.view.QuizData;
-import java.io.IOException;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
