@@ -31,7 +31,7 @@ function turnCards(){
     openCards = -2;
     document.getElementById(card1_extra).getElementsByTagName('a')[1].click();
     document.getElementById(card2_extra).getElementsByTagName('a')[1].click();
-    sleep(750).then (() => {
+    sleep(800).then (() => {
         document.getElementById('overlay').setAttribute('style', 'display: none');
     })
 }

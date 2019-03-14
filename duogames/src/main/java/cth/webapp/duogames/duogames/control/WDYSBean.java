@@ -50,7 +50,7 @@ public class WDYSBean extends GameBean implements Serializable {
     @Getter
     private final String type = "wdys";
     
-     public List<IQuestion> getQuizInformation(UserBean ub) {
+     public List<IQuestion> initQuiz(UserBean ub) {
             if (quizData.getIQuiz() == null) {
             quizData.setIQuiz(startGame());
         }        

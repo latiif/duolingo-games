@@ -60,7 +60,7 @@ public class QuizBean extends GameBean implements Serializable {
     private Timestamp endTime;
     
 
-    public List<IQuestion> getQuizInformation(UserBean ub) {
+    public List<IQuestion> initQuiz(UserBean ub) {
         if (quizData.getIQuiz() == null) {
             quizData.setIQuiz(startGame());
         }

@@ -7,6 +7,7 @@ package cth.webapp.duogames.duogames.test;
 
 import cth.webapp.duogames.duogames.utils.ScoreCalculator;
 import static cth.webapp.duogames.duogames.utils.ScoreCalculator.calculateScore;
+import cth.webapp.duogames.duogames.utils.TimeFormatter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
@@ -34,7 +35,16 @@ public class UtilsTest {
     
     @Test
     public void testTime(){
-        assertEquals(1,1);
+        
+        assertEquals("00:00:01", TimeFormatter.format(1));
+        assertEquals("00:01:00", TimeFormatter.format(60));
+        assertEquals("00:01:12", TimeFormatter.format(72));
+        assertEquals("01:01:00", TimeFormatter.format(3660));
+        assertEquals("99:59:59", TimeFormatter.format(359999));
+        assertEquals("100:00:00", TimeFormatter.format(360000));
+        assertEquals("1000:00:00", TimeFormatter.format(3600000));
+        assertEquals("00:00:00", TimeFormatter.format(0));
+        
     }
     
     
