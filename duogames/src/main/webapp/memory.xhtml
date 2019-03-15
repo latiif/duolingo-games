@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -8,41 +7,37 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
     <ui:define name="content"> 
-    <script type="text/javascript" src="js/memory.js"></script> 
+        <script type="text/javascript" src="js/memory.js"></script> 
         <div id="overlay"></div>
-
         <h1>Find the pairs</h1>
         <c:set var="pairs" value="#{memory.getQuizInformation(user)}"/>
         <h:inputHidden id="nrof" value="#{memory.nrOfPairs}" /> 
         <h:inputHidden id="result" value="#{memory.result}" />
-       
         <b:remoteCommand name="callEquals" id="remoteCommand" parameters="word,answer" actionListener="#{memory.checkPair()}" update="result" oncomplete="handleResult()"/>
         <b:remoteCommand name="endGame" id="endCommand" actionListener="#{memory.endGame()}"/>
-
         <b:container id="container">
             <b:row id="row">
                 <b:column col-xs="10" offset="1" id="column">
                     <b:panel class="centered centered-text" id="panel">
-                            <c:forEach var="word" items="#{pairs}">
+                        <c:forEach var="word" items="#{pairs}">
                             <h:form style="display:inline-block; padding: 20px" id="m_#{pairs.indexOf(word)}">
                                 <b:carousel style="height:120px; width:240px" start-animation="false" interval="false" show-indicators="false"
                                             id="card_#{pairs.indexOf(word)}" disabled="false">
-                                        <b:carouselItem>
-                                          <img src="css/mem.jpg" alt="Card" />
-                                        </b:carouselItem>
-                                        <b:carouselItem>
-                                            <b:panel class="centered-text borderless" style="height:120px; width:240px">
-                                                <span class="card" id="word_#{pairs.indexOf(word)}">#{word}</span>
-                                            </b:panel>
-                                        </b:carouselItem>
-                                 </b:carousel> 
+                                    <b:carouselItem>
+                                        <img src="css/mem.jpg" alt="Card" />
+                                    </b:carouselItem>
+                                    <b:carouselItem>
+                                        <b:panel class="centered-text borderless" style="height:120px; width:240px">
+                                            <span class="card" id="word_#{pairs.indexOf(word)}">#{word}</span>
+                                        </b:panel>
+                                    </b:carouselItem>
+                                </b:carousel> 
                             </h:form>
                         </c:forEach>
                     </b:panel>
                 </b:column>
             </b:row>
         </b:container>   
-
     </ui:define>
 </ui:composition>
 

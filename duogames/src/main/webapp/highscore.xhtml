@@ -1,54 +1,52 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
-
     <ui:define name="content"> 
         <h1>High Score</h1>
         <b:container>
             <b:row>
                 <b:column col-xs="8" offset="2">
                     <b:row>
-                    <b:panel title="Quiz" collapsible="false">
-                        <h:form>
-                            <b:dataTable value="#{gameData.getHighScore('quiz')}"
-                                         var="game" searching="false" paginated="false" info="false" border="false" striped="false">
-                                <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
-                                <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
-                                <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
-                            </b:dataTable>
-                      </h:form>
-                    </b:panel>
-                        </b:row>
-                    <b:row>
-                    <b:panel title="What did you say?" collapsible="false">
-                       <h:form>
-                            <b:dataTable value="#{gameData.getHighScore('wdys')}"
-                                         var="game" searching="false" paginated="false" info="false" border="false" striped="false">
-                                <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
-                                <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
-                                <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
-                            </b:dataTable>
-                      </h:form>
-                    </b:panel>
-                    <b:row>
+                        <b:panel title="Quiz" collapsible="false">
+                            <h:form>
+                                <b:dataTable value="#{gameData.getHighScore('quiz')}"
+                                             var="game" searching="false" paginated="false" info="false" border="false" striped="false">
+                                    <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
+                                    <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
+                                    <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
+                                </b:dataTable>
+                            </h:form>
+                        </b:panel>
                     </b:row>
-                    <b:panel title="Find the pairs" collapsible="false">
-                         <h:form>
-                            <b:dataTable value="#{gameData.getHighScore('pair')}"
-                                         var="game" searching="false" paginated="false" info="false" border="false" striped="false">
-                                <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
-                                <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
-                                <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
-                            </b:dataTable>
-                      </h:form>
-                    </b:panel>
+                    <b:row>
+                        <b:panel title="What did you say?" collapsible="false">
+                            <h:form>
+                                <b:dataTable value="#{gameData.getHighScore('wdys')}"
+                                             var="game" searching="false" paginated="false" info="false" border="false" striped="false">
+                                    <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
+                                    <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
+                                    <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
+                                </b:dataTable>
+                            </h:form>
+                        </b:panel>
+                        <b:row>
                         </b:row>
+                        <b:panel title="Find the pairs" collapsible="false">
+                            <h:form>
+                                <b:dataTable value="#{gameData.getHighScore('pair')}"
+                                             var="game" searching="false" paginated="false" info="false" border="false" striped="false">
+                                    <b:dataTableColumn value="#{game.userid.username}" label="User" orderable="false"/>
+                                    <b:dataTableColumn value="#{game.timeInSeconds}" label="Time" orderable="false"/>
+                                    <b:dataTableColumn value="#{game.score}" order="desc" orderable="false"/>
+                                </b:dataTable>
+                            </h:form>
+                        </b:panel>
+                    </b:row>
                 </b:column>
             </b:row>
         </b:container>   

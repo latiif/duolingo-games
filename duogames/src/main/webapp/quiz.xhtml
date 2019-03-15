@@ -1,29 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">  
-
-
     <ui:define name="content"> 
         <h1>Quiz</h1>
         <b:messages/>
-        
-
-        
         <b:container id="center">
-
             <c:set var="questions" value="#{quiz.initQuiz(user)}"/>
-
-
             <b:row id="info">
                 <b:growl globalOnly="true"
-                    showDetail="true"
-                    severity="info" placement-from="bottom" placement-align="center"/>
+                         showDetail="true"
+                         severity="info" placement-from="bottom" placement-align="center"/>
             </b:row>
             <b:row>
                 <b:column span="6" id="status">
@@ -33,7 +24,6 @@
                     <p>Current question: #{quizData.currQuestion + 1}/10</p>
                 </b:column>
             </b:row>
-
             <b:row>
                 <b:column>
                     <b:form>
@@ -51,7 +41,6 @@
                                         </b:radiobutton>
                                     </b:panel>
                                 </b:carouselItem>
-
                             </c:forEach>
                             <b:carouselControl direction="right" ajax="true">
                                 <b:commandButton value="Next"
@@ -60,12 +49,10 @@
                                                  look="success"
                                                  oncomplete="$('.questionsCarousel').carousel('next');$('.questionsCarousel').carousel('pause'); return false;"/>
                             </b:carouselControl>
-
                         </b:carousel>
                     </b:form>
                 </b:column>
             </b:row>
         </b:container>   
-
     </ui:define>
 </ui:composition>
