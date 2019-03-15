@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -37,6 +38,7 @@ public class UserBean implements Serializable {
     private UserData userData;
 
     @Getter
+    @Setter
     private DuoApi api;
     @Getter
     private Boolean isLoggedIn = false;
