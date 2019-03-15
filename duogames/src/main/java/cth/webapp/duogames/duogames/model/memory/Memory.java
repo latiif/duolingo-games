@@ -20,23 +20,21 @@ import java.util.stream.Collectors;
  * @author nicla
  */
 public class Memory extends Game {
-    
+
     private Map<String, List<String>> mDict;
     private int cards;
-
 
     public Memory(Map<String, List<String>> dict, int cards) {
         this.mDict = dict;
         this.cards = cards;
     }
-    
+
 //    public List<String> generatePair(){
 //       List<String> cards = new ArrayList<>();
 //        
 //        return cards;
 //    }
-    
-     public List<Pair> generatePairs() {
+    public List<Pair> generatePairs() {
         List<Pair> result = new LinkedList<>();
 
         Map<String, List<String>> cleanDict = cleanDict(mDict);
@@ -60,5 +58,5 @@ public class Memory extends Game {
         Collections.shuffle(result);
         return result;
     }
-    
+
 }

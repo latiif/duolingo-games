@@ -26,42 +26,37 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter("/index.xhtml")
 public class IndexFilter implements Filter {
+
     @Inject
     UserBean user;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        
+
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if(user != null){
-            if(!user.getIsLoggedIn()){
-                   chain.doFilter(request, response);
-            }
-            else{
-            HttpServletRequest httpreq = (HttpServletRequest) request;
-            HttpServletResponse httpres = (HttpServletResponse) response; 
+        if (user != null) {
+            if (!user.getIsLoggedIn()) {
+                chain.doFilter(request, response);
+            } else {
+                HttpServletRequest httpreq = (HttpServletRequest) request;
+                HttpServletResponse httpres = (HttpServletResponse) response;
 
-            httpres.sendRedirect(httpreq.getContextPath() + "/play.xhtml");
+                httpres.sendRedirect(httpreq.getContextPath() + "/play.xhtml");
             }
-        }
-        else{
+        } else {
             chain.doFilter(request, response);
         }
-        
+
         //httpreq.get
         //httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
-        
-        
-        
     }
-    
 
     @Override
     public void destroy() {
-        
+
     }
-    
+
 }

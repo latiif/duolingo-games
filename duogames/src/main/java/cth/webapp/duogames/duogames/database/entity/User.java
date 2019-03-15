@@ -30,8 +30,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    ,
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
+    ,
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")})
 public class User implements Serializable {
 
@@ -57,7 +59,7 @@ public class User implements Serializable {
     public User(String username) {
         this.username = username;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -106,5 +108,5 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "cth.webapp.duogames.duogames.database.entity.User[ id=" + id + " ]";
-    } 
+    }
 }

@@ -18,7 +18,6 @@ public class Pair implements IQuestion {
 //
 //        return options;
 //    }
-
     public Pair(String word, String answer) {
         this.word = word;
         this.answer = answer;
@@ -28,9 +27,9 @@ public class Pair implements IQuestion {
     public boolean check(String answer) {
         return answer.toLowerCase().equals(word.toLowerCase());
     }
-    
-    public boolean equals(Pair newPair){
-        return (this.answer.equalsIgnoreCase(newPair.getAnswer()) 
+
+    public boolean equals(Pair newPair) {
+        return (this.answer.equalsIgnoreCase(newPair.getAnswer())
                 && this.word.equalsIgnoreCase(newPair.getWord()));
     }
 

@@ -31,10 +31,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "gamesessions")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GameSession.findAll", query = "SELECT g FROM GameSession g"),
-    @NamedQuery(name = "GameSession.findById", query = "SELECT g FROM GameSession g WHERE g.id = :id"),
-    @NamedQuery(name = "GameSession.findByTime", query = "SELECT g FROM GameSession g WHERE g.time = :time"),
-    @NamedQuery(name = "GameSession.findByScore", query = "SELECT g FROM GameSession g WHERE g.score = :score"),
+    @NamedQuery(name = "GameSession.findAll", query = "SELECT g FROM GameSession g")
+    ,
+    @NamedQuery(name = "GameSession.findById", query = "SELECT g FROM GameSession g WHERE g.id = :id")
+    ,
+    @NamedQuery(name = "GameSession.findByTime", query = "SELECT g FROM GameSession g WHERE g.time = :time")
+    ,
+    @NamedQuery(name = "GameSession.findByScore", query = "SELECT g FROM GameSession g WHERE g.score = :score")
+    ,
     @NamedQuery(name = "GameSession.findByType", query = "SELECT g FROM GameSession g WHERE g.type = :type")})
 public class GameSession implements Serializable {
 
@@ -74,7 +78,7 @@ public class GameSession implements Serializable {
         this.score = score;
         this.type = type;
     }
-    
+
     public GameSession(BigInteger time, int score, String type, User user) {
         this.time = time;
         this.score = score;
@@ -121,8 +125,8 @@ public class GameSession implements Serializable {
     public void setUserid(User userid) {
         this.userid = userid;
     }
-    
-    public String getTimeInSeconds(){
+
+    public String getTimeInSeconds() {
         return TimeFormatter.format(time.longValue());
     }
 
@@ -150,5 +154,5 @@ public class GameSession implements Serializable {
     public String toString() {
         return "cth.webapp.duogames.duogames.database.entity.GameSession[ id=" + id + " ]";
     }
-    
+
 }

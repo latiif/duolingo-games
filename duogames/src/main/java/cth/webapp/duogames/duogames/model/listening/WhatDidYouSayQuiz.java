@@ -34,9 +34,9 @@ public class WhatDidYouSayQuiz extends Game {
         List<IQuestion> result = new LinkedList<>();
 
         AudioMapper am = AudioMapper.getInstance();
-        
+
         String currLang = api.getCurrentLanguage();
-        
+
         List<String> words = mDict
                 .keySet()
                 .stream()
@@ -48,9 +48,8 @@ public class WhatDidYouSayQuiz extends Game {
         Collections.shuffle(words);
 
         return words.stream()
-               
-                .map(w -> new ListeningQuestion(am.getAudioUrl(w, currLang),w))
+                .map(w -> new ListeningQuestion(am.getAudioUrl(w, currLang), w))
                 .collect(Collectors.toList());
     }
-    
+
 }

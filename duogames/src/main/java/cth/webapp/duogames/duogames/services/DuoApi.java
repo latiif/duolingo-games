@@ -135,11 +135,10 @@ public class DuoApi {
             Logger.getLogger(DuoApi.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-     
         Gson gson = new Gson();
         JsonReader reader = new JsonReader(new StringReader(raw));
         reader.setLenient(true);
-       
+
         return gson.fromJson(reader, JsonObject.class);
 
     }
@@ -486,7 +485,7 @@ public class DuoApi {
         if (from == null) {
             from = getCurrentLanguage();
         }
-             
+
         String url = "https://d2.duolingo.com/api/1/dictionary/hints/%1$s/%2$s?tokens=%3$s";
         url = String.format(url, from, to, getListFormatted(words));
 
@@ -565,28 +564,28 @@ public class DuoApi {
      */
     public Map<String, List<String>> getDictionaryOfKnownWords(String abbrFrom, String abbrTo) {
 
-
         Map<String, List<String>> res
                 = getTranslations(getKnownWords(abbrTo), abbrTo, abbrFrom);
 
         return res;
     }
 
-  
     /**
      * Extracts useful profile information from user
+     *
      * @return an instnace of DuollingoProfileInfo
      * @see DuolingoProfileInfo
-     */  
-    public DuolingoProfileInfo getProfileInfo(){
+     */
+    public DuolingoProfileInfo getProfileInfo() {
         return new DuolingoProfileInfo(userData);
     }
-    
+
     private class MyDto {
+
         Map<String, String> headers;
         Map<String, String> args;
         String origin;
         String url;
     }
-    
+
 }

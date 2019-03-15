@@ -25,36 +25,32 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter("/score.xhtml")
 public class ScoreFilter implements Filter {
+
     @Inject
     ScoreBean score;
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        
+
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpreq = (HttpServletRequest) request;
-        HttpServletResponse httpres = (HttpServletResponse) response; 
+        HttpServletResponse httpres = (HttpServletResponse) response;
         HttpSession ses = httpreq.getSession(false);
-        if(score.getGamebean() != null)
+        if (score.getGamebean() != null) {
             chain.doFilter(request, response);
-        
-        else{
+        } else {
             httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
         }
-        
+
         //httpreq.get
         //httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
-        
-        
-        
     }
-    
 
     @Override
     public void destroy() {
-        
+
     }
 }

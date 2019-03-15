@@ -10,8 +10,8 @@ package cth.webapp.duogames.duogames.utils;
  * @author stina
  */
 public class TimeFormatter {
-    
-    public static String format(long time){
+
+    public static String format(long time) {
         return String.format("%02d:%02d:%02d", time / 3600, (time % 3600) / 60, time % 60);
     }
 }

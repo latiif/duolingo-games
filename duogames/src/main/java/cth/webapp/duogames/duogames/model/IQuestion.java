@@ -10,7 +10,7 @@ package cth.webapp.duogames.duogames.model;
  * @author stina
  */
 public interface IQuestion {
-    
+
     public boolean check(String answer);
-    
+
 }

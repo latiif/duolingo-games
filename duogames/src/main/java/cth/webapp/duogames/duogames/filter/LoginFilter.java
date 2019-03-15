@@ -23,40 +23,35 @@ import javax.servlet.http.HttpSession;
  *
  * @author nicla
  */
-
 @WebFilter("/userprofile.xhtml")
 public class LoginFilter implements Filter {
+
     @Inject
     UserBean user;
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        
+
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpreq = (HttpServletRequest) request;
-        HttpServletResponse httpres = (HttpServletResponse) response; 
+        HttpServletResponse httpres = (HttpServletResponse) response;
         HttpSession ses = httpreq.getSession(false);
-        if(user.getIsLoggedIn())
-        chain.doFilter(request, response);
-        
-        else{
+        if (user.getIsLoggedIn()) {
+            chain.doFilter(request, response);
+        } else {
             httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
         }
-        
+
         //httpreq.get
         //httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
-        
-        
-        
     }
-    
 
     @Override
     public void destroy() {
-        
+
     }
-    
+
 }

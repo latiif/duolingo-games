@@ -12,15 +12,15 @@ package cth.webapp.duogames.duogames.utils;
 public class ScoreCalculator {
 
     /**
-     * 
+     *
      * @param correct
      * @param time
-     * @return 
+     * @return
      */
     public static int calculateScore(int correct, long time) {
         int score = correct * 100;
         score += Math.max((90000 - time) / 100, 0);
         return score;
     }
-    
+
 }

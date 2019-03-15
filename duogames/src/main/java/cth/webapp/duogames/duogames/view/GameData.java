@@ -18,27 +18,26 @@ import javax.inject.Named;
  *
  * @author stina
  */
-@Named(value="gameData")
+@Named(value = "gameData")
 @SessionScoped
 public class GameData implements Serializable {
-    
+
     @EJB
     private GameDAO gameDAO;
-    
+
     /*public List<Gamesession> getHighScore(){
         List<Gamesession> games = gameDAO.findRange(10);
         return games;
     }*/
-    
-    public List<GameSession>getHighScore(String type){
+    public List<GameSession> getHighScore(String type) {
         return gameDAO.findHighestScores(10, type);
     }
-    
-    public String getQuickestGame(){
+
+    public String getQuickestGame() {
         return TimeFormatter.format(gameDAO.findQuickestTime().longValue());
     }
-    
-    public int getTotalGames(){
+
+    public int getTotalGames() {
         return gameDAO.findTotalGames();
     }
 }

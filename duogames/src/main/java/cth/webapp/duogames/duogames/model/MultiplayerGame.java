@@ -47,12 +47,12 @@ public class MultiplayerGame {
         SortedSet<Integer> values = new TreeSet<>(scores.values());
         int ranking = 1;
         for (Integer value : values) {
-            if (scores.getOrDefault(userid,0)==value){
+            if (scores.getOrDefault(userid, 0) == value) {
                 return ranking;
             }
             ranking++;
         }
-        
+
         return 0;
     }
 

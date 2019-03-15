@@ -18,42 +18,38 @@ import lombok.Setter;
  * @author stina
  */
 @SessionScoped
-@Named(value="quizData")
+@Named(value = "quizData")
 public class QuizData implements Serializable {
-    
+
     @Setter
     @Getter
     private String answer = "";
-   
+
     @Getter
     @Setter
     private int totalQuestions;
-    
+
     @Getter
     @Setter
     private int currQuestion;
-    
+
     @Getter
     @Setter
     private int nrCorrect;
-    
+
     @Getter
     @Setter
     private String time;
-    
+
     @Getter
     @Setter
     private int score;
-    
+
     @Getter
     @Setter
     private List<String> quiz;
     @Getter
     @Setter
     private List<IQuestion> iQuiz;
-    
-    
-    
-    
-    
+
 }

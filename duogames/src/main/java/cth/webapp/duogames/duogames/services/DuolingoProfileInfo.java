@@ -58,7 +58,7 @@ public class DuolingoProfileInfo {
 
         String url = safeRetrieve(userData, "avatar", "//s3.amazonaws.com/duoli…images/avatar/default_2");
         this.imgurl = "https:" + url + "/xlarge";
-        
+
         this.languages = getLanguages(true, userData);
 
     }

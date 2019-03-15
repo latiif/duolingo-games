@@ -12,23 +12,22 @@ import cth.webapp.duogames.duogames.model.IQuestion;
  * @author latiif
  */
 public class ListeningQuestion implements IQuestion {
-    
+
     private String wordUrl;
     private String correctAnswer;
-    
-    
-    public ListeningQuestion(String wordUrl, String answer){
+
+    public ListeningQuestion(String wordUrl, String answer) {
         this.wordUrl = wordUrl;
         this.correctAnswer = answer;
     }
-    
-    public String getUrl(){
+
+    public String getUrl() {
         return wordUrl;
     }
-    
+
     @Override
-    public boolean check(String answer){
+    public boolean check(String answer) {
         return answer.toLowerCase().equals(correctAnswer.toLowerCase());
     }
-    
+
 }

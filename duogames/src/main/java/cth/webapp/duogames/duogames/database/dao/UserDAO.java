@@ -18,17 +18,19 @@ import javax.persistence.criteria.Root;
  */
 @Stateless
 public class UserDAO extends AbstractDAO<User> {
-   
+
     public UserDAO() {
         super(User.class);
     }
-    
+
     /**
-     * Searches the database for a user with the supplied username. Returns null if none is found.
+     * Searches the database for a user with the supplied username. Returns null
+     * if none is found.
+     *
      * @param username
-     * @return 
+     * @return
      */
-    public User findUserByUsername(String username){
+    public User findUserByUsername(String username) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> query = cb.createQuery(User.class);
         Root<User> root = query.from(User.class);

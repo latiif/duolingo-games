@@ -18,9 +18,10 @@ import javax.inject.Named;
  *
  * @author stina
  */
-@Named(value="userData")
+@Named(value = "userData")
 @SessionScoped
 public class UserData implements Serializable {
+
     @Getter
     @Setter
     private String username = "";
@@ -28,11 +29,11 @@ public class UserData implements Serializable {
     @Getter
     @Setter
     private String password = "";
-    
+
     @Inject
     private AchievementTracker achieve;
-    
-    public Map<String, String> getAchievements(){
+
+    public Map<String, String> getAchievements() {
         return achieve.getAchievements();
     }
 }
