@@ -8,18 +8,16 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
     <h:outputStylesheet library="css" name="css/main.css"  />
     <ui:define name="content"> 
-        <!--<script src="js/jQuery.js"></script>-->
         <script src="js/index.js"></script>
         <script>
-            $(document).ready(function(){
-                $('.login').click(function(){
+            $(document).ready(function () {
+                $('.login').click(function () {
                     $('.loading').css("display", "block")
 
-                    });
+                });
             });
-            
-        </script>
 
+        </script>
         <c:if test="#{user.isLoggedIn}">
             #{user.redirect()}
         </c:if>
@@ -50,6 +48,5 @@
                 <p>You need a Duolingo account to use this website, register for one <a href="https://www.duolingo.com/register" target="_blank">here</a>.</p>
             </b:row>
         </b:container>   
-
     </ui:define>
 </ui:composition>
