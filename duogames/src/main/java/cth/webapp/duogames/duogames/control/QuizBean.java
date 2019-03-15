@@ -30,8 +30,6 @@ import org.ocpsoft.common.util.Strings;
 @SessionScoped
 public class QuizBean extends GameBean implements Serializable {
     
-    @Inject
-    private UserBean userBean;
     
     @Inject
     private ScoreBean scorebean;
@@ -62,7 +60,7 @@ public class QuizBean extends GameBean implements Serializable {
 
     @Override
     public List<IQuestion> startGame() {
-        Map<String, List<String>> dict = userBean.getApi().getDictionaryOfKnownWords("en", userBean.getApi().getCurrentLanguage());
+        Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
         quizData.setCurrQuestion(0);
         quizData.setTotalQuestions(10);
         quizData.setNrCorrect(0);
