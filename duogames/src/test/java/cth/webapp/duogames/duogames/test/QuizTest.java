@@ -9,6 +9,7 @@ import cth.webapp.duogames.duogames.control.QuizBean;
 import cth.webapp.duogames.duogames.control.UserBean;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.model.quiz.Question;
+import cth.webapp.duogames.duogames.model.quiz.Quiz;
 import cth.webapp.duogames.duogames.services.DuoApi;
 import cth.webapp.duogames.duogames.view.QuizData;
 import java.util.ArrayList;
@@ -67,14 +68,35 @@ public class QuizTest {
         assertFalse(quizl.check("c"));
         assertFalse(quizl.check("d"));
         
+        quizl = new Question("test",wrong, "Б");
+        assertTrue(quizl.check("Б"));
+        assertFalse(quizl.check("test"));
+        assertFalse(quizl.check("a"));
+        assertFalse(quizl.check("c"));
+        assertFalse(quizl.check("d"));
+        
+        
         
         //System.out.println(api.getDictionaryOfKnownWords("en", api.getCurrentLanguage()));
         
     }
 
     @Test
-    public void testValidate(){
+    public void testGenerate(){
+        Quiz q = new Quiz(api.getDictionaryOfKnownWords("en", api.getCurrentLanguage()), 10, 4);
         
+        List<Question> wrong = (List<Question>)(List<?>) q.generateQuestions();
+        
+        for(Question quest: wrong){
+            List<String> wrongWords = quest.getWrongAnswers();
+            List<String> rWords = quest.getOptions();
+            assertFalse(wrongWords.contains(quest.getRightAnswer()));
+            assertTrue(rWords.contains(quest.getRightAnswer()));
+            for(String w: wrongWords){
+                assertFalse(w.equalsIgnoreCase(quest.getRightAnswer()));
+            }
+           
+        }
 
     }
 
