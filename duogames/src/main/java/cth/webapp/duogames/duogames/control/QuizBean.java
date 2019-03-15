@@ -26,31 +26,26 @@ import org.ocpsoft.common.util.Strings;
  *
  * @author latiif
  */
-@Named(value="quiz")
+@Named(value = "quiz")
 @SessionScoped
 public class QuizBean extends GameBean implements Serializable {
-    
-    
+
     @Inject
     private ScoreBean scorebean;
-    
+
     @Inject
     @Setter
     private QuizData quizData;
-    
-    
+
     @Getter
     private final String type = "quiz";
-    
+
     @Getter
     @Setter
     private String gameid;
-    
-    
-    
+
     private Timestamp startTime;
     private Timestamp endTime;
-    
 
     public List<IQuestion> initQuiz(UserBean ub) {
         if (quizData.getIQuiz() == null) {
@@ -69,7 +64,7 @@ public class QuizBean extends GameBean implements Serializable {
         startTime = new Timestamp(System.currentTimeMillis());
         return new Quiz(dict, 10, 3).generateQuestions();
     }
-    
+
     @Override
     public void resetGame() {
 
@@ -78,27 +73,25 @@ public class QuizBean extends GameBean implements Serializable {
 
         redirect("/duogames/play.xhtml");
     }
-    
-    public void validate(){     
-        if (quizData.getIQuiz().get(quizData.getCurrQuestion()).check(quizData.getAnswer()))
-        {
+
+    public void validate() {
+        if (quizData.getIQuiz().get(quizData.getCurrQuestion()).check(quizData.getAnswer())) {
             FacesMessages.info("Correct!");
-            int x =  quizData.getNrCorrect() +1;
+            int x = quizData.getNrCorrect() + 1;
             quizData.setNrCorrect(x);
             int y = quizData.getCurrQuestion() + 1;
             quizData.setCurrQuestion(y);
-            if(quizData.getCurrQuestion() == 10){
+            if (quizData.getCurrQuestion() == 10) {
                 endGame();
             }
-        }
-        else{
+        } else {
             FacesMessages.error("Wrong");
-            
-            int x =  quizData.getCurrQuestion() +1;
+
+            int x = quizData.getCurrQuestion() + 1;
             quizData.setCurrQuestion(x);
-            if(quizData.getCurrQuestion() == 10){
+            if (quizData.getCurrQuestion() == 10) {
                 endGame();
-            } 
+            }
         }
     }
 
@@ -113,10 +106,11 @@ public class QuizBean extends GameBean implements Serializable {
         addToDatabase(quizData.getScore(), seconds, type);
 
         quizData.setIQuiz(null);
-        if (Strings.isNullOrEmpty(gameid))
+        if (Strings.isNullOrEmpty(gameid)) {
             redirect("/duogames/score.xhtml");
-        else
-            redirect("/duogames/score.xhtml?gameid="+gameid);
+        } else {
+            redirect("/duogames/score.xhtml?gameid=" + gameid);
+        }
 
     }
 

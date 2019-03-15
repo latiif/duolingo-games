@@ -28,16 +28,15 @@ public class MultiplayerBean {
     public MultiplayerBean() {
         games = new HashMap<>();
     }
-    
-    public boolean tryGame(String gameid, String uid, int nrWords, String language){
-        
+
+    public boolean tryGame(String gameid, String uid, int nrWords, String language) {
+
         Boolean canJoin = joinGame(gameid, uid, nrWords, language);
         Boolean canCreate = createGame(gameid, uid, nrWords, language);
         Boolean canStart = canJoin | canCreate;
-        
-        
+
         return canStart;
-        
+
     }
 
     private boolean createGame(String gameid, String uid, int nrWords, String language) {
@@ -63,15 +62,15 @@ public class MultiplayerBean {
         return " ";
     }
 
-    public int getRanking(String gameid,String userid,Integer score){
+    public int getRanking(String gameid, String userid, Integer score) {
         MultiplayerGame game = games.get(gameid);
-        
+
         game.addScore(userid, score);
-        
+
         return game.getRanking(userid);
-        
+
     }
-    
+
     private void redirect(String url) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
@@ -80,7 +79,7 @@ public class MultiplayerBean {
         }
     }
 
-    public String generateGameID(){
+    public String generateGameID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
 }

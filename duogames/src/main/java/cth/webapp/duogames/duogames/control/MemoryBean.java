@@ -27,27 +27,24 @@ import lombok.Setter;
  *
  * @author nicla
  */
-@Named(value="memory")
+@Named(value = "memory")
 @SessionScoped
-public class MemoryBean extends GameBean implements Serializable {    
+public class MemoryBean extends GameBean implements Serializable {
+
     @Inject
     private ScoreBean scorebean;
-    
+
     @Inject
     private QuizData quizData;
-    
-    
-    
 
     private Timestamp startTime;
     private Timestamp endTime;
-    
 
     @Getter
     final private int nrOfPairs = 6;
     @Getter
     final private String type = "pair";
-    
+
     @Getter
     private List<Pair> pairs;
     @Getter
@@ -58,30 +55,29 @@ public class MemoryBean extends GameBean implements Serializable {
     private String answer = "";
     @Getter
     private boolean result;
-    
-    
+
     public List<String> getQuizInformation(UserBean ub) {
-        
+
         if (quizData.getQuiz() == null) {
             quizData.setQuiz(startGame());
         }
-        
+
         return quizData.getQuiz();
     }
-    
+
     @Override
-    public List<String> startGame(){
+    public List<String> startGame() {
         Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
 
         startTime = new Timestamp(System.currentTimeMillis());
         pairs = new Memory(dict, 6).generatePairs();
         quizData.setQuiz(new ArrayList<>());
-        
-        pairs.forEach(p -> 
-                {
-                    quizData.getQuiz().add(p.getWord());
-                    quizData.getQuiz().add(p.getAnswer());
-                });
+
+        pairs.forEach(p
+                -> {
+            quizData.getQuiz().add(p.getWord());
+            quizData.getQuiz().add(p.getAnswer());
+        });
         Collections.shuffle(quizData.getQuiz());
         return quizData.getQuiz();
     }
@@ -103,18 +99,18 @@ public class MemoryBean extends GameBean implements Serializable {
         quizData.setQuiz(null);
         redirect("/duogames/play.xhtml");
     }
-    
-    public void checkPair(){
+
+    public void checkPair() {
         System.out.println("in java bean");
         FacesContext context = FacesContext.getCurrentInstance();
         word = context.getExternalContext().getRequestParameterMap().get("word");
         answer = context.getExternalContext().getRequestParameterMap().get("answer");
-        for(Pair oldPair : pairs){
-            if(oldPair.getWord().equalsIgnoreCase(word)){
+        for (Pair oldPair : pairs) {
+            if (oldPair.getWord().equalsIgnoreCase(word)) {
                 Pair p = new Pair(word, answer);
                 result = oldPair.equals(p);
                 return;
-            } else if(oldPair.getAnswer().equalsIgnoreCase(answer)){
+            } else if (oldPair.getAnswer().equalsIgnoreCase(answer)) {
                 Pair p = new Pair(word, answer);
                 result = oldPair.equals(p);
                 return;

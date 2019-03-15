@@ -15,13 +15,12 @@ import lombok.Setter;
  *
  * @author nicla
  */
-@Named(value="scorebean")
+@Named(value = "scorebean")
 @SessionScoped
 public class ScoreBean implements Serializable {
-    
-    
+
     @Setter
     @Getter
     GameBean gamebean;
-    
+
 }

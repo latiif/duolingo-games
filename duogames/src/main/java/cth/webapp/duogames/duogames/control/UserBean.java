@@ -26,14 +26,14 @@ import lombok.Setter;
  *
  * @author latiif
  */
-@Named(value="user")
+@Named(value = "user")
 //@RequestScoped
 @SessionScoped
 public class UserBean implements Serializable {
 
     @EJB
     private UserDAO userDAO;
-    
+
     @Inject
     private UserData userData;
 
@@ -42,7 +42,7 @@ public class UserBean implements Serializable {
     private DuoApi api;
     @Getter
     private Boolean isLoggedIn = false;
-    
+
     @Getter
     private User user;
 
@@ -60,17 +60,16 @@ public class UserBean implements Serializable {
         if (isLoggedIn) {
             createUser();
             redirect();
-            
-        }
-        else{
+
+        } else {
             wrongpass();
         }
-            
+
     }
-   
+
     public void redirect() {
         try {
-            
+
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/play.xhtml");
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -80,12 +79,12 @@ public class UserBean implements Serializable {
     private void createUser() {
         user = new User(userData.getUsername());
         User tmp = userDAO.findUserByUsername(user.getUsername());
-        if(tmp == null){
+        if (tmp == null) {
             userDAO.add(user);
         } else {
             user.setId(tmp.getId());
             System.out.println(user.getId());
-                    
+
         }
     }
 
@@ -93,13 +92,13 @@ public class UserBean implements Serializable {
         try {
             FacesContext.getCurrentInstance().getExternalContext().addResponseHeader("LoginError", "Wrong username or password");
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/index.xhtml?error=pass");
-            
+
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
-    
-    public void logout(){
+
+    public void logout() {
         user = null;
         isLoggedIn = false;
         api = null;
@@ -109,9 +108,9 @@ public class UserBean implements Serializable {
             Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //TODO Find a better place for this function
-    public boolean hasSupportForWDYS(){
+    public boolean hasSupportForWDYS() {
         return AudioMapper.getInstance().isValidLanguage(api.getCurrentLanguage());
     }
 }
