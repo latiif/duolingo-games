@@ -9,6 +9,7 @@ import cth.webapp.duogames.duogames.control.QuizBean;
 import cth.webapp.duogames.duogames.control.UserBean;
 import cth.webapp.duogames.duogames.model.IQuestion;
 import cth.webapp.duogames.duogames.services.DuoApi;
+import cth.webapp.duogames.duogames.view.QuizData;
 import java.util.List;
 import javax.ejb.Init;
 import static junit.framework.Assert.assertEquals;
@@ -26,6 +27,7 @@ public class QuizTest {
     private QuizBean quiz = new QuizBean();
      List<IQuestion> quizList;
      UserBean user;
+     QuizData quizData;
      DuoApi api = new DuoApi("llusx", "NO_PASSWORD_NEEDED");
      
     @Init
@@ -33,12 +35,18 @@ public class QuizTest {
         user = new UserBean();
         user.signin();
         user.setApi(api);
-        
-       quizList = quiz.initQuiz(user);
+        quizData = new QuizData();
+        quiz.setQuizData(quizData);
+        quizList = quiz.startGame();
     }
     @Test 
     public void getDictionary(){
-        
+        user = new UserBean();
+        //user.signin();
+        user.setApi(api);
+        quizData = new QuizData();
+        quiz.setQuizData(quizData);
+        quizList = quiz.startGame();
         quiz.validate();
         
         System.out.println(api.getDictionaryOfKnownWords("en", api.getCurrentLanguage()));

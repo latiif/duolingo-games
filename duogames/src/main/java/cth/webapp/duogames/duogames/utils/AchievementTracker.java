@@ -27,7 +27,6 @@ public class AchievementTracker implements Serializable {
     @Inject
     UserBean userBean;
     
-    private static AchievementTracker INSTANCE = null;
     private Map<String, String> achievements;
     
     @PostConstruct
@@ -51,12 +50,6 @@ public class AchievementTracker implements Serializable {
         }
     }
     
-    public static AchievementTracker getInstance() {
-        if (INSTANCE == null){
-            INSTANCE = new AchievementTracker();
-        }
-        return INSTANCE;
-    }
     
     public Map<String, String> getAchievements(){
         return achievements;

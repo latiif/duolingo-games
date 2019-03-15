@@ -35,6 +35,7 @@ public class QuizBean extends GameBean implements Serializable {
     private ScoreBean scorebean;
     
     @Inject
+    @Setter
     private QuizData quizData;
     
     
@@ -78,48 +79,5 @@ public class QuizBean extends GameBean implements Serializable {
         redirect("/duogames/play.xhtml");
     }
     
-    public void validate(){
-
-        
-        if (quizData.getIQuiz().get(quizData.getCurrQuestion()).check(quizData.getAnswer()))
-
-        {
-            FacesMessages.info("Correct!");
-            int x =  quizData.getNrCorrect() +1;
-            quizData.setNrCorrect(x);
-            int y = quizData.getCurrQuestion() + 1;
-            quizData.setCurrQuestion(y);
-            if(quizData.getCurrQuestion() == 10){
-                endGame();
-            }
-        }
-        else{
-            FacesMessages.error("Wrong");
-            
-            int x =  quizData.getCurrQuestion() +1;
-            quizData.setCurrQuestion(x);
-            if(quizData.getCurrQuestion() == 10){
-                endGame();
-            } 
-        }
-    }
-
-    @Override
-    public void endGame() {
-        endTime = new Timestamp(System.currentTimeMillis());
-        long diff = (endTime.getTime() - startTime.getTime());
-        long seconds = diff / 1000L;
-        quizData.setTime(TimeFormatter.format(seconds));
-        quizData.setScore(ScoreCalculator.calculateScore(quizData.getNrCorrect(), diff));
-        scorebean.setGamebean(this);
-        addToDatabase(quizData.getScore(), seconds, type);
-
-        quizData.setIQuiz(null);
-        if (Strings.isNullOrEmpty(gameid))
-            redirect("/duogames/score.xhtml");
-        else
-            redirect("/duogames/score.xhtml?gameid="+gameid);
-
-    }
-
+    
 }
