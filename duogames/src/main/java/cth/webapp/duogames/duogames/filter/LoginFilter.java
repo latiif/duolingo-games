@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.filter;
 
 import cth.webapp.duogames.duogames.control.UserBean;
@@ -19,10 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author nicla
- */
 @WebFilter("/userprofile.xhtml")
 public class LoginFilter implements Filter {
 
@@ -31,7 +22,6 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
@@ -44,14 +34,10 @@ public class LoginFilter implements Filter {
         } else {
             httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
         }
-
-        //httpreq.get
-        //httpres.sendRedirect(httpreq.getContextPath() + "/index.xhtml");
     }
 
     @Override
     public void destroy() {
-
     }
 
 }

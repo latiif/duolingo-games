@@ -23,16 +23,13 @@ public class UserBean implements Serializable {
 
     @EJB
     private UserDAO userDAO;
-
     @Inject
     private UserData userData;
-
     @Getter
     @Setter
     private DuoApi api;
     @Getter
     private Boolean isLoggedIn = false;
-
     @Getter
     private User user;
 
@@ -40,12 +37,10 @@ public class UserBean implements Serializable {
         if (userData.getUsername() == null || userData.getPassword() == null) {
             return;
         }
-
         if (userData.getUsername().isEmpty() || userData.getPassword().isEmpty()) {
             return;
         }
         api = new DuoApi(userData.getUsername(), userData.getPassword());
-
         isLoggedIn = api.getIsLoggedIn();
         if (isLoggedIn) {
             createUser();
@@ -57,7 +52,6 @@ public class UserBean implements Serializable {
 
     public void redirect() {
         try {
-
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/play.xhtml");
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -66,8 +60,8 @@ public class UserBean implements Serializable {
 
     /**
      * *
-     * Checks if the user exists in database, if yes it gets the credentials, if no
-     * it adds the user to the database.
+     * Checks if the user exists in database, if yes it gets the credentials, if
+     * no it adds the user to the database.
      */
     private void createUser() {
         user = new User(userData.getUsername());
@@ -83,7 +77,6 @@ public class UserBean implements Serializable {
         try {
             FacesContext.getCurrentInstance().getExternalContext().addResponseHeader("LoginError", "Wrong username or password");
             FacesContext.getCurrentInstance().getExternalContext().redirect("/duogames/index.xhtml?error=pass");
-
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

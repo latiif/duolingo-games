@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.model.quiz;
 
-/**
- *
- * @author nicla, latiif
- */
 import cth.webapp.duogames.duogames.model.IQuestion;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -26,9 +17,7 @@ public class Question implements IQuestion {
     public List<String> getOptions() {
         List<String> options = new LinkedList<>(wrongAnswers);
         options.add(rightAnswer);
-
         Collections.shuffle(options);
-
         return options;
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.control;
 
 import java.io.IOException;
@@ -17,10 +12,6 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-/**
- *
- * @author latiif
- */
 @ServerEndpoint("/quizmultiplayer/{gameid}")
 public class QuizMultiplayer {
 
@@ -42,29 +33,22 @@ public class QuizMultiplayer {
     @OnMessage
     public void onMessage(final String message, @PathParam("gameid") String gameid, final Session client) {
         List<Session> sessions_ = sessions.getOrDefault(gameid, new LinkedList<Session>());
-
         sessions_.stream().forEach((sess) -> {
             try {
-
                 sess.getBasicRemote().sendText(message);
-
             } catch (IOException ex) {
             }
         });
-
     }
 
     @OnClose
     public void close(@PathParam("gameid") String gameid, Session session) {
         List<Session> sessions_ = sessions.getOrDefault(gameid, new LinkedList<Session>());
-
         if (sessions_.contains(session)) {
             sessions_.remove(session);
             sessions.put(gameid, sessions_);
-
         } else {
             // already not in game
         }
     }
-
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.model.MultiplayerGame;
@@ -13,12 +8,7 @@ import java.util.UUID;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author latiif
- */
 @Named(value = "multi")
 @ApplicationScoped
 public class MultiplayerBean {

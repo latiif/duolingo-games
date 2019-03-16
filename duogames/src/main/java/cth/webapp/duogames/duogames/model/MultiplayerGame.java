@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.model;
 
-import cth.webapp.duogames.duogames.view.UserData;
-import static java.lang.Math.abs;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,16 +7,11 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-/**
- *
- * @author latiif
- */
 public class MultiplayerGame {
 
     private List<String> participants;
     private Map<String, Integer> scores;
     private String id;
-
     private int nrWords;
     private String language;
 
@@ -52,7 +40,6 @@ public class MultiplayerGame {
             }
             ranking++;
         }
-
         return 0;
     }
 
@@ -64,7 +51,6 @@ public class MultiplayerGame {
         if (!this.language.toLowerCase().equals(language.toLowerCase())) {
             return false;
         }
-
         //Take out fair play criteria, for demo
         /*
         if (abs(nrWords-this.nrWords)>50){
@@ -74,5 +60,4 @@ public class MultiplayerGame {
         participants.add(uid);
         return true;
     }
-
 }
