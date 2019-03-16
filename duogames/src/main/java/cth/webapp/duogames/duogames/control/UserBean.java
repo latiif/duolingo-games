@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.database.dao.UserDAO;
@@ -22,12 +17,7 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author latiif
- */
 @Named(value = "user")
-//@RequestScoped
 @SessionScoped
 public class UserBean implements Serializable {
 
@@ -60,11 +50,9 @@ public class UserBean implements Serializable {
         if (isLoggedIn) {
             createUser();
             redirect();
-
         } else {
             wrongpass();
         }
-
     }
 
     public void redirect() {
@@ -76,6 +64,11 @@ public class UserBean implements Serializable {
         }
     }
 
+    /**
+     * *
+     * Checks if the user exists in database, if yes it gets the credentials, if no
+     * it adds the user to the database.
+     */
     private void createUser() {
         user = new User(userData.getUsername());
         User tmp = userDAO.findUserByUsername(user.getUsername());
@@ -83,8 +76,6 @@ public class UserBean implements Serializable {
             userDAO.add(user);
         } else {
             user.setId(tmp.getId());
-            System.out.println(user.getId());
-
         }
     }
 
@@ -109,7 +100,6 @@ public class UserBean implements Serializable {
         }
     }
 
-    //TODO Find a better place for this function
     public boolean hasSupportForWDYS() {
         return AudioMapper.getInstance().isValidLanguage(api.getCurrentLanguage());
     }

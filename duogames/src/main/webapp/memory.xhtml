@@ -11,7 +11,7 @@
         <div id="overlay"></div>
         <h1>Find the pairs</h1>
         <c:set var="pairs" value="#{memory.getQuizInformation(user)}"/>
-        <h:inputHidden id="nrof" value="#{memory.nrOfPairs}" /> 
+        <h:inputHidden id="nrof" value="#{memory.NR_OF_PAIRS}" /> 
         <h:inputHidden id="result" value="#{memory.result}" />
         <b:remoteCommand name="callEquals" id="remoteCommand" parameters="word,answer" actionListener="#{memory.checkPair()}" update="result" oncomplete="handleResult()"/>
         <b:remoteCommand name="endGame" id="endCommand" actionListener="#{memory.endGame()}"/>

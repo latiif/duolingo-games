@@ -8,17 +8,15 @@ function handleResult() {
         if (correctPairs === parseInt(nrOfPairs, 10)) {
             endGame();
         }
+        resetVars();
     } else {
         card1_extra = card1;
         card2_extra = card2;
         document.getElementById('overlay').setAttribute('style', 'display: inline');
-        sleep(800).then(() => {
+        sleep(850).then(() => {
             turnCards();
         });
     }
-    sleep(1600).then(() => {
-        resetVars();
-    });
 }
 
 function disableCards() {
@@ -33,6 +31,7 @@ function turnCards() {
     document.getElementById(card2_extra).getElementsByTagName('a')[1].click();
     sleep(800).then(() => {
         document.getElementById('overlay').setAttribute('style', 'display: none');
+        resetVars();
     });
 }
 function incAndCheckCards() {

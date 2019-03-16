@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cth.webapp.duogames.duogames.control;
 
 import cth.webapp.duogames.duogames.model.memory.Memory;
@@ -21,58 +16,50 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
-import lombok.Setter;
 
-/**
- *
- * @author nicla
- */
 @Named(value = "memory")
 @SessionScoped
 public class MemoryBean extends GameBean implements Serializable {
 
     @Inject
     private ScoreBean scorebean;
-
-    @Inject
     private QuizData quizData;
-
     private Timestamp startTime;
     private Timestamp endTime;
-
     @Getter
-    final private int nrOfPairs = 6;
+    final private int NR_OF_PAIRS = 6;
     @Getter
     final private String type = "pair";
-
     @Getter
     private List<Pair> pairs;
-    @Getter
-    @Setter
     private String word = "";
-    @Getter
-    @Setter
     private String answer = "";
     @Getter
     private boolean result;
 
     public List<String> getQuizInformation(UserBean ub) {
-
+        scorebean.setGamebean(this);
+        quizData = super.getQuizData();
         if (quizData.getQuiz() == null) {
             quizData.setQuiz(startGame());
         }
-
         return quizData.getQuiz();
     }
 
+    /**
+     * *
+     * Generates a set amount of word pairs, and returns a shuffled list of
+     * every generated pairs word and translation.
+     *
+     * @return Shuffled list of Strings
+     */
     @Override
     public List<String> startGame() {
-        Map<String, List<String>> dict = super.getUserBean().getApi().getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
-
+        Map<String, List<String>> dict = super.getUserBean().getApi()
+                .getDictionaryOfKnownWords("en", super.getUserBean().getApi().getCurrentLanguage());
         startTime = new Timestamp(System.currentTimeMillis());
-        pairs = new Memory(dict, 6).generatePairs();
+        pairs = new Memory(dict, NR_OF_PAIRS).generatePairs();
         quizData.setQuiz(new ArrayList<>());
-
         pairs.forEach(p
                 -> {
             quizData.getQuiz().add(p.getWord());
@@ -82,14 +69,17 @@ public class MemoryBean extends GameBean implements Serializable {
         return quizData.getQuiz();
     }
 
+    /**
+     * *
+     * Adds gametime, score and gametype to database. Redirects the user.
+     */
     @Override
     public void endGame() {
         endTime = new Timestamp(System.currentTimeMillis());
         long diff = (endTime.getTime() - startTime.getTime());
         long seconds = diff / 1000L;
         quizData.setTime(TimeFormatter.format(seconds));
-        quizData.setScore(ScoreCalculator.calculateScore(nrOfPairs * 2, diff));
-        scorebean.setGamebean(this);
+        quizData.setScore(ScoreCalculator.calculateScore(NR_OF_PAIRS * 2, diff));
         addToDatabase(quizData.getScore(), seconds, type);
         redirect("/duogames/score.xhtml");
     }
@@ -100,27 +90,28 @@ public class MemoryBean extends GameBean implements Serializable {
         redirect("/duogames/play.xhtml");
     }
 
+    /**
+     * *
+     * This method is called from memory.xhtml by Javascript. Checks if the
+     * words from the two turned cards are a matching pair. When this method is
+     * done, a Javascript function will be called to handle the result.
+     */
     public void checkPair() {
-        System.out.println("in java bean");
         FacesContext context = FacesContext.getCurrentInstance();
         word = context.getExternalContext().getRequestParameterMap().get("word");
         answer = context.getExternalContext().getRequestParameterMap().get("answer");
         for (Pair oldPair : pairs) {
             if (oldPair.getWord().equalsIgnoreCase(word)) {
-                Pair p = new Pair(word, answer);
-                result = oldPair.equals(p);
+                result = oldPair.equals(new Pair(word, answer));
                 return;
             } else if (oldPair.getAnswer().equalsIgnoreCase(answer)) {
-                Pair p = new Pair(word, answer);
-                result = oldPair.equals(p);
+                result = oldPair.equals(new Pair(word, answer));
                 return;
             } else if (oldPair.getAnswer().equalsIgnoreCase(word)) {
-                Pair p = new Pair(answer, word);
-                result = oldPair.equals(p);
+                result = oldPair.equals(new Pair(answer, word));
                 return;
             } else if (oldPair.getWord().equalsIgnoreCase(answer)) {
-                Pair p = new Pair(answer, word);
-                result = oldPair.equals(p);
+                result = oldPair.equals(new Pair(answer, word));
                 return;
             }
         }

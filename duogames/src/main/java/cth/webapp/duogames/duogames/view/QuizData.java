@@ -23,6 +23,10 @@ public class QuizData implements Serializable {
 
     @Setter
     @Getter
+    private String word = "";
+
+    @Setter
+    @Getter
     private String answer = "";
 
     @Getter
