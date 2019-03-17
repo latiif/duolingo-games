@@ -22,7 +22,7 @@ public class UtilsTest {
     private ScoreCalculator score = new ScoreCalculator();
     
     
-
+//Unit test for scorecalculator
     @Test
     public void testScore(){
         int corr = 5;
@@ -30,6 +30,44 @@ public class UtilsTest {
 
         assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
         assertNotEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore((int)time, corr));
+        
+        corr = -5;
+        time = 1000;
+
+        assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
+        assertNotEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore((int)time, corr));
+        
+        
+        corr = 5;
+        time = -1000;
+
+        assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
+        assertNotEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore((int)time, corr));
+        
+        corr = -5;
+        time = -1000;
+
+        assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
+        assertNotEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore((int)time, corr));
+        
+        corr = 0;
+        time = 1000;
+
+        assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
+        assertNotEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore((int)time, corr));
+        
+        corr = 5;
+        time = 0;
+
+        assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
+        assertNotEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore((int)time, corr));
+        
+        corr = 0;
+        time = 0;
+
+        assertEquals(corr * 100 + Math.max((90000 - time) / 100, 0), calculateScore(corr, time));
+        
+        
 
     }
     
